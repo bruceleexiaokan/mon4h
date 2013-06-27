@@ -1,0 +1,20 @@
+Todo list in July 2013
+- create github project,  mon4h
+- dashboard4h
+  - query engine service
+  - push engine service
+  - UI
+- collector
+  - collector
+  - writer
+- metrics aggregation framework
+  - test suite
+- central logging service
+- hadoop log4j appender for central logging
+  - logging classification
+- hadoop metrics sink for dashboard
+- region split tool
+- region balancer
+- html style
+- co-processor
+

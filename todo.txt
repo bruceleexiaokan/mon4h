@@ -17,4 +17,5 @@ Todo list in July 2013
 - region balancer
 - html style
 - co-processor
-
+- alerting
+  - EPL seting up

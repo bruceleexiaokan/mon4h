@@ -1,0 +1,3 @@
+- No maven support, but it is fine for now.
+- How to configure the system
+- How to build and debug and run

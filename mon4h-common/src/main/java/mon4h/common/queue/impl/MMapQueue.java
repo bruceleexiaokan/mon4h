@@ -16,8 +16,6 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 import mon4h.common.queue.Queue;
-import mon4h.common.queue.Queue.QueueException;
-
 import sun.nio.ch.DirectBuffer;
 
 @SuppressWarnings("restriction")

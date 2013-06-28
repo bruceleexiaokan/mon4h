@@ -8,10 +8,8 @@
         </encoder>
     </appender>
 
-    <root level="WARN">
+    <root level="INFO">
         <appender-ref ref="Console"/>
-        <!--<appender-ref ref="CentralLogging"/>-->
     </root>
 
-    <!-- logger name="mon4h.xxx.xxx.xxx" level="INFO"/ -->
 </configuration>

@@ -1,0 +1,1 @@
+mvn archetype:generate -DarchetypeArtifactId=jersey-quickstart-webapp -DarchetypeGroupId=org.glassfish.jersey.archetypes -DinteractiveMode=false -DgroupId=mon4h -DartifactId=mon4h-collector -Dpackage=mon4h.collector.resources -DarchetypeVersion=2.0

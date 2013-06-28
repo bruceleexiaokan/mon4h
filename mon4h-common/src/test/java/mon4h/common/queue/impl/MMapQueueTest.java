@@ -3,6 +3,7 @@ package mon4h.common.queue.impl;
 import java.io.File;
 import java.io.IOException;
 
+import mon4h.common.os.OS;
 import mon4h.common.queue.impl.MMapQueue.ByteConverter;
 import mon4h.common.queue.impl.MMapQueue.ObjectConverter;
 
@@ -10,7 +11,7 @@ import org.junit.Test;
 
 public class MMapQueueTest {
 
-	private static final String TEST_DIR = "C:/tmp/data";
+	private static final String TEST_DIR = OS.isWindows() ? "C:/tmp/data" : "/tmp";
 	
     public  void cleanup() throws Exception {
     	File testDir = new File(TEST_DIR);
@@ -39,7 +40,8 @@ public class MMapQueueTest {
     public void testConverter() throws IOException, ClassNotFoundException{
     	@SuppressWarnings("resource")
 		ByteConverter<Long> byteConverter = new ByteConverter<Long>();
-    	ObjectConverter<Long> objectConverter = new ObjectConverter<Long>(); 
+    	@SuppressWarnings("resource")
+		ObjectConverter<Long> objectConverter = new ObjectConverter<Long>(); 
     	byte[] buf = null;
     	Long number = null;
     	

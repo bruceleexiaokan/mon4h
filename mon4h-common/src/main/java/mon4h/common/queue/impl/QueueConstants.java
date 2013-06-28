@@ -1,6 +1,6 @@
-package mon4h.collector.constant;
+package mon4h.common.queue.impl;
 
-public class Constants {
+public class QueueConstants {
 	public static final int SIZE_OF_INT = 4;
 	public static final String FILE_NAME = "data";
 	public static final String FILE_SUFFIX = ".dat";

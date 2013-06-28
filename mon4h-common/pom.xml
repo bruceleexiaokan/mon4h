@@ -13,7 +13,7 @@
     <artifactId>mon4h-common</artifactId>
     <name>monitor for hadoop common</name>
     <packaging>jar</packaging>
-    <version>1.0.0</version>
+    <version>${mon4h.version}</version>
 
     <dependencies>
     </dependencies>

@@ -10,32 +10,22 @@ import org.slf4j.LoggerFactory;
 
 public class Configuration {
 
+	private static volatile boolean initialized = false;
+	private static final Properties prop = new Properties();
 	private static final Logger LOGGER = LoggerFactory.getLogger(Configuration.class);
 
-	private static volatile Configuration config = null;
-
-	private final Properties prop = new Properties();
-	
-	private Configuration() {
-	}
-	
-	public static Configuration getInstance() {
-		if (config == null) {
+	public final static Properties getProperties() {
+		if (!initialized) {
 			synchronized (Configuration.class) {
-				if (config == null) {
-					config = new Configuration();
-					config.initialize();
+				if (!initialized) {
+					initialize();
 				}
 			}
 		}
-		return config;
-	}
-
-	public final Properties getProperties() {
 		return prop;
 	}
 	
-	private void initialize() {
+	private static void initialize() {
         InputStream in = null;
         ClassLoader classLoader = Configuration.class.getClassLoader();
         try {

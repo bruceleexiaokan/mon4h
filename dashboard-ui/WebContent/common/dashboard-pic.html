@@ -1,0 +1,208 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+<meta http-equiv="expires" content="#REQUEST_TIME_NOW" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<!-- <meta http-equiv="x-ua-compatible" content="ie=10"/> -->
+<style>
+* {
+	font-family:'Microsoft Yahei';
+}
+#naviagtor,#dashboardDemo {
+	font-size:14px;
+}
+
+#logo {
+	padding: 10px 5px;
+	background-color: #292929;
+	color: #eee;
+	overflow: hidden;
+	float: right;
+	font-size: 18px;
+}
+
+.header {
+	margin: 0;
+	padding: 10px 5px;
+	background-color: #292929;
+	color: #eee;
+	overflow: hidden;
+	width: 99%;
+}
+
+.logo {
+	float: right;
+	font-size: 15px;
+}
+
+#naviagtor {
+	margin: 0;
+	padding: 10px 5px;
+	list-style: none;
+
+	border: 1px solid gray;
+	overflow: hidden;
+	zoom: 1;
+}
+#navigator2 {
+	margin:0;
+	padding:10px 5px;
+	list-style:none;
+	width:99%;
+	border:1px solid gray;
+	overflow:hidden;
+	zoom:1;
+}
+#navigator3 {
+	margin:0;
+	padding:10px 5px;
+	list-style:none;
+	width:99%;
+	border:1px solid gray;
+	overflow:hidden;
+	zoom:1;
+}
+#navigator4 {
+	margin:0;
+	padding:10px 5px;
+	list-style:none;
+	width:99%;
+	border:1px solid gray;
+	overflow:hidden;
+	zoom:1;
+}
+#matricNameTips {
+	position: absolute;
+	width: 880px;
+	background: #FFF;
+	border: 1px solid #aac8ff;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	z-index: 4;
+}
+
+#matricNameTips li {
+	margin:-1px 0 0 0;
+	padding:0;
+	overflow:hidden;
+}
+#matricNameTips a {
+	display:block;
+	padding:5px;
+	color:#369;
+	text-decoration:none;
+	border-top:1px solid #FFF;
+	border-bottom:1px solid #FFF;
+}
+#matricNameTips a:hover {
+	border-top:1px solid #aac8ff;
+	border-bottom:1px solid #aac8ff;
+	background:#d9e6ff;
+}
+#matricNameTips span {
+	padding:5px;
+}
+
+#naviagtor li {
+	float: left;
+	margin-right: 3px;
+}
+#naviagtor a {
+	color:#0066ff;
+	margin-left:10px;
+}
+#dashboardDemo {
+	margin-top: 5px;
+}
+</style>
+<link rel="shortcut icon" href="../favicon.ico" />
+<title>Dashboard</title>
+
+<script type="text/javascript" src="../cQuery_110421.js"></script>
+<script type="text/javascript" src="../jquery-1.8.3.js"></script>
+<script type="text/javascript" src="../dashboard.js"></script>
+<script type="text/javascript" src="../calendar.js"></script>
+
+
+<!--  <link rel="stylesheet" href="http://192.168.63.39:4242/s/gwt/standard/standard.css"> -->
+</head>
+<body>
+		
+<div class="dashboard" id="dashboardDemoRealtime" style="display: none"></div>
+<div id="dashboardDemo">
+	<div class="dashboard" id="dashboardDemoAppID"  style="display: none"></div>
+	<div class="dashboard" id="dashboardDemoHostName" style="display: none"></div>
+	<div class="dashboard" id="dashboardDemoLevel" style="display: none"></div>
+	<div class="dashboard" id="dashboardDemoInfo" style="display: none"></div>
+</div>
+<script>
+#this_html_is_image_reqdata_template
+
+var paraString = '';
+var getMatricsURL='[[query_engine_server/]/]/jsonp/getmetricstags?reqdata=${reqdata}&callback=${callback}';
+var splitCharA = '&';
+var splitCharB = '=';
+var lastConfig = {};
+var lastV = [] ;
+var de_rate = 'false';
+var realtimePanel=$('#dashboardDemoRealtime');
+var orPanel=$('#dashboardDemoAppID');
+
+var url = image_url;
+//var url = unescape(paraString);
+var newConfig={
+	title: '',
+	panel:$('#dashboardDemoAppID'),
+	bases:{
+		'%chart%':		'line',
+		'%startTime%':	'',
+		'%endTime%':	'',
+		'%interval%':	'',
+		'%metric%':		'',
+		'%rate%':		'false',	
+		statistics:		'sum',
+		dawnfunc:		'sum'
+	},
+	exps:{
+	},
+	groups:[]
+}; 
+
+var strs = url.split(splitCharA);   
+for(var i = 1; i < strs.length; i ++){   
+	var key = strs[i].split(splitCharB)[0];
+	var value = (strs[i].split(splitCharB)[1]);
+	if(key == 'namespace'){
+		newConfig.namespace = value;
+	}
+	else if(key == 'groups'){
+		value=value.split('-');
+		newConfig.groups = value;
+	}
+	else if(key == '%startTime%'){
+		newConfig.bases['%startTime%'] = value;
+	}
+	else if(key == '%endTime%'){
+		newConfig.bases['%endTime%'] = value;
+	}
+	else{
+		newConfig.bases[key] = value;
+	}
+}
+if(newConfig.groups == '') newConfig.groups = undefined;
+newConfig['title'] = newConfig.bases['%metric%'];
+var uid='dashboard_loadTags_'+$.uid();
+
+if (newConfig.ref){
+	newConfig.ref.uninit();
+}
+lastConfig=$.copy($.extend(true,{},newConfig));
+newConfig.ref=newConfig.panel.regMod('dashboard','1.0',lastConfig);	
+orPanel.css('display','');  
+
+</script>
+</body>
+</html>

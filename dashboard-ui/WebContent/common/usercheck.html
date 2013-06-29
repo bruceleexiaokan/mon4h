@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<style>
+.header {
+	padding: 10px 5px;
+	background-color: #292929;
+	color: #eee;
+	overflow: hidden;
+	width: 100%;
+}
+.logo {
+	float: right;
+	font-size: 15px;
+}
+</style>
+<head>
+<meta http-equiv="pragma" content="no-cache" />
+<meta http-equiv="Cache-Control" content="no-cache, must-revalidate" />
+<meta http-equiv="expires" content="#REQUEST_TIME_NOW" />
+<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+<link rel="shortcut icon" href="../favicon.ico" />
+<title>Dashboard</title>
+<script type="text/javascript" src="../calendar.js"></script>
+</head>
+
+<body>
+
+<div class="header">
+	<h1 class="logo">Dashboard Debug UI </h1>
+</div>
+
+<hr/>
+<div class="check_namespace">
+<a>请输入需要检查的</a><font color="red">Namespace</font><a>与</a><font color="red">MatricName</font><a>.</a><br/>
+<!--<a>注意检查您</a><font color="red">本机IP</font>是否拥有<font color="red">读写</font>权限.</a></br></br>-->
+<form id="checknamespaceform" name="checknamespaceform" action="usercheck.html?flag=checknamespace" method="post">
+<font size="5">Matric NameSpace:</font><input type="text" id="namespace" name="namespace"></input>&nbsp;
+<font size="5">Matric Name:</font><input type="text" id="metricname" name="metricname"></input>
+<input type="submit" name="checknamespacebutton" value="是否配置"></input>
+</form>
+</div>
+
+<hr/>
+<br/>
+<div class="checktsdb">
+<font size="4">#Check_Namespace_In_Tsdb</font>
+</div>
+
+<div class="lastdata">
+#Check_Last_Input_Data
+</div>
+
+<div class="backcontent">
+#Check_Back_Content
+</div>
+
+<div class="writerightlist">
+#Check_Write_Right_List
+</div>
+
+<div class="readrightlist">
+#Check_Read_Right_List
+</div>
+
+<hr/>
+<a>Ctrip@copy right.</a>
+
+<script type="text/javascript">
+function lastDataSend() {
+	var start = document.getElementById('time_start').value;
+	var end = document.getElementById('time_end').value;
+	if( start != null && end != null ) {
+		if( start != "" && end != "" ) {
+		
+			var s = Date.parse(start)/1000
+			var e = Date.parse(end)/1000
+			if( e - s > 3600 ) {
+				alert("时间过长,应<=1个小时;");
+				return false;
+			} else if( e - s < 0 ) {
+				alert("后面时间小于前面");
+				return false;
+			}
+			return true;
+		}
+	}
+	return false;
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+<configuration>         
+    <!-- console -->   
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">   
+       <Encoding>UTF-8</Encoding>   
+        <layout class="ch.qos.logback.classic.PatternLayout">   
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{50} - %msg%n   
+            </pattern>   
+        </layout>   
+    </appender>   
+    
+    <!-- central logging -->   
+    <appender name="CENTRALLOGGING" class="com.ctrip.dashboard.common.logging.LoggingAppender">   
+       <Encoding>UTF-8</Encoding>   
+        <layout class="ch.qos.logback.classic.PatternLayout">   
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{50} - %msg%n   
+            </pattern>   
+        </layout>   
+    </appender>
+       
+    <!-- daily -->   
+    <appender name="FILE"  
+        class="ch.qos.logback.core.rolling.RollingFileAppender">  
+        <Prudent>false</Prudent> 
+        <Encoding>UTF-8</Encoding>   
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">   
+            <FileNamePattern>${LOG_HOME}/%d{yyyy-MM-dd}/dashboard-engine.%d{yyyy-MM-dd_HH}.log</FileNamePattern>  
+            <MaxHistory>720</MaxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">   
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-4relative [%thread] %-5level %logger{50} - %msg%n   
+            </pattern>   
+       </layout>   
+    </appender>   
+    
+    <logger name="com.ctrip.dashboard"
+  		additivity="false">
+  		<level value="DEBUG" />
+  		<appender-ref ref="STDOUT" />
+ 	</logger>
+  
+    <root level="DEBUG">   
+        <appender-ref ref="STDOUT" /> 
+    </root>   
+</configuration>

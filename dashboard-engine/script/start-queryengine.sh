@@ -1,0 +1,4 @@
+#!/bin/bash
+./start.sh queryengine $@
+
+#java -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.port=8995 -Dcom.sun.management.jmxremote.ssl=false -Dcom.sun.management.jmxremote -Xdebug -Xrunjdwp:transport=dt_socket,address=15285,server=y,suspend=n -classpath ../*:../lib/*:../lib/SQL/*:../lib/SpellCheck/* -d64 -Dresin.home=$SERVER_ROOT -server -Xms2048M -Xmx2048M -Xmn500M -XX:PermSize=500M -XX:MaxPermSize=500M -XX:SurvivorRatio=65536 -XX:MaxTenuringThreshold=0 -Xnoclassgc -XX:+DisableExplicitGC -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:+UseCMSCompactAtFullCollection -XX:CMSFullGCsBeforeCompaction=0 -XX:+CMSClassUnloadingEnabled -XX:-CMSParallelRemarkEnabled -XX:CMSInitiatingOccupancyFraction=90 -XX:SoftRefLRUPolicyMSPerMB=0 com.ctrip.search.engine.EngineServer &

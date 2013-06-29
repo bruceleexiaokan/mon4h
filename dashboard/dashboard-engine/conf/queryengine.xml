@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>   
 <configuration> 
-	<access-check-config-file-name>D:\projects\ctrip-dashboard\dashboard\dashboard-engine\conf\access-check-config.xml</access-check-config-file-name>
-	<app-root-dir>D:\projects\ctrip-dashboard\dashboard\dashboard-engine</app-root-dir>
+	<access-check-config-file-name>D:\projects\mon4h\dashboard\dashboard-engine\conf\access-check-config.xml</access-check-config-file-name>
+	<app-root-dir>D:\dashboard</app-root-dir>
 	<cache-root-dir>/var/dashboard/cache</cache-root-dir>
 	<cache-in-use>false</cache-in-use>
 	<mapreduce-in-use>false</mapreduce-in-use>
 	<engine>
 		<server>
 			<port>8080</port>
-			<log-home>D:\projects\ctrip-dashboard\dashboard\dashboard-engine\log</log-home>
-			<log-config-file>D:\projects\ctrip-dashboard\dashboard\dashboard-engine\conf\queryengine-logback.xml</log-config-file>
+			<log-home>D:\dashboard\log</log-home>
+			<log-config-file>D:\projects\mon4h\dashboard\dashboard-engine\conf\queryengine-logback.xml</log-config-file>
 			<meta-uptime-interval>3600000</meta-uptime-interval>
 			<request>
 				<max-content-length>33554432</max-content-length>
@@ -38,7 +38,7 @@
 			<smtp-account>Rdkjda@Ctrip.com</smtp-account>
 		</mail>
 		<deploy>
-			<version-file>D:\projects\ctrip-dashboard\dashboard\dashboard-engine\conf\queryengine-version.info</version-file>
+			<version-file>D:\projects\mon4h\dashboard\dashboard-engine\conf\queryengine-version.info</version-file>
 		</deploy>
 	</engine>
 </configuration>

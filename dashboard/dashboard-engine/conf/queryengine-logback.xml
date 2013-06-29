@@ -36,35 +36,35 @@
        </layout>   
     </appender>   
     
-    <logger name="com.ctrip.dashboard.common"
+    <logger name="com.mon4h.dashboard.common"
   		additivity="false">
-  		<level value="ERROR" />
+  		<level value="INFO" />
   		<appender-ref ref="FILE" />
-  		<appender-ref ref="CENTRALLOGGING" />
+  		<appender-ref ref="STDOUT" />
  	</logger>
  	
- 	<logger name="com.ctrip.dashboard.cache"
+ 	<logger name="com.mon4h.dashboard.cache"
   		additivity="false">
-  		<level value="ERROR" />
+  		<level value="INFO" />
   		<appender-ref ref="FILE" />
-  		<appender-ref ref="CENTRALLOGGING" />
+  		<appender-ref ref="STDOUT" />
  	</logger>
  	
- 	<logger name="com.ctrip.dashboard.engine"
+ 	<logger name="com.mon4h.dashboard.engine"
   		additivity="false">
-  		<level value="ERROR" />
+  		<level value="INFO" />
   		<appender-ref ref="FILE" />
-  		<appender-ref ref="CENTRALLOGGING" />
+  		<appender-ref ref="STDOUT" />
  	</logger>
  	
- 	<logger name="com.ctrip.dashboard.tsdb"
+ 	<logger name="com.mon4h.dashboard.tsdb"
   		additivity="false">
-  		<level value="ERROR" />
+  		<level value="INFO" />
   		<appender-ref ref="FILE" />
-  		<appender-ref ref="CENTRALLOGGING" />
+  		<appender-ref ref="STDOUT" />
  	</logger>
   
-    <root level="ERROR">   
+    <root level="INFO">   
         <appender-ref ref="FILE" /> 
     </root>   
 </configuration>

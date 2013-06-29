@@ -8,38 +8,28 @@
     <version>1.0.0</version>
   </parent>
   <groupId>com.mon4h.dashboard</groupId>
-  <artifactId>dashboard-engine</artifactId>
+  <artifactId>dashboard-cache</artifactId>
   <version>1.0.0</version>
-  <name>dashboard-engine</name>
+  <name>dashboard-cache</name>
   <url>http://maven.apache.org</url>
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
 	<dependency>
-		<groupId>com.mon4h.dashboard</groupId>
-		<artifactId>dashboard-tsdb</artifactId>
-		<version>1.0.0</version>
-    </dependency>
-	<dependency>
-		<groupId>com.mon4h.dashboard</groupId>
-		<artifactId>dashboard-cache</artifactId>
-		<version>1.0.0</version>
-    </dependency>
+		<groupId>org.fusesource.leveldbjni</groupId>
+		<artifactId>leveldbjni-all</artifactId>
+		<version>1.5</version>
+	</dependency>
 	<dependency>
 		<groupId>com.mon4h.dashboard</groupId>
 		<artifactId>dashboard-common</artifactId>
 		<version>1.0.0</version>
     </dependency>
 	<dependency>
-		<groupId>io.netty</groupId>
-		<artifactId>netty</artifactId>
-		<version>3.5.11.Final</version>
-	</dependency>
-	<dependency>
-		<groupId>javax.mail</groupId>
-		<artifactId>mail</artifactId>
-		<version>1.4.5</version>
-	</dependency>	
+		<groupId>com.mon4h.dashboard</groupId>
+		<artifactId>dashboard-tsdb</artifactId>
+		<version>1.0.0</version>
+    </dependency>
   </dependencies>
 </project>

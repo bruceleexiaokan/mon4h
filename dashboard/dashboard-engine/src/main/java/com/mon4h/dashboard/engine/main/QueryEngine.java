@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.core.joran.spi.JoranException;
 
-import com.ctrip.dashboard.cache.main.CacheOperator;
+import com.mon4h.dashboard.cache.main.CacheOperator;
 import com.mon4h.dashboard.common.config.ConfigFactory;
 import com.mon4h.dashboard.common.config.impl.ReloadableXmlConfigure;
 import com.mon4h.dashboard.common.logging.LogUtil;

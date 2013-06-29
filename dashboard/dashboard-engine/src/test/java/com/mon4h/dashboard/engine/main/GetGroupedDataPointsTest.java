@@ -8,7 +8,7 @@ import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import com.ctrip.dashboard.cache.main.CacheOperator;
+import com.mon4h.dashboard.cache.main.CacheOperator;
 import com.mon4h.dashboard.engine.check.NamespaceCheck;
 import com.mon4h.dashboard.engine.command.CommandTests;
 import com.mon4h.dashboard.engine.command.GetGroupedDataPointsRequest;

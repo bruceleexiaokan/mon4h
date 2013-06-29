@@ -9,11 +9,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<!-- module>mon4h-collector</module -->
-		<!--  module>mon4h-common</module -->
-		<module>dashboard-common</module>
-		<module>dashboard-engine</module>
-		<module>dashboard-tsdb</module>
+		<module>mon4h-collector</module>
+		<module>mon4h-common</module>
 	</modules>
 
 	<properties>
@@ -320,11 +317,11 @@
 					<artifactId>maven-source-plugin</artifactId>
 					<version>2.2.1</version>
 				</plugin>
-				<plugin>
+				<!-- plugin>
 					<groupId>com.keyboardsamurais.maven</groupId>
 					<artifactId>maven-timestamp-plugin</artifactId>
 					<version>1.0</version>
-				</plugin>
+				</plugin -->
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -353,7 +350,7 @@
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<inherited>true</inherited>
 			</plugin>
-			<plugin>
+			<!-- plugin>
 				<groupId>com.keyboardsamurais.maven</groupId>
 				<artifactId>maven-timestamp-plugin</artifactId>
 				<configuration>
@@ -369,7 +366,7 @@
 					</execution>
 				</executions>
 				<inherited>true</inherited>
-			</plugin>
+			</plugin -->
 		</plugins>
 	</build>
 	<reporting>

@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.ctrip.dashboard.cache.data.TimeRange;
+import com.mon4h.dashboard.cache.data.TimeRange;
 import com.mon4h.dashboard.engine.main.GetQuery.TimeRangeSampler;
 
 public class GetQueryTheLongestOfTimeRangeTest {

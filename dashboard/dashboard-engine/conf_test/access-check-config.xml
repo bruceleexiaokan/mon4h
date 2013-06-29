@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<config-db-url>jdbc:mysql://dev_mysql.dev.sh.ctriptravel.com:28747/centralloggingdb?useUnicode=true</config-db-url>
+	<db-driver>com.mysql.jdbc.Driver</db-driver>
+	<config-refresh-interval>600000</config-refresh-interval>
+	<db-username>uws_freeway_1</db-username>
+	<db-password>hzS4pFdhT7dSbkFNr3ry</db-password>
+	<table-hbase>logging_hbase</table-hbase>
+	<table-namespace>logging_metric_namespace</table-namespace>
+	<table-ip-read>logging_metric_ns_read</table-ip-read>
+	<table-ip-write>logging_metric_ns_write</table-ip-write>
+</configuration>

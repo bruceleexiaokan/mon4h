@@ -24,7 +24,7 @@
 		<log4j.version>2.0-beta2</log4j.version>
 		<slf4j.version>1.7.2</slf4j.version>
 		<logback.version>1.0.9</logback.version>
-		<jersey.version>1.17</jersey.version>
+		<!--   jersey.version>1.17</jersey.version -->
 		<jersey-apache-client4.version>1.9.1</jersey-apache-client4.version>
 		<jackson.version>1.9.2</jackson.version>
 		<jaxb.version>2.1.9</jaxb.version>

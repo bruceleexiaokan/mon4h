@@ -68,6 +68,10 @@ public class MMapQueue<T extends Serializable> implements Queue<T> {
 		this.maxFileNumber = maxFileNumber;
 		init();
 	}
+	
+	public String getQueueDirectory() {
+		return fileDir;
+	}
 
 	public int getFileNumber() {
 		if (writeIndexFile >= readIndexFile) {
@@ -76,10 +80,12 @@ public class MMapQueue<T extends Serializable> implements Queue<T> {
 		return Integer.MAX_VALUE - readIndexFile + writeIndexFile + 1;
 	}
 	
+	@Override
 	public boolean readAvailable() {
 		return (writepos != readpos) || (writeIndexFile != readIndexFile);
 	}
 	
+	@Override
 	public boolean writeAvailable() {
 		return (getFileNumber() < maxFileNumber) || (writeIndexFile < pageSize - ENDER_SIZE - HEADER_SIZE);
 	}
@@ -151,25 +157,30 @@ public class MMapQueue<T extends Serializable> implements Queue<T> {
 		}
 	}
 
-	public void shutdown() throws IOException {
-		synchronized (this) {
-			if (writeMbb != null) {
-				writeMbb.force();
-				unmap(writeMbb);
+	@Override
+	public void shutdown() throws QueueException {
+		try {
+			synchronized (this) {
+				if (writeMbb != null) {
+					writeMbb.force();
+					unmap(writeMbb);
+				}
+				if (readMbb != null) {
+					readMbb.force();
+					unmap(readMbb);
+				}
+				if (indexMbb != null) {
+					indexMbb.force();
+					unmap(indexMbb);
+				}
+				closeResources(readChannel, readFile, writeChannel, writeFile,
+						indexChannel, indexFile);
+				readChannel = writeChannel = indexChannel = null;
+				readFile = writeFile = indexFile = null;
+				readIndexFile = writeIndexFile = readpos = writepos = 0;
 			}
-			if (readMbb != null) {
-				readMbb.force();
-				unmap(readMbb);
-			}
-			if (indexMbb != null) {
-				indexMbb.force();
-				unmap(indexMbb);
-			}
-			closeResources(readChannel, readFile, writeChannel, writeFile,
-					indexChannel, indexFile);
-			readChannel = writeChannel = indexChannel = null;
-			readFile = writeFile = indexFile = null;
-			readIndexFile = writeIndexFile = readpos = writepos = 0;
+		} catch (IOException e) {
+			throw new QueueException("Got an IO exception " + e.getMessage(), e);
 		}
 	}
 

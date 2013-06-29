@@ -6,9 +6,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Map;
 
+import junit.framework.TestCase;
+
 import org.junit.Test;
 
-public class MessageTest {
+public class MessageTest extends TestCase {
 
 	@Test
 	public void testMessageReadAndWrite() throws Exception {
@@ -34,7 +36,7 @@ public class MessageTest {
 		ObjectInputStream ois = new ObjectInputStream(bis);
 
 		Message newMsg = (Message)ois.readObject();
-		assert(msg.getType() == newMsg.getType());
+		assertTrue("msg.getType() not equal to newMsg.getType(), new type = " + newMsg.getType() , msg.getType().equals(newMsg.getType()));
 		assert(msg.getAdditionalHeaders().size() == newMsg.getAdditionalHeaders().size());
 		assert(msg.getAdditionalHeaders().get("header1") == "value1");
 		assert(msg.getAdditionalHeaders().get("header2") == "value2");

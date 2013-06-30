@@ -1,10 +1,12 @@
 package mon4h.common.util;
 
+import java.util.Map;
+
+import junit.framework.Assert;
 import mon4h.common.domain.models.Log;
 import mon4h.common.domain.models.Message;
 import mon4h.common.domain.models.Model;
 import mon4h.common.domain.models.sub.LogLevel;
-import mon4h.common.domain.models.sub.ModelType;
 import mon4h.common.domain.models.sub.Tag;
 
 import org.junit.Test;
@@ -17,6 +19,9 @@ public class ModelMessageHelperTest {
 		
 		Log l1 = new Log();
 		Log l2 = new Log();
+		logs[0] = l1;
+		logs[1] = l2;
+		
 		l1.setCreatedTime(0);
 		l2.setCreatedTime(1);
 		l1.setLevel(LogLevel.DEBUG);
@@ -34,7 +39,9 @@ public class ModelMessageHelperTest {
 		assert(!l1.equals(l2));
 		
 		Message msg = ModelMessageHelper.generateMessage(logs);
-		assert(msg.getAdditionalHeaders().get(ModelMessageHelper.NUMBER_HEADER).equals(ModelType.LOGS.getType()));
+		Map<String, String> headers = msg.getAdditionalHeaders();
+		Assert.assertTrue("Expected header size 1", headers.size() == 1);
+		Assert.assertTrue("Expected number header value = 2, but actual " + headers.toString(), "2".equals(headers.get(ModelMessageHelper.NUMBER_HEADER)));
 		Model[] models = ModelMessageHelper.restore(msg);
 		assert(models.length == 2);
 		for (int i = 0 ; i < 2; i++) {

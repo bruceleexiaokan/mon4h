@@ -77,7 +77,7 @@ public class ModelMessageHelper {
 	}
 
 	public static Model[] restore(final Message msg) throws IOException, ClassNotFoundException {
-		if (msg == null || msg.getBody() == null || (!ModelType.LOGS.getType().equals(msg.getType())))
+		if (msg == null || msg.getBody() == null)
 			return null;
 		
 		String numStr = msg.getAdditionalHeaders().get(NUMBER_HEADER);

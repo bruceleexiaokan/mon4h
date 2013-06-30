@@ -10,10 +10,14 @@ Dependent library management:
  - No maven support, will support it in the future
  
 Build:
+ - convert the project to dynamic web project by specifying it in project->properties->project facets
  - import this project in eclipse IDE (the source includes .project and .classpath)
  - make sure this project's facet is dynamic web project
  - make sure this project's binary target is WebContent/WEB-INF/classes
  - the dependent library is in WebContent/WEB-INF/lib (Need to change it to maven)
+ - configure your target runtime in eclipse to tomcat 7
+ - work around compilation error
+   Window -> Preferences -> Java -> Compiler -> Errors/Warnings -> Deprecated and restricted API -> Forbidden reference (access rules) -> Warnings£¬
  
 Config:
  - in windows environment, the configuration is now hardcoded to D:/dashboard/conf/commonui.ini

@@ -1,0 +1,2 @@
+1. 2013/6/30, namespace and metrics name are messed up. Bruce please fix it
+2. 

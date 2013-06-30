@@ -45,7 +45,7 @@ public class Config implements ReloadListener{
 	
 	public static void configTSDB(){
 		if(systemType == SYSTEM_TYPE_QUERY){
-			QueryEngine.setHBaseInfo();
+			QueryEngineOld.setHBaseInfo();
 		}
 		if(systemType == SYSTEM_TYPE_PUSH){
 			PushEngine.setHBaseInfo();

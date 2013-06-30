@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
+    <zkquorum>hadoop1</zkquorum>
+	<basepath>/hbase</basepath>
+	<uidtable>demo.tsdb-uid</uidtable>
+	<metatable>demo.metrictag</metatable>
+	<datatable>demo.tsdb</datatable>
 	<config-db-url>jdbc:mysql://fltsearchlog.mysql.sh.ctriptravel.com:55944/centralloggingdb?useUnicode=true</config-db-url>
 	<db-driver>com.mysql.jdbc.Driver</db-driver>
 	<config-refresh-interval>600000</config-refresh-interval>

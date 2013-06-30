@@ -12,7 +12,7 @@ import java.util.Properties;
 
 import mon4h.collector.configuration.Configuration;
 import mon4h.collector.configuration.Constants;
-import mon4h.common.models.Message;
+import mon4h.common.domain.models.Message;
 import mon4h.common.queue.Queue;
 import mon4h.common.queue.Queue.QueueException;
 import mon4h.common.queue.impl.CompositeMemoryQueue;

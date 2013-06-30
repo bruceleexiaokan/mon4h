@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 
 import mon4h.collector.configuration.Constants;
 import mon4h.collector.queue.QueueManager;
-import mon4h.common.models.Message;
+import mon4h.common.domain.models.Message;
 import mon4h.common.queue.Queue;
 
 import org.slf4j.Logger;

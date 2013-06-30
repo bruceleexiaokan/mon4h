@@ -1,4 +1,4 @@
-package mon4h.common.models;
+package mon4h.common.domain.models;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -12,8 +12,6 @@ public class Message implements Serializable {
 	private static final long serialVersionUID = 4495232286401416840L;
 
 	private static final byte[] DUMMY_BODY = new byte[0];
-//	private static final String VERSION = "ver";
-//	private static final String TYPE = "type";
 	
 	private String type;
 	private TreeMap<String, String> additionalHeaders = new TreeMap<String, String>();

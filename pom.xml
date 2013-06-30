@@ -24,7 +24,7 @@
 		<log4j.version>2.0-beta2</log4j.version>
 		<slf4j.version>1.7.2</slf4j.version>
 		<logback.version>1.0.9</logback.version>
-		<jersey.version>1.17</jersey.version>
+		<!-- jersey.version>1.17</jersey.version -->
 		<jersey-apache-client4.version>1.9.1</jersey-apache-client4.version>
 		<jackson.version>1.9.2</jackson.version>
 		<jaxb.version>2.1.9</jaxb.version>
@@ -32,6 +32,10 @@
 		<sonar.language>java</sonar.language>
 		<sonar.dynamicAnalysis>true</sonar.dynamicAnalysis>
 		<sonar.java.coveragePlugin>cobertura</sonar.java.coveragePlugin>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<guava.version>14.0-rc1</guava.version>
+		<jackson-jaxrs-json-provider.version>2.1.4</jackson-jaxrs-json-provider.version>
 	</properties>
 
 	<dependencyManagement>
@@ -56,6 +60,13 @@
 				<groupId>org.apache.hive</groupId>
 				<artifactId>hive-jdbc</artifactId>
 				<version>${hive.version}</version>
+			</dependency>
+
+			<!--Java tools library instead of the apache commons libraries -->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
 			</dependency>
 
 			<!-- About logger -->
@@ -147,6 +158,11 @@
 				<version>${jersey.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.sun.jersey</groupId>
+				<artifactId>jersey-media-json-jackson</artifactId>
+				<version>${jersey.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>com.sun.jersey.contribs</groupId>
 				<artifactId>jersey-spring</artifactId>
 				<version>${jersey.version}</version>
@@ -176,6 +192,11 @@
 				<groupId>org.codehaus.jackson</groupId>
 				<artifactId>jackson-jaxrs</artifactId>
 				<version>${jackson.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.jaxrs</groupId>
+				<artifactId>jackson-jaxrs-json-provider</artifactId>
+				<version>${jackson-jaxrs-json-provider.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
@@ -317,11 +338,8 @@
 					<artifactId>maven-source-plugin</artifactId>
 					<version>2.2.1</version>
 				</plugin>
-				<!-- plugin>
-					<groupId>com.keyboardsamurais.maven</groupId>
-					<artifactId>maven-timestamp-plugin</artifactId>
-					<version>1.0</version>
-				</plugin -->
+				<!-- plugin> <groupId>com.keyboardsamurais.maven</groupId> <artifactId>maven-timestamp-plugin</artifactId> 
+					<version>1.0</version> </plugin -->
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -350,23 +368,11 @@
 				<artifactId>maven-surefire-report-plugin</artifactId>
 				<inherited>true</inherited>
 			</plugin>
-			<!-- plugin>
-				<groupId>com.keyboardsamurais.maven</groupId>
-				<artifactId>maven-timestamp-plugin</artifactId>
-				<configuration>
-					<propertyName>build.time</propertyName>
-					<timestampPattern>yyyyMMddHHmm</timestampPattern>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>compile</phase>
-						<goals>
-							<goal>create</goal>
-						</goals>
-					</execution>
-				</executions>
-				<inherited>true</inherited>
-			</plugin -->
+			<!-- plugin> <groupId>com.keyboardsamurais.maven</groupId> <artifactId>maven-timestamp-plugin</artifactId> 
+				<configuration> <propertyName>build.time</propertyName> <timestampPattern>yyyyMMddHHmm</timestampPattern> 
+				</configuration> <executions> <execution> <phase>compile</phase> <goals> 
+				<goal>create</goal> </goals> </execution> </executions> <inherited>true</inherited> 
+				</plugin -->
 		</plugins>
 	</build>
 	<reporting>
@@ -401,17 +407,9 @@
 			<snapshotRepository> <id>snapshots</id> <url> http://xxx </url> </snapshotRepository -->
 	</distributionManagement>
 
-	<!-- repositories>
-		<repository>
-			<id>releases-repository.java.net</id>
-			<name>Java.net Snapshot Repository for Maven</name>
-			<url>https://maven.java.net/content/repositories/releases/</url>
-			<layout>default</layout>
-		</repository>
-		<repository>
-			<id>cloudera</id>
-			<url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
-		</repository>
-	</repositories -->
+	<!-- repositories> <repository> <id>releases-repository.java.net</id> <name>Java.net 
+		Snapshot Repository for Maven</name> <url>https://maven.java.net/content/repositories/releases/</url> 
+		<layout>default</layout> </repository> <repository> <id>cloudera</id> <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url> 
+		</repository> </repositories -->
 
 </project>

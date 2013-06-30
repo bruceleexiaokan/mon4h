@@ -1,4 +1,4 @@
-package mon4h.common.models;
+package mon4h.common.domain.models;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -7,6 +7,8 @@ import java.io.ObjectOutputStream;
 import java.util.Map;
 
 import junit.framework.TestCase;
+
+import mon4h.common.domain.models.Message;
 
 import org.junit.Test;
 

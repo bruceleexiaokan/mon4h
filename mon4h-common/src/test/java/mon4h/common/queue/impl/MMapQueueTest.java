@@ -7,8 +7,8 @@ import java.nio.ByteBuffer;
 
 import mon4h.common.os.OS;
 import mon4h.common.queue.Queue.QueueException;
-import mon4h.common.queue.impl.MMapQueue.ByteConverter;
-import mon4h.common.queue.impl.MMapQueue.ObjectConverter;
+import mon4h.common.util.ByteConverter;
+import mon4h.common.util.ObjectConverter;
 
 import org.junit.Test;
 

@@ -16,5 +16,9 @@
     <version>${mon4h.version}</version>
 
     <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+            </dependency>
     </dependencies>
 </project>

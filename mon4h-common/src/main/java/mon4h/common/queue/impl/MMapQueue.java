@@ -2,13 +2,9 @@ package mon4h.common.queue.impl;
 
 import static java.nio.channels.FileChannel.MapMode.READ_WRITE;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.Closeable;
 import java.io.File;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.RandomAccessFile;
 import java.io.Serializable;
 import java.nio.ByteBuffer;
@@ -16,6 +12,8 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 import mon4h.common.queue.Queue;
+import mon4h.common.util.ByteConverter;
+import mon4h.common.util.ObjectConverter;
 import sun.nio.ch.DirectBuffer;
 
 @SuppressWarnings("restriction")
@@ -68,6 +66,10 @@ public class MMapQueue<T extends Serializable> implements Queue<T> {
 		this.maxFileNumber = maxFileNumber;
 		init();
 	}
+	
+	public String getQueueDirectory() {
+		return fileDir;
+	}
 
 	public int getFileNumber() {
 		if (writeIndexFile >= readIndexFile) {
@@ -76,10 +78,12 @@ public class MMapQueue<T extends Serializable> implements Queue<T> {
 		return Integer.MAX_VALUE - readIndexFile + writeIndexFile + 1;
 	}
 	
+	@Override
 	public boolean readAvailable() {
 		return (writepos != readpos) || (writeIndexFile != readIndexFile);
 	}
 	
+	@Override
 	public boolean writeAvailable() {
 		return (getFileNumber() < maxFileNumber) || (writeIndexFile < pageSize - ENDER_SIZE - HEADER_SIZE);
 	}
@@ -151,25 +155,30 @@ public class MMapQueue<T extends Serializable> implements Queue<T> {
 		}
 	}
 
-	public void shutdown() throws IOException {
-		synchronized (this) {
-			if (writeMbb != null) {
-				writeMbb.force();
-				unmap(writeMbb);
+	@Override
+	public void shutdown() throws QueueException {
+		try {
+			synchronized (this) {
+				if (writeMbb != null) {
+					writeMbb.force();
+					unmap(writeMbb);
+				}
+				if (readMbb != null) {
+					readMbb.force();
+					unmap(readMbb);
+				}
+				if (indexMbb != null) {
+					indexMbb.force();
+					unmap(indexMbb);
+				}
+				closeResources(readChannel, readFile, writeChannel, writeFile,
+						indexChannel, indexFile);
+				readChannel = writeChannel = indexChannel = null;
+				readFile = writeFile = indexFile = null;
+				readIndexFile = writeIndexFile = readpos = writepos = 0;
 			}
-			if (readMbb != null) {
-				readMbb.force();
-				unmap(readMbb);
-			}
-			if (indexMbb != null) {
-				indexMbb.force();
-				unmap(indexMbb);
-			}
-			closeResources(readChannel, readFile, writeChannel, writeFile,
-					indexChannel, indexFile);
-			readChannel = writeChannel = indexChannel = null;
-			readFile = writeFile = indexFile = null;
-			readIndexFile = writeIndexFile = readpos = writepos = 0;
+		} catch (IOException e) {
+			throw new QueueException("Got an IO exception " + e.getMessage(), e);
 		}
 	}
 
@@ -328,57 +337,6 @@ public class MMapQueue<T extends Serializable> implements Queue<T> {
 			return (index <= writeIndexFile) && (index >= readIndexFile); 
 		}
 		return (index <= writeIndexFile) || (index >= readIndexFile); 
-	}
-
-	static class ByteConverter<T extends Serializable> extends
-			ByteArrayOutputStream {
-		private ObjectOutputStream oos;
-
-		ByteConverter() throws IOException {
-			super();
-			oos = new ObjectOutputStream(this);
-		}
-
-		byte[] toBytes(T t) throws IOException {
-			reset();
-			oos.reset();
-			oos.writeObject((Object) t);
-			oos.flush();
-			return buf;
-		}
-		
-		byte[] capacity(int length) {
-			reset();
-			if (buf.length < length) {
-				buf = new byte[length];
-			}
-			return buf;
-		}
-	}
-
-	static class ObjectConverter<T extends Serializable> extends
-			ByteArrayInputStream {
-		private ObjectInputStream ois;
-
-		@SuppressWarnings("resource")
-		ObjectConverter() throws IOException {
-			super(new ByteConverter<T>().toByteArray());
-			ois = new ObjectInputStream(this);
-		}
-
-		@SuppressWarnings("unchecked")
-		T toObject(byte[] buf, int offset, int length) throws IOException, ClassNotFoundException {
-			reset(buf, offset, length);
-			return (T) ois.readObject();
-		}
-
-		private void reset(byte[] buf, int offset, int length) {
-			this.buf = buf;
-			this.pos = offset;
-			this.count = Math.min(offset + length, buf.length);
-			this.mark = offset;
-		}
-
 	}
 
 }

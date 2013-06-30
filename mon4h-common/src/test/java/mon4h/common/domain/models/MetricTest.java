@@ -18,7 +18,7 @@ public class MetricTest {
 		metric.setCreatedTime(0);
 		metric.setMetricType(MetricType.LONG_TYPE);
 		metric.setName("name");
-		metric.setValue("123");
+		metric.setValue(123);
 		metric.getTags().add(new Tag("key", "value"));
 		
 		ByteConverter<Metric> bc = new ByteConverter<Metric>();

@@ -18,20 +18,29 @@ import com.google.common.collect.Lists;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(propOrder = {"level", "createdTime", "threadId", "traceId", "title", "message", "attributes"})
-public class Log implements Model {
+@XmlType(propOrder = {"level", "createdTime", "threadId", "traceId", "source", 
+		"hostname", "ip", "message", "throwable", "tags"})
+public class Log implements ILogModel {
 
 	private static final long serialVersionUID = 4981161490616909937L;
 	private LogLevel level;
 	private long createdTime;
 	private long threadId;
 	private long traceId;
-	private String title;
+	private String source;
+	private String hostname;
+	private String ip;
 	private String message;
+	private Throwable throwable;
 	
-    @XmlElementWrapper(name = "attributes")
-    @XmlElement(name = "attribute")
+	@XmlElementWrapper(name = "tags")
+    @XmlElement(name = "tag")
     private List<Tag> tags = Lists.newArrayList();
+	
+	@Override
+	public ModelType getType() {
+		return ModelType.LOGS;
+	}
 
 	public LogLevel getLevel() {
 		return level;
@@ -65,12 +74,28 @@ public class Log implements Model {
 		this.traceId = traceId;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getSource() {
+		return source;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public String getHostname() {
+		return hostname;
+	}
+
+	public void setHostname(String hostname) {
+		this.hostname = hostname;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 
 	public String getMessage() {
@@ -81,6 +106,14 @@ public class Log implements Model {
 		this.message = message;
 	}
 
+    public Throwable getThrowable() {
+		return throwable;
+	}
+
+	public void setThrowable(Throwable throwable) {
+		this.throwable = throwable;
+	}
+	
 	public List<Tag> getTags() {
 		return tags;
 	}
@@ -92,7 +125,6 @@ public class Log implements Model {
 	@Override
 	public int hashCode() {
 		long code = level.getCode() ^ createdTime ^ threadId ^ traceId;
-		code ^= (title == null) ? 0 : title.hashCode();
 		code ^= (message == null) ? 0 : message.hashCode();
 		for (Tag tag : tags) {
 			code ^= tag.hashCode();
@@ -108,14 +140,8 @@ public class Log implements Model {
 		result = result && createdTime == log.createdTime;
 		result = result && threadId == log.threadId;
 		result = result && traceId == log.traceId;
-		result = result && (title == null ? log.title == null : title.equals(log.title));
 		result = result && (message == null ? log.message == null : message.equals(log.message));
 		result = result && tags.equals(log.tags);
 		return result;
-	}
-	
-	@Override
-	public ModelType getType() {
-		return ModelType.METRICS;
 	}
 }

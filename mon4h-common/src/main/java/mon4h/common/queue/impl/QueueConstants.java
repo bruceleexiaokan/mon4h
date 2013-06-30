@@ -7,4 +7,6 @@ public class QueueConstants {
 	public static final String INDEX_NAME = "data.idx";
 	public static final int DEFAULT_PAGE_SIZE = 128 * 1024 * 1024;
 
+	public static final String COMPOSITE_MESSAGE_TYPE = "CompositeMessage";
+
 }

@@ -28,7 +28,7 @@ public class ModelResource {
 	@Path("logs")
 	public void queueLogs(Log[] logs) throws Exception {
     	try {
-    		Message msg = ModelMessageHelper.generateMessage(logs);
+    		Message msg = ModelMessageHelper.convertToMessage(logs);
 			QueueManager manager = QueueManager.getInstance();
 			List<Queue<Message>> queues = manager.getQueuesByType(msg.getType());
 			for (Queue<Message> queue : queues) {
@@ -45,7 +45,7 @@ public class ModelResource {
 	@Path("metrics")
 	public void queueMetrics(Metric[] metrics) throws Exception {
     	try {
-    		Message msg = ModelMessageHelper.generateMessage(metrics);
+    		Message msg = ModelMessageHelper.convertToMessage(metrics);
 			QueueManager manager = QueueManager.getInstance();
 			List<Queue<Message>> queues = manager.getQueuesByType(msg.getType());
 			for (Queue<Message> queue : queues) {

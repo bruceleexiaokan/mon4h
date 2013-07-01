@@ -1,11 +1,11 @@
 Todo list in July 2013
-- create github project,  mon4h
+- create github project, mon4h (Done)
 - dashboard4h
-  - query engine service
-  - push engine service
-  - UI
-- collector
-  - collector
+  - query engine service   (Done with hardcode configuration)
+  - push engine service    (No need, remove it)
+  - UI                     (Done)
+- collector/writer 
+  - collector              ()
   - writer
 - metrics aggregation framework
   - test suite

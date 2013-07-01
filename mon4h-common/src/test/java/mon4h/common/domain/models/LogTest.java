@@ -4,14 +4,12 @@ import java.io.IOException;
 
 import mon4h.common.domain.models.sub.LogLevel;
 import mon4h.common.domain.models.sub.Tag;
-import mon4h.common.util.ByteConverter;
-import mon4h.common.util.ObjectConverter;
+import mon4h.common.util.ByteObjectConverter;
 
 import org.junit.Test;
 
 public class LogTest {
 
-	@SuppressWarnings("resource")
 	@Test
 	public void testLog() throws IOException, ClassNotFoundException {
 		Log log = new Log();
@@ -21,10 +19,9 @@ public class LogTest {
 		log.setThreadId(1);
 		log.setTraceId(2);
 		log.getTags().add(new Tag("key", "value"));
-		
-		ByteConverter<Log> bc = new ByteConverter<Log>();
-		ObjectConverter<Log> oc = new ObjectConverter<Log>();
-		Log log1 = oc.toObject(bc.toBytes(log), 0, bc.size());
+
+		byte[] tmp = ByteObjectConverter.objectToBytes(log);
+		Log log1 = ByteObjectConverter.bytesToObject(tmp);
 		assert(log1.getCreatedTime() == 0);
 		assert(log1.getThreadId() == 1);
 		assert(log1.getTraceId() == 2);

@@ -15,7 +15,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import junit.framework.Assert;
-import mon4h.collector.configuration.Constants;
+import mon4h.collector.configuration.CollectorConstants;
 import mon4h.common.domain.models.ILogModel;
 import mon4h.common.domain.models.Log;
 import mon4h.common.domain.models.Message;
@@ -66,7 +66,7 @@ public class ClientMessageTest {
 		response = c
 				.target("http://127.0.0.1:8080/mon4h-collector/rest/messages")
 				.request(MediaType.APPLICATION_OCTET_STREAM)
-				.header(Constants.MESSAGE_NUMBER_HTTP_HEADER, "1")
+				.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, "1")
 				.post(Entity.entity(msgcontent, MediaType.APPLICATION_OCTET_STREAM));
 		status = response.getStatus();
 
@@ -74,14 +74,14 @@ public class ClientMessageTest {
 				.target("http://127.0.0.1:8080/mon4h-collector/rest/messages")
 				.request(MediaType.APPLICATION_OCTET_STREAM)
 				.accept(MediaType.APPLICATION_OCTET_STREAM)
-				.header(Constants.MESSAGE_NUMBER_HTTP_HEADER, "1")
-				.header(Constants.MESSAGE_NAME_HTTP_HEADER,
+				.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, "1")
+				.header(CollectorConstants.MESSAGE_NAME_HTTP_HEADER,
 						ModelType.LOGS.getType()).get();
 
 		status = response.getStatus();
 		Assert.assertTrue(status >= 200 && status < 300);
 		String countStr = response
-				.getHeaderString(Constants.MESSAGE_NUMBER_HTTP_HEADER);
+				.getHeaderString(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER);
 		Assert.assertTrue(Integer.valueOf(countStr) == 1);
 
 		Assert.assertTrue(response.hasEntity());

@@ -1,6 +1,6 @@
 package mon4h.collector.configuration;
 
-public class Constants {
+public class CollectorConstants {
 	public static final int MAX_MESSAGE_SIZE = 2 * 1024 * 1024;
 	public static final int DEFAULT_PAGE_SIZE = 128 * 1024 * 1024;
 	public static final int DEFAULT_MEMORY_QUEUE_MAX_ITEMS = 51200;

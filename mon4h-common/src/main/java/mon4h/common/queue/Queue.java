@@ -2,8 +2,6 @@ package mon4h.common.queue;
 
 import java.io.Serializable;
 
-import mon4h.common.queue.Queue.QueueException;
-
 public interface Queue<T extends Serializable> {
 
 	public void produce(T item) throws QueueException;

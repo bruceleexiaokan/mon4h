@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
-import mon4h.collector.configuration.Configuration;
-import mon4h.collector.configuration.Constants;
+import mon4h.collector.configuration.CollectorConfiguration;
+import mon4h.collector.configuration.CollectorConstants;
 import mon4h.common.domain.models.Message;
 import mon4h.common.queue.Queue;
 import mon4h.common.queue.Queue.QueueException;
@@ -79,20 +79,20 @@ public class QueueManager {
 	}
 	
 	private static void initialize() throws IOException {
-		Properties prop = Configuration.getProperties();
-		String dir = prop.getProperty(Constants.diskQueueDir);
-		String names = prop.getProperty(Constants.queueNames);
-		String pageSizeStr = prop.getProperty(Constants.pageSize);
-		String maxMemItemsStr = prop.getProperty(Constants.memoryQueueMaxItems);
+		Properties prop = CollectorConfiguration.getProperties();
+		String dir = prop.getProperty(CollectorConstants.diskQueueDir);
+		String names = prop.getProperty(CollectorConstants.queueNames);
+		String pageSizeStr = prop.getProperty(CollectorConstants.pageSize);
+		String maxMemItemsStr = prop.getProperty(CollectorConstants.memoryQueueMaxItems);
 		if (dir == null || names == null) {
 			return;
 		}
-		int pageSize = Constants.DEFAULT_PAGE_SIZE;
+		int pageSize = CollectorConstants.DEFAULT_PAGE_SIZE;
 		if (pageSizeStr != null) {
 			pageSizeStr = pageSizeStr.trim();
 			pageSize = Integer.valueOf(pageSizeStr);
 		}
-		int maxMemItems = Constants.DEFAULT_MEMORY_QUEUE_MAX_ITEMS;
+		int maxMemItems = CollectorConstants.DEFAULT_MEMORY_QUEUE_MAX_ITEMS;
 		if (maxMemItemsStr != null) {
 			maxMemItemsStr = maxMemItemsStr.trim();
 			maxMemItems = Integer.valueOf(maxMemItemsStr);
@@ -107,8 +107,8 @@ public class QueueManager {
 			if (!dirFile.exists()) {
 				dirFile.mkdir();
 			}
-			int fileNumber = Constants.DEFAULT_MAX_DISK_FILE_NUMBER;
-			String fileNumberStr = prop.getProperty(Constants.queuePrefix + name + Constants.queueMaxFilesPostfix);
+			int fileNumber = CollectorConstants.DEFAULT_MAX_DISK_FILE_NUMBER;
+			String fileNumberStr = prop.getProperty(CollectorConstants.queuePrefix + name + CollectorConstants.queueMaxFilesPostfix);
 			if (fileNumberStr != null) {
 				fileNumberStr = fileNumberStr.trim();
 				fileNumber = Integer.valueOf(fileNumberStr);
@@ -118,7 +118,7 @@ public class QueueManager {
 			queueMap.put(name, memoryQueue);
 			LOGGER.info("Added queue " + memoryQueue.getName());
 			
-			String typesStr = prop.getProperty(Constants.queuePrefix + name + Constants.queueTypesPostfix);
+			String typesStr = prop.getProperty(CollectorConstants.queuePrefix + name + CollectorConstants.queueTypesPostfix);
 			if (typesStr == null) {
 				continue;
 			}

@@ -8,7 +8,7 @@ public class ConfigurationTest {
 
 	@Test
 	public void testConfiguration() {
-		Properties prop = Configuration.getProperties();
+		Properties prop = CollectorConfiguration.getProperties();
 		String address = prop.getProperty("restful.server.address");
 		assert(address != null);
 	}

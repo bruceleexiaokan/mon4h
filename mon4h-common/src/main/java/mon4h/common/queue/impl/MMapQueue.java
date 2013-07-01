@@ -12,8 +12,7 @@ import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 
 import mon4h.common.queue.Queue;
-import mon4h.common.util.ByteConverter;
-import mon4h.common.util.ObjectConverter;
+import mon4h.common.util.ByteObjectConverter;
 import sun.nio.ch.DirectBuffer;
 
 @SuppressWarnings("restriction")
@@ -33,8 +32,6 @@ public class MMapQueue<T extends Serializable> implements Queue<T> {
 	private MappedByteBuffer writeMbb;
 	private MappedByteBuffer indexMbb;
 	private final ByteBuffer headerBb = ByteBuffer.allocate(HEADER_SIZE);
-	private final ByteConverter<T> byteConverter = new ByteConverter<T>();
-	private final ObjectConverter<T> objConverter = new ObjectConverter<T>();
 	
 	private volatile int readIndexFile = 0;
 	private volatile int writeIndexFile = 0;
@@ -94,8 +91,8 @@ public class MMapQueue<T extends Serializable> implements Queue<T> {
 			throw new QueueException("item is null");
 		}
 		try {
-			byte[] contents = byteConverter.toBytes(item);
-			int length = byteConverter.size();
+			byte[] contents = ByteObjectConverter.objectToBytes(item);
+			int length = contents.length;
 
 			synchronized (this) {
 				int writePos = writeMbb.position();
@@ -122,8 +119,9 @@ public class MMapQueue<T extends Serializable> implements Queue<T> {
 
 	@Override
 	public T consume() throws QueueException {
-		byte[] contents = null;
 		try {
+			byte[] contents = null;
+			T obj = null;
 			synchronized (this) {
 				int readPos = readMbb.position();
 				int type = readMbb.getInt();
@@ -141,15 +139,14 @@ public class MMapQueue<T extends Serializable> implements Queue<T> {
 					return null;
 				}
 
-				contents = byteConverter.capacity(length);
-//				int pos = readMbb.position();
-//				System.out.println("Current read position: " + pos);
+				contents = new byte[length];
 				readMbb.get(contents, 0, length);
 				readpos = readMbb.position();
 				readMbb.putInt(readPos, ITEM_TYPE.EMPTY.ordinal());
-				T object = objConverter.toObject(contents, 0, length);
-				return object;
 			}
+			obj = ByteObjectConverter.bytesToObject(contents);
+			return obj;
+			
 		} catch (Exception e) {
 			throw new QueueException("Got an exception in consume", e);
 		}

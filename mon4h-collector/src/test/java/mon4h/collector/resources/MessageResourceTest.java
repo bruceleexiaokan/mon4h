@@ -11,7 +11,7 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import mon4h.collector.configuration.Constants;
+import mon4h.collector.configuration.CollectorConstants;
 import mon4h.common.domain.models.Message;
 
 import org.glassfish.jersey.server.ResourceConfig;
@@ -33,7 +33,7 @@ public class MessageResourceTest extends CollectorJerseyTest {
 		
         Response response = target("messages")
         	.request()
-        	.header(Constants.MESSAGE_NUMBER_HTTP_HEADER, "1")
+        	.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, "1")
         	.post(Entity.entity(msgcontent, MediaType.APPLICATION_OCTET_STREAM));
         int status = response.getStatus();
         assert(status >= 200 && status < 300);
@@ -41,13 +41,13 @@ public class MessageResourceTest extends CollectorJerseyTest {
         response = target("messages")
 	        	.request(MediaType.APPLICATION_OCTET_STREAM)
 	        	.accept(MediaType.APPLICATION_OCTET_STREAM)
-	        	.header(Constants.MESSAGE_NUMBER_HTTP_HEADER, "1")
-	        	.header(Constants.MESSAGE_NAME_HTTP_HEADER, "metrics")
+	        	.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, "1")
+	        	.header(CollectorConstants.MESSAGE_NAME_HTTP_HEADER, "metrics")
 	        	.get();
         
         status = response.getStatus();
         assert(status >= 200 && status < 300);
-		String countStr = response.getHeaderString(Constants.MESSAGE_NUMBER_HTTP_HEADER);
+		String countStr = response.getHeaderString(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER);
 		assert(Integer.valueOf(countStr) == 1);
 
 		assert (response.hasEntity());
@@ -66,11 +66,11 @@ public class MessageResourceTest extends CollectorJerseyTest {
         response = target("messages")
 	        	.request(MediaType.APPLICATION_OCTET_STREAM)
 	        	.accept(MediaType.APPLICATION_OCTET_STREAM)
-	        	.header(Constants.MESSAGE_NUMBER_HTTP_HEADER, "1")
-	        	.header(Constants.MESSAGE_NAME_HTTP_HEADER, "metrics")
+	        	.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, "1")
+	        	.header(CollectorConstants.MESSAGE_NAME_HTTP_HEADER, "metrics")
 	        	.get();
 
-		countStr = response.getHeaderString(Constants.MESSAGE_NUMBER_HTTP_HEADER);
+		countStr = response.getHeaderString(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER);
 		assert("0".equals(countStr));
     }
 
@@ -87,7 +87,7 @@ public class MessageResourceTest extends CollectorJerseyTest {
 		
 		Response response = resource.getBinaryMessages(1, "metrics");
 		Object obj = response.getEntity();
-		String countStr = response.getHeaderString(Constants.MESSAGE_NUMBER_HTTP_HEADER);
+		String countStr = response.getHeaderString(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER);
 		assert(Integer.valueOf(countStr) == 1);
 		byte[] msgContent = (byte[])obj;
 		ByteArrayInputStream bais1 = new ByteArrayInputStream(msgContent);
@@ -102,7 +102,7 @@ public class MessageResourceTest extends CollectorJerseyTest {
 		}
 
 		response = resource.getBinaryMessages(1, "metrics");
-		countStr = response.getHeaderString(Constants.MESSAGE_NUMBER_HTTP_HEADER);
+		countStr = response.getHeaderString(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER);
 		assert("0".equals(countStr));
 	}
 	

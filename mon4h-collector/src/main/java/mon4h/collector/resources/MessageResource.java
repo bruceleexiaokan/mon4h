@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import mon4h.collector.configuration.Constants;
+import mon4h.collector.configuration.CollectorConstants;
 import mon4h.collector.queue.QueueManager;
 import mon4h.common.domain.models.Message;
 import mon4h.common.queue.Queue;
@@ -32,7 +32,7 @@ public class MessageResource {
 	
     @POST
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
-    public void addBinaryMessages(InputStream input, @HeaderParam(Constants.MESSAGE_NUMBER_HTTP_HEADER) int number) throws Exception {
+    public void addBinaryMessages(InputStream input, @HeaderParam(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER) int number) throws Exception {
     	try {
 			ObjectInputStream ois = new ObjectInputStream(input);
 			for (int i = 0; i < number; ++i) {
@@ -50,8 +50,8 @@ public class MessageResource {
 	@GET
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
-    public Response getBinaryMessages(@HeaderParam(Constants.MESSAGE_NUMBER_HTTP_HEADER) int number,
-    		@HeaderParam(Constants.MESSAGE_NAME_HTTP_HEADER) String name) throws Exception {
+    public Response getBinaryMessages(@HeaderParam(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER) int number,
+    		@HeaderParam(CollectorConstants.MESSAGE_NAME_HTTP_HEADER) String name) throws Exception {
     	try {
 			QueueManager manager = QueueManager.getInstance();
 			Queue<Message> queue = manager.getQueueByName(name);
@@ -79,7 +79,7 @@ public class MessageResource {
 				content = baos.toByteArray();
 			}
 			Response response = Response.ok(content, MediaType.APPLICATION_OCTET_STREAM)
-					.header(Constants.MESSAGE_NUMBER_HTTP_HEADER, count)
+					.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, count)
 					.entity(content)
 					.build();
 			return response;

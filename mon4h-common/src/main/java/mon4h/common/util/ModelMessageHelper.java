@@ -1,11 +1,9 @@
 package mon4h.common.util;
 
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 import mon4h.common.domain.models.ILogModel;
@@ -15,8 +13,6 @@ import mon4h.common.queue.impl.QueueConstants;
 public class ModelMessageHelper {
 	
 	public static final String NUMBER_HEADER = "number";
-	private static final LinkedList<ByteConverter<? extends Serializable>> bcs = new LinkedList<ByteConverter<? extends Serializable>>();
-	private static final LinkedList<ObjectConverter<? extends Serializable>> ocs = new LinkedList<ObjectConverter<? extends Serializable>>();
 
 	public static Message convertToMessage(ILogModel... models) throws IOException {
 		HashMap<String, ArrayList<ILogModel>> map = getMap(models);
@@ -28,77 +24,47 @@ public class ModelMessageHelper {
 		return doConvertToMessage(map);
 	}
 
-	@SuppressWarnings({ "unchecked" })
 	public static HashMap<String, ArrayList<ILogModel>> convertToModels(final Message msg) throws IOException, ClassNotFoundException {
 		if (msg == null || msg.getBody() == null)
 			return null;
 		
 		HashMap<String, ArrayList<ILogModel>> map = new HashMap<String, ArrayList<ILogModel>>();
 		String type = msg.getType();
-		ObjectConverter<? extends Serializable> oc = null;
-		try {
-			synchronized (ModelMessageHelper.class) {
-				oc = getObjectConverter();
+		byte[] body = msg.getBody();
+		
+		if (!QueueConstants.COMPOSITE_MESSAGE_TYPE.equals(type)) {
+			ILogModel[] models = ByteObjectConverter.bytesToObject(body);
+			String numStr = msg.getAdditionalHeaders().get(NUMBER_HEADER);
+			int number = Integer.valueOf(numStr);
+			if (number != models.length) {
+				throw new IOException("Inconsistent of number in header and actually array size");
 			}
-			byte[] body = msg.getBody();
-			
-			if (!QueueConstants.COMPOSITE_MESSAGE_TYPE.equals(type)) {
-				ILogModel[] models = ((ObjectConverter<ILogModel>)oc).toArray(body, 0, body.length);
-				String numStr = msg.getAdditionalHeaders().get(NUMBER_HEADER);
-				int number = Integer.valueOf(numStr);
-				if (number != models.length) {
-					throw new IOException("Inconsistent of number in header and actually array size");
-				}
-				ArrayList<ILogModel> list = new ArrayList<ILogModel>();
-				for (int i = 0; i < models.length; ++i) {
-					list.add(models[i]);
-				}
-				map.put(type, list);
-				return map;
+			ArrayList<ILogModel> list = new ArrayList<ILogModel>();
+			for (int i = 0; i < models.length; ++i) {
+				list.add(models[i]);
 			}
-			
-			Message[] msgs = ((ObjectConverter<Message>)oc).toArray(body, 0, body.length);
-			for (Message m : msgs) {
-				HashMap<String, ArrayList<ILogModel>> submap = convertToModels(m);
-				for (Map.Entry<String, ArrayList<ILogModel>> e : submap.entrySet()) {
-					ArrayList<ILogModel> sublist = map.get(e.getKey());
-					if (sublist == null) {
-						map.put(e.getKey(), e.getValue());
-					} else {
-						sublist.addAll(e.getValue());
-					}
-				}
-			}
+			map.put(type, list);
 			return map;
-			
-		} finally {
-			if (oc != null) {
-				synchronized (ModelMessageHelper.class) {
-					ocs.add(oc);
+		}
+		
+		Message[] msgs = ByteObjectConverter.bytesToObject(body);
+		for (Message m : msgs) {
+			HashMap<String, ArrayList<ILogModel>> submap = convertToModels(m);
+			for (Map.Entry<String, ArrayList<ILogModel>> e : submap.entrySet()) {
+				ArrayList<ILogModel> sublist = map.get(e.getKey());
+				if (sublist == null) {
+					map.put(e.getKey(), e.getValue());
+				} else {
+					sublist.addAll(e.getValue());
 				}
 			}
 		}
+
+		return map;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public static byte[] convertMessageToBytes(Message msg) throws IOException {
-		ByteConverter<Message> bc = null;
-		try {
-			synchronized (ModelMessageHelper.class) {
-				bc = (ByteConverter<Message>)getByteConverter();
-			}
-			byte[] src = bc.toBytes(msg);
-			int size = bc.size();
-			byte[] result = new byte[size];
-			System.arraycopy(src, 0, result, 0, size);
-			return result;
-		} finally {
-			if (bc != null) {
-				synchronized (ModelMessageHelper.class) {
-					bcs.add(bc);
-				}
-			}
-		}
+		return ByteObjectConverter.objectToBytes(msg);
 	}
 
 	private static Message doConvertToMessage(
@@ -119,51 +85,21 @@ public class ModelMessageHelper {
 		return msg;
 	}
 	
-	@SuppressWarnings("unchecked")
 	private static Message convertToCompositeMessage(Message[] msgs) throws IOException {
-		ByteConverter<Message> bc = null;
-		try {
-			synchronized (ModelMessageHelper.class) {
-				bc = (ByteConverter<Message>)getByteConverter();
-			}
-			Message msg = new Message(QueueConstants.COMPOSITE_MESSAGE_TYPE);
-			msg.getAdditionalHeaders().put(NUMBER_HEADER, Integer.toString(msgs.length));
-			byte[] content = bc.arrayToBytes(msgs);
-			byte[] body = new byte[bc.size()];
-			System.arraycopy(content, 0, body, 0, body.length);
-			msg.setBody(body);
-			return msg;
-		} finally {
-			if (bc != null) {
-				synchronized (ModelMessageHelper.class) {
-					bcs.add(bc);
-				}
-			}
-		}
+		Message msg = new Message(QueueConstants.COMPOSITE_MESSAGE_TYPE);
+		msg.getAdditionalHeaders().put(NUMBER_HEADER, Integer.toString(msgs.length));
+		byte[] body = ByteObjectConverter.objectToBytes(msgs);
+		msg.setBody(body);
+		return msg;
 	}
 
-	@SuppressWarnings("unchecked")
 	private static Message convertToMessage(String type, ArrayList<ILogModel> models) throws IOException {
 		ILogModel[] modelArray = models.toArray(new ILogModel[models.size()]);
-		ByteConverter<ILogModel> bc = null;
-		try {
-			synchronized (ModelMessageHelper.class) {
-				bc = (ByteConverter<ILogModel>)getByteConverter();
-			}
-			Message msg = new Message(type);
-			msg.getAdditionalHeaders().put(NUMBER_HEADER, Integer.toString(modelArray.length));
-			byte[] content = bc.arrayToBytes(modelArray);
-			byte[] body = new byte[bc.size()];
-			System.arraycopy(content, 0, body, 0, body.length);
-			msg.setBody(body);
-			return msg;
-		} finally {
-			if (bc != null) {
-				synchronized (ModelMessageHelper.class) {
-					bcs.add(bc);
-				}
-			}
-		}
+		Message msg = new Message(type);
+		msg.getAdditionalHeaders().put(NUMBER_HEADER, Integer.toString(modelArray.length));
+		byte[] body = ByteObjectConverter.objectToBytes(modelArray);
+		msg.setBody(body);
+		return msg;
 	}
 	
 
@@ -193,15 +129,4 @@ public class ModelMessageHelper {
 		return map;
 	}
 	
-	private static ByteConverter<? extends Serializable> getByteConverter() throws IOException {
-		if (!bcs.isEmpty())
-			return bcs.remove();
-		return new ByteConverter<Serializable>();
-	}
-
-	private static ObjectConverter<? extends Serializable> getObjectConverter() throws IOException {
-		if (!ocs.isEmpty())
-			return ocs.remove();
-		return new ObjectConverter<Serializable>();
-	}
 }

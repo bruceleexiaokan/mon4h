@@ -14,7 +14,7 @@ public class Constants {
 	public static final String queuePrefix = "mon4h.collector.queue.";
 	public static final String queueMaxFilesPostfix = ".maxfiles";
 	public static final String queueTypesPostfix = ".types";
-	
+
 	public static final String MESSAGE_NUMBER_HTTP_HEADER = "Message-Number";
 	public static final String MESSAGE_NAME_HTTP_HEADER = "Message-Name";
 }

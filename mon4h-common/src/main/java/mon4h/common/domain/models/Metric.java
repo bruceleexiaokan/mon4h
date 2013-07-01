@@ -18,11 +18,11 @@ import com.google.common.collect.Lists;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = {"name", "value", "createdTime", "metricType", "tags"})
-public class Metric implements Model {
+public class Metric implements ILogModel {
 
 	private static final long serialVersionUID = 6367675351821139894L;
 	private String name;
-    private String value;
+    private double value;
     private long createdTime;
     private MetricType metricType;
 
@@ -34,15 +34,20 @@ public class Metric implements Model {
 		return name;
 	}
 
+	@Override
+	public ModelType getType() {
+		return ModelType.METRICS;
+	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
 
-	public String getValue() {
+	public double getValue() {
 		return value;
 	}
 
-	public void setValue(String value) {
+	public void setValue(double value) {
 		this.value = value;
 	}
 
@@ -74,7 +79,7 @@ public class Metric implements Model {
 	public int hashCode() {
 		long code = createdTime;
 		code ^= (name == null) ? 0 : name.hashCode();
-		code ^= (value == null) ? 0 : value.hashCode();
+		code ^= Double.valueOf(value).hashCode();
 		code ^= (metricType == null) ? 0 : metricType.getValue();
 		for (Tag tag : tags) {
 			code ^= tag.hashCode();
@@ -89,13 +94,8 @@ public class Metric implements Model {
 		result = result && metricType.getValue() == m.metricType.getValue();
 		result = result && createdTime == m.createdTime;
 		result = result && (name == null ? m.name == null : name.equals(m.name));
-		result = result && (value == null ? m.value == null : value.equals(m.value));
+		result = result && value == m.value;
 		result = result && tags.equals(m.tags);
 		return result;
-	}
-
-	@Override
-	public ModelType getType() {
-		return ModelType.LOGS;
 	}
 }

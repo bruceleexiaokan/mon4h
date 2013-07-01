@@ -19,6 +19,7 @@ import mon4h.collector.configuration.Constants;
 import mon4h.collector.queue.QueueManager;
 import mon4h.common.domain.models.Message;
 import mon4h.common.queue.Queue;
+import mon4h.common.queue.impl.QueueConstants;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,10 +37,8 @@ public class MessageResource {
 			ObjectInputStream ois = new ObjectInputStream(input);
 			for (int i = 0; i < number; ++i) {
 				Message msg = (Message) ois.readObject();
-				QueueManager manager = QueueManager.getInstance();
-				List<Queue<Message>> queues = manager.getQueuesByType(msg.getType());
-				for (Queue<Message> queue : queues) {
-					queue.produce(msg);
+				if (!QueueConstants.COMPOSITE_MESSAGE_TYPE.equals(msg.getType())) {
+					queueMessage(msg);
 				}
 			}
     	} catch (Exception e) {
@@ -48,7 +47,7 @@ public class MessageResource {
     	}
     }
 
-    @GET
+	@GET
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
     public Response getBinaryMessages(@HeaderParam(Constants.MESSAGE_NUMBER_HTTP_HEADER) int number,
@@ -89,4 +88,12 @@ public class MessageResource {
     		throw e;
     	}
     }
+
+    private void queueMessage(Message msg) throws Exception {
+		QueueManager manager = QueueManager.getInstance();
+		List<Queue<Message>> queues = manager.getQueuesByType(msg.getType());
+		for (Queue<Message> queue : queues) {
+			queue.produce(msg);
+		}
+	}
 }

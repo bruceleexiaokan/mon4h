@@ -19,7 +19,6 @@ public class LogTest {
 		log.setLevel(LogLevel.FATAL);
 		log.setMessage("message");
 		log.setThreadId(1);
-		log.setTitle("title");
 		log.setTraceId(2);
 		log.getTags().add(new Tag("key", "value"));
 		

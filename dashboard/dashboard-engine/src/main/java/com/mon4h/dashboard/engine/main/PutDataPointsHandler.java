@@ -41,19 +41,26 @@ public class PutDataPointsHandler extends SimpleHttpRequestHandler<PutDataPoints
 		this.is = is;
 	}
 	
+	/**
+	 * 2 versions here
+	 * 1. write directly to hbase
+	 *    Cons: if hbase is down, data is lost
+	 * 2. write too collector and then to hbase
+	 *    Pros: if hbase is down, collector can keep the data and will not lose the data
+	 */
 	@Override
 	public PutDataPointsResponse doRun() throws Exception {
 		PutDataPointsResponse rt = new PutDataPointsResponse();
 		for(TimeSeriesData data : dataList){
 			TimeSeries ts = data.getTimeseries();
 			TSDB tsdb = TSDBClient.getTSDB(ts.getNameSpace());
-			String genName = MetricTagWriter.generateCompositeName(ts.getNameSpace(), ts.getMetricsName());
+			String compositeMetricsName = MetricTagWriter.generateCompositeName(ts.getNameSpace(), ts.getMetricsName());
 			
 			for (DataPoint point : data.getDataPoints()) {
 				if (data.getValueType() == InterfaceConst.DataType.DOUBLE) {
-					tsdb.addPoint(genName, System.currentTimeMillis()/1000, point.getDoubleValue().floatValue(), ts.getTags());
+					tsdb.addPoint(compositeMetricsName, point.getTimestamp()/1000, point.getDoubleValue().floatValue(), ts.getTags());
 				} else {
-					tsdb.addPoint(genName, System.currentTimeMillis()/1000, point.getLongValue(), ts.getTags());
+					tsdb.addPoint(compositeMetricsName, point.getTimestamp()/1000, point.getLongValue(), ts.getTags());
 				}
 			}
 			tsdb.flush();

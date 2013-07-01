@@ -10,7 +10,7 @@
 			<port>8080</port>
 			<log-home>D:\dashboard\log</log-home>
 			<log-config-file>D:\projects\mon4h\dashboard\dashboard-engine\conf\queryengine-logback.xml</log-config-file>
-			<meta-uptime-interval>3600000</meta-uptime-interval>
+			<meta-uptime-interval>300000</meta-uptime-interval>
 			<request>
 				<max-content-length>33554432</max-content-length>
 				<request-executor>

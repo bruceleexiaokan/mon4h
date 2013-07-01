@@ -36,13 +36,6 @@ public class QueryEngine {
 	 */
 	public static void main(String[] args) throws JoranException {
 		System.setProperty("tsd.core.auto_create_metrics", "true");
-//		try {
-//			LogUtil.setLogbackConfigFile("D:/dashboard/log/queryengine", "D:/projects/mon4h/dashboard/dashboard-engine/conf/queryengine.xml");
-//		} catch (JoranException e) {
-//			System.out.println("Config logback failed: "+e.getMessage());
-//			System.exit(3);
-//		}		
-//		log.debug("Engine Start!");
 
 		Config.systemType = Config.SYSTEM_TYPE_QUERY;
 		configQuery();

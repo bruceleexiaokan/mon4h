@@ -32,6 +32,11 @@ public class MetricTagWriter {
 		List<String> keys = convertToString(namespace, name, tags);
 		doAddKeys(keys);
 	}
+	
+	public void addMetrics(String compositeMetricsName, Map<String, String> tags) {
+		List<String> keys = convertToString(compositeMetricsName, tags);
+		doAddKeys(keys);
+	}
 
 	public void flush() {
 		HashSet<String> temp = null;
@@ -93,6 +98,33 @@ public class MetricTagWriter {
 			lenStr = getLengthString(value, 3);
 			results.add("0" + prefixName + key);
 			results.add("1" + prefixName + key + lenStr + value);
+		}
+		
+		return results;
+	}
+	
+	/**
+	 * tagname:  [0][metricsLength][metrics][tagNameLength][TagName]
+	 * tagvalue: [1][metricsLength][metrics][tagValueLength][TagValue]
+	 * The length is based on 36 radix. 
+	 * @param compositeMetricsName
+	 * @param tags
+	 * @return
+	 */
+	private List<String> convertToString(String compositeMetricsName, Map<String, String> tags) {
+		ArrayList<String> results = new ArrayList<String>();
+
+		String lenStr = getLengthString(compositeMetricsName, 2);
+		compositeMetricsName = lenStr + compositeMetricsName;
+		
+		for (Map.Entry<String, String> tag : tags.entrySet()) {
+			String key = tag.getKey();
+			String value = tag.getValue();
+			lenStr = getLengthString(key, 2);
+			key = lenStr + key;
+			lenStr = getLengthString(value, 3);
+			results.add("0" + compositeMetricsName + key);
+			results.add("1" + compositeMetricsName + key + lenStr + value);
 		}
 		
 		return results;

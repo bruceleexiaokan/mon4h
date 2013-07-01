@@ -226,7 +226,7 @@ public class TSDBClient {
 
     public static String getRawMetricsName(String namespace, String metricsName) {
         if (namespace == null || nsKeywordNull.equals(namespace)) {
-            return metricsName;
+            return nsPrefixSplit + nsKeywordNull + nsPrefixSplit + metricsName;
         } else {
             return nsPrefixSplit + namespace + nsPrefixSplit + metricsName;
         }
@@ -253,8 +253,11 @@ public class TSDBClient {
 //            hbase.setFlushInterval(HBASE_FLUSH_INTERVAL);
             rlhbaseMap.put(mapKey, hbase);
         }
-        if (nshbaseMap.get(namespace) == null) {
-            nshbaseMap.put(namespace, hbase);
+//        if (nshbaseMap.get(namespace) == null) {
+//            nshbaseMap.put(namespace, hbase);
+//        }
+        if (nshbaseMap.get(checkedns) == null) {
+        	nshbaseMap.put(checkedns, hbase);
         }
         tsdb = new TSDB(hbase, timeseries_table);
         tsdbMap.put(checkedns, tsdb);

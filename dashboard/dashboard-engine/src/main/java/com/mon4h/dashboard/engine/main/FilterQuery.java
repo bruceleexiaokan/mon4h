@@ -62,6 +62,8 @@ public class FilterQuery extends TsdbQuery{
 		String metric = timeSeriesQuery.getMetricsName();
 		if(timeSeriesQuery.getNameSpace() != null){
 			metric = TSDBClient.getRawMetricsName(timeSeriesQuery.getNameSpace(), metric);
+		}else{
+			metric = TSDBClient.getRawMetricsName(null, metric);
 		}
 		this.setTimeSeries(metric, timeSeriesQuery.getTags(), groupByTags, null, false);
 	}

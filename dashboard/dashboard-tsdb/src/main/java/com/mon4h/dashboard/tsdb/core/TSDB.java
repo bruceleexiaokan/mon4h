@@ -212,12 +212,14 @@ public final class TSDB {
      * @throws IllegalArgumentException if the tags list is empty or one of the
      *                                  elements contains illegal characters.
      */
-    public void addPoint(final String metric,
+    public void addPoint(final String compositeMetricsName,
                          final long timestamp,
                          final long value,
                          final Map<String, String> tags) {
+    	MetricTagWriter writer = TSDBClient.getMetricsTagWriter();
+        writer.addMetrics(compositeMetricsName, tags);
         final short flags = 0x7;  // An int stored on 8 bytes.
-        addPointInternal(metric, timestamp, Bytes.toBytes(value),
+        addPointInternal(compositeMetricsName, timestamp, Bytes.toBytes(value),
                 tags, flags);
     }
 
@@ -241,19 +243,19 @@ public final class TSDB {
      * @throws IllegalArgumentException if the tags list is empty or one of the
      *                                  elements contains illegal characters.
      */
-    public void addPoint(final String metric,
+    public void addPoint(final String compositeMetricsName,
                          final long timestamp,
                          final float value,
                          final Map<String, String> tags) {
     	MetricTagWriter writer = TSDBClient.getMetricsTagWriter();
-        writer.addMetrics(null, metric, tags);
+        writer.addMetrics(compositeMetricsName, tags);
         if (Float.isNaN(value) || Float.isInfinite(value)) {
             throw new IllegalArgumentException("value is NaN or Infinite: " + value
-                    + " for metric=" + metric
+                    + " for metric=" + compositeMetricsName
                     + " timestamp=" + timestamp);
         }
         final short flags = Const.FLAG_FLOAT | 0x3;  // A float stored on 4 bytes.
-        addPointInternal(metric, timestamp,
+        addPointInternal(compositeMetricsName, timestamp,
                 Bytes.toBytes(Float.floatToRawIntBits(value)),
                 tags, flags);
     }

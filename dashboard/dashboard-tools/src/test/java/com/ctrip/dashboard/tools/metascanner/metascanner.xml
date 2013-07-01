@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<hbase-config-file-name>D:/dashboard/engine/conf/hbase.xml</hbase-config-file-name>
+	<meta-scanner>
+		<log-home>D:/dashboard/engine/log</log-home>
+		<log-config-file>D:/dashboard/engine/conf/logback.xml</log-config-file>
+		<executor>
+			<core-size>4</core-size>
+			<max-size>4</max-size>
+			<queue-size>1</queue-size>
+		</executor>
+		<log-target>
+			<appid>9207</appid>
+			<host>192.168.82.58</host>
+			<port>63100</port>
+		</log-target>
+	</meta-scanner>
+</configuration>

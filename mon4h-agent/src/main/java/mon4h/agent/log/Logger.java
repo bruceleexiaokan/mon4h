@@ -18,6 +18,7 @@ public class Logger implements ILogger {
 	private volatile boolean warnEnabled = true;
 	private volatile boolean errorEnabled = true;
 	private volatile boolean fatalEnabled = true;
+
 	private ILogSender sender = null;
 
 	public Logger(String name) {
@@ -105,6 +106,13 @@ public class Logger implements ILogger {
 	}
 
 	@Override
+	public void debug(String message, Throwable throwable) {
+		if (!isDebugEnabled())
+			return;
+		debug(message, throwable, null);
+	}
+	
+	@Override
 	public void debug(String message, Throwable throwable,
 			Map<String, String> tags) {
 		if (!isDebugEnabled())
@@ -141,6 +149,13 @@ public class Logger implements ILogger {
 		if (!isInfoEnabled())
 			return;
 		info(message, null, tags);
+	}
+
+	@Override
+	public void info(String message, Throwable throwable) {
+		if (!isInfoEnabled())
+			return;
+		info(message, throwable, null);
 	}
 
 	@Override
@@ -183,6 +198,13 @@ public class Logger implements ILogger {
 	}
 
 	@Override
+	public void warn(String message, Throwable throwable) {
+		if (!isWarnEnabled())
+			return;
+		warn(message, throwable, null);
+	}
+
+	@Override
 	public void warn(String message, Throwable throwable,
 			Map<String, String> tags) {
 		if (!isWarnEnabled())
@@ -222,6 +244,13 @@ public class Logger implements ILogger {
 	}
 
 	@Override
+	public void error(String message, Throwable throwable) {
+		if (!isErrorEnabled())
+			return;
+		error(message, throwable, null);
+	}
+
+	@Override
 	public void error(String message, Throwable throwable,
 			Map<String, String> tags) {
 		if (!isErrorEnabled())
@@ -258,6 +287,13 @@ public class Logger implements ILogger {
 		if (!isFatalEnabled())
 			return;
 		fatal(message, null, tags);
+	}
+
+	@Override
+	public void fatal(String message, Throwable throwable) {
+		if (!isFatalEnabled())
+			return;
+		fatal(message, throwable, null);
 	}
 
 	@Override

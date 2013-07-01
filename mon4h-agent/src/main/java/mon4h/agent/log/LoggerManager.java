@@ -13,13 +13,16 @@ public class LoggerManager {
 	private static final Logger LOGGER = LoggerFactory.getLogger(LoggerManager.class);
 
 	private final Map<String, ILogger> loggerMap = new ConcurrentHashMap<String, ILogger>();
+	private final MetricLogger metricLogger;
 	
 	private static class Holder {
 		private static LoggerManager instance = new LoggerManager();
 	}
 	
 	private LoggerManager() {
-		LogSender.getInstance();
+		LogSender logSender = LogSender.getInstance();
+		metricLogger = new MetricLogger();
+		metricLogger.setSender(logSender);
 		LOGGER.info("LoggerManager started");
 	}
 	

@@ -1,2 +1,8 @@
-1. 2013/6/30, namespace and metrics name are messed up. Bruce please fix it
-2. 
+
+
+2013/7/1 21:18, Edward, fixed issue of timestamp when putting datapoint to use specified timestamp 
+         instead of current system timestamp
+
+2013/6/30, namespace and metrics name are messed up. Bruce please fix it
+   - it was fixed by Edward on 2013/7/1
+ 

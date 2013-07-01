@@ -7,16 +7,17 @@ import java.io.Serializable;
 
 public class ByteConverter<T extends Serializable> extends
 		ByteArrayOutputStream {
-	private ObjectOutputStream oos;
+//	private ObjectOutputStream oos;
 
 	public ByteConverter() throws IOException {
 		super();
-		oos = new ObjectOutputStream(this);
+//		oos = new ObjectOutputStream(this);
 	}
 
 	public byte[] toBytes(T t) throws IOException {
 		reset();
-		oos.reset();
+		ObjectOutputStream oos = new ObjectOutputStream(this);
+//		oos.reset();
 		oos.writeObject((Object) t);
 		oos.flush();
 		return buf;
@@ -24,7 +25,8 @@ public class ByteConverter<T extends Serializable> extends
 
 	public byte[] arrayToBytes(T[] ts) throws IOException {
 		reset();
-		oos.reset();
+		ObjectOutputStream oos = new ObjectOutputStream(this);
+//		oos.reset();
 		oos.writeObject((Object) ts);
 		oos.flush();
 		return buf;

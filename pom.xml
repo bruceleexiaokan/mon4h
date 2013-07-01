@@ -229,6 +229,12 @@
 				<version>${jackson-jaxrs-json-provider.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson-jaxrs-json-provider.version}</version>
+			</dependency>
+
+			<dependency>
 				<groupId>com.sun.xml.bind</groupId>
 				<artifactId>jaxb</artifactId>
 				<version>${jaxb.version}</version>

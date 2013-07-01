@@ -7,12 +7,14 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import mon4h.common.domain.models.sub.MetricType;
 import mon4h.common.domain.models.sub.ModelType;
 import mon4h.common.domain.models.sub.Tag;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 
 @XmlRootElement
@@ -35,6 +37,8 @@ public class Metric implements ILogModel {
 	}
 
 	@Override
+	@XmlTransient
+	@JsonIgnore
 	public ModelType getType() {
 		return ModelType.METRICS;
 	}

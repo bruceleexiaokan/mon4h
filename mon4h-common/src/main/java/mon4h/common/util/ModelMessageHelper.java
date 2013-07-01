@@ -79,6 +79,27 @@ public class ModelMessageHelper {
 			}
 		}
 	}
+	
+	@SuppressWarnings("unchecked")
+	public static byte[] convertMessageToBytes(Message msg) throws IOException {
+		ByteConverter<Message> bc = null;
+		try {
+			synchronized (ModelMessageHelper.class) {
+				bc = (ByteConverter<Message>)getByteConverter();
+			}
+			byte[] src = bc.toBytes(msg);
+			int size = bc.size();
+			byte[] result = new byte[size];
+			System.arraycopy(src, 0, result, 0, size);
+			return result;
+		} finally {
+			if (bc != null) {
+				synchronized (ModelMessageHelper.class) {
+					bcs.add(bc);
+				}
+			}
+		}
+	}
 
 	private static Message doConvertToMessage(
 			HashMap<String, ArrayList<ILogModel>> map) throws IOException {

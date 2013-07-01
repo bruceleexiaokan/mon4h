@@ -5,20 +5,19 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
-import mon4h.agent.log.AgentContants;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Configuration {
+public class AgentConfiguration {
 
 	private static volatile boolean initialized = false;
 	private static final Properties prop = new Properties();
-	private static final Logger LOGGER = LoggerFactory.getLogger(Configuration.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(AgentConfiguration.class);
 
 	public final static Properties getProperties() {
 		if (!initialized) {
-			synchronized (Configuration.class) {
+			synchronized (AgentConfiguration.class) {
 				if (!initialized) {
 					initialize();
 				}
@@ -29,7 +28,7 @@ public class Configuration {
 	
 	private static void initialize() {
         InputStream in = null;
-        ClassLoader classLoader = Configuration.class.getClassLoader();
+        ClassLoader classLoader = AgentConfiguration.class.getClassLoader();
         try {
             URL url = classLoader.getResource(AgentContants.CONFIG_FILE);
             if (url == null) {

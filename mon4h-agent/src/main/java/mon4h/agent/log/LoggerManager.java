@@ -5,7 +5,12 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import mon4h.agent.api.ILogger;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class LoggerManager {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(LoggerManager.class);
 
 	private final Map<String, ILogger> loggerMap = new ConcurrentHashMap<String, ILogger>();
 	
@@ -13,16 +18,26 @@ public class LoggerManager {
 		private static LoggerManager instance = new LoggerManager();
 	}
 	
-	private LoggerManager() {}
+	private LoggerManager() {
+		LogSender.getInstance();
+		LOGGER.info("LoggerManager started");
+	}
 	
-	public LoggerManager getInstance() {
+	public static LoggerManager getInstance() {
 		return Holder.instance;
 	}
 	
+	public static void shutdown() {
+		LOGGER.info("LoggerManager shutting down");
+		LogSender.getInstance().shutdown();
+		LOGGER.info("LoggerManager shut down");
+	}
+	
 	public ILogger getLogger(String name) {
-		ILogger logger = loggerMap.get(name);
+		mon4h.agent.log.Logger logger = (mon4h.agent.log.Logger) loggerMap.get(name);
 		if (logger == null) {
-			logger = new Logger(name);
+			logger = new mon4h.agent.log.Logger(name);
+			logger.setSender(LogSender.getInstance());
 			loggerMap.put(name, logger);
 		}
 		return logger;

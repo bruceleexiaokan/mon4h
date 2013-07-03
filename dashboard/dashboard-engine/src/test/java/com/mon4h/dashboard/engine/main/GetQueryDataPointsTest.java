@@ -10,7 +10,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.mon4h.dashboard.cache.main.CacheOperator;
-import com.mon4h.dashboard.engine.check.NamespaceCheck;
 import com.mon4h.dashboard.engine.command.CommandTests;
 import com.mon4h.dashboard.engine.command.GetDataPointsRequest;
 import com.mon4h.dashboard.engine.command.GetDataPointsResponse;
@@ -25,7 +24,6 @@ public class GetQueryDataPointsTest {
 	
 	@BeforeClass
 	public static void setUp() throws Exception {
-		NamespaceCheck.init(1);
 		CacheOperator.init("D:\\home\\zlsong",false);
 		System.out.println("GetDataPointsTest start");
 		if(TSDBClient.getMetaHBaseClient() == null){

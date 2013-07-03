@@ -2,9 +2,6 @@ package com.mon4h.dashboard.engine.main;
 
 
 import org.json.JSONTokener;
-
-import com.mon4h.dashboard.engine.check.MapReduceMetric;
-import com.mon4h.dashboard.engine.check.NamespaceCheck;
 import com.mon4h.dashboard.engine.command.GetMetricsTagsRequest;
 import com.mon4h.dashboard.engine.command.GetMetricsTagsResponse;
 import com.mon4h.dashboard.engine.data.InterfaceConst;
@@ -30,8 +27,6 @@ public class GetMetricsTagsHandler extends SimpleHttpRequestHandler<GetMetricsTa
 		if(remoteIp == null || remoteIp.isEmpty()){
 			remoteIp = CommonUtil.getRemoteIP(channel);
 		}
-		NamespaceCheck.checkNamespace(rt.getTimeSeriesTagsList(),remoteIp);
-		MapReduceMetric.checkMapReduceMetrics(rt.getTimeSeriesTagsList());
 		rt.setResultCode(InterfaceConst.ResultCode.SUCCESS);
 		rt.setResultInfo("success");
 		return rt;

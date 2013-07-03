@@ -1,4 +1,4 @@
-
+[Changes]
 
 2013/7/1 21:18, Edward, fixed issue of timestamp when putting datapoint to use specified timestamp 
          instead of current system timestamp
@@ -6,3 +6,22 @@
 2013/6/30, namespace and metrics name are messed up. Bruce please fix it
    - it was fixed by Edward on 2013/7/1
  
+
+[Features]
+2013/7/1 - [Todo] new configuration
+           - specify config dir in program argument
+		   - specify config dir in environment variable
+		   - the default root config file is queryengine.xml
+		   - log back configuration --> log4j to keep consistent with hadoop/hbase system. This is defined in queryengine.xml
+		   - include the following items
+		      - hbase configuration: zookeeper quorum endpoints, zookeeper znode
+			  - uid table, meta table, tsdb table
+			  
+		 -  [Todo] simply the logic of query engine
+		      - remove push engine
+			  - 
+		 -  [Todo] change logback to log4j (some conflict with hadoop existing logging system)
+		 -  [Todo] how to configure the force-create of metrics
+		           System.setProperty("tsd.core.auto_create_metrics", "true"); 
+		 -  [Todo] remove access control
+[Bugs]

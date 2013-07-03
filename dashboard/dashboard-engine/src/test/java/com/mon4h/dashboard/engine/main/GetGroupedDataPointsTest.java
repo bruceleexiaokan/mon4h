@@ -9,7 +9,6 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import com.mon4h.dashboard.cache.main.CacheOperator;
-import com.mon4h.dashboard.engine.check.NamespaceCheck;
 import com.mon4h.dashboard.engine.command.CommandTests;
 import com.mon4h.dashboard.engine.command.GetGroupedDataPointsRequest;
 import com.mon4h.dashboard.engine.command.GetGroupedDataPointsResponse;
@@ -27,7 +26,6 @@ public class GetGroupedDataPointsTest {
 	
 	@BeforeClass
 	public static void setUp() throws Exception {
-		NamespaceCheck.init(10 * 60 * 1000);
 		CacheOperator.init("D:\\home\\zlsong",false);
 		System.out.println("GetGroupedDataPointsTest start");
 		if(TSDBClient.getMetaHBaseClient() == null){

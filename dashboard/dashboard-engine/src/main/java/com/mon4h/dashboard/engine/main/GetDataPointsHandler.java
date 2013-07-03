@@ -1,9 +1,6 @@
 package com.mon4h.dashboard.engine.main;
 
 import org.json.JSONTokener;
-
-import com.mon4h.dashboard.engine.check.MapReduceMetric;
-import com.mon4h.dashboard.engine.check.NamespaceCheck;
 import com.mon4h.dashboard.engine.command.GetDataPointsRequest;
 import com.mon4h.dashboard.engine.command.GetDataPointsResponse;
 import com.mon4h.dashboard.engine.data.DataPoints;
@@ -12,8 +9,6 @@ import com.mon4h.dashboard.engine.data.InterfaceConst;
 import com.mon4h.dashboard.engine.data.TimeSeries;
 import com.mon4h.dashboard.engine.rpc.CommonUtil;
 import com.mon4h.dashboard.engine.rpc.SimpleHttpRequestHandler;
-import com.mon4h.dashboard.tsdb.core.TSDBClient;
-import com.mon4h.dashboard.tsdb.uid.UniqueIds;
 
 /*
  * process absolute data points request
@@ -113,12 +108,7 @@ public class GetDataPointsHandler extends SimpleHttpRequestHandler<GetDataPoints
 		if(remoteIp == null || remoteIp.isEmpty()){
 			remoteIp = CommonUtil.getRemoteIP(channel);
 		}
-		if( NamespaceCheck.checkIpRead(namespace, remoteIp) == false ) {
-			int resultCode = InterfaceConst.ResultCode.ACCESS_FORBIDDEN;
-			String resultInfo = "You don't have the right to visit it.";
-			return generateFailedResponse(resultCode,resultInfo);
-		}
-		
+
 		baseTime = request.getStartTime();
 		if(baseTime<=0){
 			int resultCode = InterfaceConst.ResultCode.INVALID_START_TIME;
@@ -138,73 +128,7 @@ public class GetDataPointsHandler extends SimpleHttpRequestHandler<GetDataPoints
 			maxPointsCount = InterfaceConst.Limit.MAX_DATAPOINT_COUNT;
 		}
 		String interval = request.getDownSampler().getInterval();
-		Interval = interval;
-		if( Config.getMapReduceInUse() == true ) {
-			String metricname = request.getTimeSeries().getMetricsName();
-			MetricName = metricname;
-			metricname = MapReduceMetric.checkTableChoice(request.getDownSampler(),metricname);
-			boolean functype = MapReduceMetric.checkFunctype(request.getDownSampler());
-			if( metricname != null && functype == true ) {
-				int resultCode = InterfaceConst.ResultCode.INVALID_DOWNSAMPLER;
-				String resultInfo = "The downsampler is not invalid.";
-				return generateFailedResponse(resultCode,resultInfo);
-			}
-			if( metricname != null ) {
-				do {
-					byte[] metricnameid = null;
-					String namespaceTemp = null;
-					if(namespace == null || namespace.length() == 0) {
-						namespaceTemp = metricname;
-						try {
-							metricnameid = UniqueIds.metrics().getId(namespaceTemp);
-						} catch( Exception e ) {
-							namespaceTemp = TSDBClient.nsPrefixSplit + TSDBClient.nsKeywordNull + TSDBClient.nsPrefixSplit + metricname;
-							try {
-								metricnameid = UniqueIds.metrics().getId(namespaceTemp);
-							} catch( Exception e1 ) {
-								break;
-							}
-						}
-					} else {
-						namespaceTemp = TSDBClient.nsPrefixSplit + namespace + TSDBClient.nsPrefixSplit + metricname;
-						try {
-							metricnameid = UniqueIds.metrics().getId(namespaceTemp);
-						} catch( Exception e ) {
-							break;
-						}
-					}
-					
-					if( metricnameid == null || metricnameid.length == 0 ) {
-						break;
-					}
-					namespace = MapReduceMetric.calNamespaceType(metricname,namespace);
-					request.getTimeSeries().setMetricsName(metricname);
-					int StarttimeOffset = MapReduceMetric.calTimeOffset(baseTime/1000);
-					
-					mapreduceEndTime = endTime;
-					mapreduceStartTime = MapReduceMetric.calTodayTime();
-					long stepTimeOffset = endTime-mapreduceStartTime;
-					if( stepTimeOffset >= 3600000 ) {
-						endTime = mapreduceStartTime;
-						mapreducetimetoday = true;
-					} else if( stepTimeOffset < 3600000 && stepTimeOffset > 0 ) {
-						endTime = mapreduceStartTime;
-					}
-					
-					long EndBaseTime = MapReduceMetric.calBasetime(endTime/1000);
-					
-					int EndtimeOffset = MapReduceMetric.calTimeOffset(endTime/1000);
-					basetime = MapReduceMetric.calBasetime(baseTime/1000);
-					baseTime = (basetime + StarttimeOffset)*1000;
-					endTime  = (EndBaseTime + EndtimeOffset)*1000;
-					intervalReturn = MapReduceMetric.calIntervalReturn(interval);
-					interval = MapReduceMetric.calIntervalMapReduce(interval);
-					request.getDownSampler().setInterval(interval);
-					mapreduce = true;
-				} while(false);
-			}
-		}
-	
+		Interval = interval;	
 		rate = request.getRate();
 		if( rate == true ) {
 			request.getDownSampler().setFuncType(InterfaceConst.DownSamplerFuncType.RAT);

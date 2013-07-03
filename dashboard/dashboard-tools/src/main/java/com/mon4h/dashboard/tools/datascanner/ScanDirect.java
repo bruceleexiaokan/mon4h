@@ -1,7 +1,6 @@
 package com.mon4h.dashboard.tools.datascanner;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -28,11 +27,9 @@ import org.slf4j.LoggerFactory;
 
 import ch.qos.logback.core.joran.spi.JoranException;
 
-import com.mon4h.dashboard.common.config.ConfigFactory;
-import com.mon4h.dashboard.common.config.impl.ReloadableXmlConfigure;
 import com.mon4h.dashboard.common.logging.LogUtil;
-import com.mon4h.dashboard.tools.metascanner.Config;
-import com.mon4h.dashboard.tools.metascanner.Config.MetaScannerConfig;
+import com.mon4h.dashboard.engine.main.Config;
+import com.mon4h.dashboard.engine.main.QueryEngine;
 import com.mon4h.dashboard.tsdb.core.*;
 import com.mon4h.dashboard.tsdb.uid.LoadableUniqueId;
 import com.mon4h.dashboard.tsdb.uid.UniqueId;
@@ -48,21 +45,15 @@ public class ScanDirect {
 	private static long totalSize = 0;
 	
 	private SimpleDateFormat secsdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	
-	private static final String demoZKQuorum = "hadoop1";
-	private static final String basePath = "/hbase";
-	private static final String uidTable = "demo.tsdb-uid";
-	private static final String metaTable = "demo.metrictag";
-	private static final String dataTable = "demo.tsdb";
-	private static final String defaultConfigDir = "D:/projects/mon4h/dashboard/dashboard-tools/conf";
-
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		// this is ugly, need to improve
+		QueryEngine.configQuery();
 		setHBaseInfo();
 		try {
-			LogUtil.setLogbackConfigFile("D:/dashboard/log", defaultConfigDir+"/logback.xml");
+			LogUtil.setLogbackConfigFile(Config.getQuery().server.logHome, Config.getQuery().server.logbackConfigFileName);
 		} catch (JoranException e1) {
 			e1.printStackTrace();
 		}
@@ -139,70 +130,8 @@ public class ScanDirect {
 		}
 	}
 	
-	private static void configAccessCheck(){
-		MetaScannerConfig cfg = new MetaScannerConfig();
-		cfg.accessConfigFileName = "D:/dashboard/conf/access-check-config.xml";
-		Config.get().metaScannerConfig.getAndSet(cfg);
-		if(Config.getMetaScanner().accessConfigFileName == null){
-			System.out.println("The access check config file not set.");
-			System.exit(3);
-		}
-		ReloadableXmlConfigure hbaseConfigure = new ReloadableXmlConfigure();
-		try {
-			hbaseConfigure.setConfigFile(Config.getMetaScanner().accessConfigFileName);
-		} catch (FileNotFoundException e) {
-			System.out.println("The access check config file not exist: "+Config.getMetaScanner().accessConfigFileName);
-			System.exit(3);
-		}
-		try {
-			hbaseConfigure.parse();
-		} catch (Exception e) {
-			System.out.println("The access check config file "+Config.getMetaScanner().accessConfigFileName+" is not valid: "+e.getMessage());
-			System.exit(3);
-		}
-		hbaseConfigure.setReloadInterval(60);
-		hbaseConfigure.setReloadListener(Config.get());
-		ConfigFactory.setConfigure(ConfigFactory.Config_AccessInfo, hbaseConfigure);
-		try {
-			Config.get().parseHBase();
-		} catch (Exception e) {
-			System.out.println("The access check config file "+Config.getMetaScanner().accessConfigFileName+" is not valid: "+e.getMessage());
-			System.exit(3);
-		}
-	}
-	
 	public static void setHBaseInfo(){
-List<TSDBClient.NameSpaceConfig> nscfgs = new ArrayList<TSDBClient.NameSpaceConfig>();
-		
-		TSDBClient.NameSpaceConfig cfg = new TSDBClient.NameSpaceConfig();
-		nscfgs.add(cfg);
-		cfg.hbase = new TSDBClient.HBaseConfig();
-		cfg.hbase.zkquorum = demoZKQuorum;
-		cfg.hbase.basePath = basePath;		
-		cfg.hbase.isMeta = false;
-		cfg.hbase.isUnique = true;
-		cfg.tableName = uidTable;
-		
-		cfg = new TSDBClient.NameSpaceConfig();
-		cfg.hbase = new TSDBClient.HBaseConfig();
-		cfg.hbase.zkquorum = demoZKQuorum;
-		cfg.hbase.basePath = basePath;		
-		cfg.hbase.isMeta = true;
-		cfg.hbase.isUnique = false;
-		cfg.tableName = metaTable;		
-		nscfgs.add(cfg);
-		
-		cfg = new TSDBClient.NameSpaceConfig();
-		cfg.hbase = new TSDBClient.HBaseConfig();
-		cfg.hbase.zkquorum = demoZKQuorum;
-		cfg.hbase.basePath = basePath;		
-		cfg.hbase.isMeta = false;
-		cfg.hbase.isUnique = false;
-		cfg.tableName = dataTable;		
-//		cfg.namespace = "ns-null";
-		nscfgs.add(cfg);
-		
-		TSDBClient.config(nscfgs);
+		TSDBClient.config(Config.getTSDBConfig());
 	}
 	
 	public void runDirect(String namespace,PrintWriter pw,String metricsName,Map<String,String> tagFilter,String start,String end) throws ParseException{

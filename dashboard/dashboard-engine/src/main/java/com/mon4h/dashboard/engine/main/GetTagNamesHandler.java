@@ -1,8 +1,6 @@
 package com.mon4h.dashboard.engine.main;
 
 import org.json.JSONTokener;
-
-import com.mon4h.dashboard.engine.check.NamespaceCheck;
 import com.mon4h.dashboard.engine.command.GetTagNamesRequest;
 import com.mon4h.dashboard.engine.command.GetTagNamesResponse;
 import com.mon4h.dashboard.engine.data.InterfaceConst;
@@ -22,7 +20,6 @@ public class GetTagNamesHandler extends SimpleHttpRequestHandler<GetTagNamesResp
 		if(remoteIp == null || remoteIp.isEmpty()){
 			remoteIp = CommonUtil.getRemoteIP(channel);
 		}
-		NamespaceCheck.checkNamespaceTags(rt.getTimeSeriesTags(),remoteIp);
 		rt.setResultCode(InterfaceConst.ResultCode.SUCCESS);
 		rt.setResultInfo("success");
 		return rt;

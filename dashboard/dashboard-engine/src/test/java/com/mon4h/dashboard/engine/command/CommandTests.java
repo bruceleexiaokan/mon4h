@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
-import com.mon4h.dashboard.engine.check.MysqlSingleton;
 import com.mon4h.dashboard.engine.data.InterfaceConst;
 import com.mon4h.dashboard.engine.main.MetricsTags;
 import com.mon4h.dashboard.tsdb.core.TSDBClient;
@@ -37,22 +36,22 @@ public class CommandTests {
 	}
 	
 	public static void configHBase(){
- 		String quorum = "hadoop1";        
-		String basePath = "/hbase";
-		String namespace = TSDBClient.nsKeywordNull();
-		List<TSDBClient.NameSpaceConfig> nscfgs = new ArrayList<TSDBClient.NameSpaceConfig>();
-		
-		TSDBClient.NameSpaceConfig cfg = new TSDBClient.NameSpaceConfig();
-		cfg.hbase = new TSDBClient.HBaseConfig();
-		cfg.hbase.zkquorum = quorum;
-		cfg.hbase.basePath = basePath;
-		cfg.hbase.isMeta = true;
-		cfg.hbase.isUnique = true;
-		cfg.namespace = namespace;
-		cfg.tableName = "demo.tsdb";
-		nscfgs.add(cfg);
-		
-		TSDBClient.config(nscfgs);
+// 		String quorum = "hadoop1";        
+//		String basePath = "/hbase";
+//		String namespace = TSDBClient.nsKeywordNull();
+//		List<TSDBClient.NameSpaceConfig> nscfgs = new ArrayList<TSDBClient.NameSpaceConfig>();
+//		
+//		TSDBClient.NameSpaceConfig cfg = new TSDBClient.NameSpaceConfig();
+//		cfg.hbase = new TSDBClient.HBaseConfig();
+//		cfg.hbase.zkquorum = quorum;
+//		cfg.hbase.basePath = basePath;
+//		cfg.hbase.isMeta = true;
+//		cfg.hbase.isUnique = true;
+//		cfg.namespace = namespace;
+//		cfg.tableName = "demo.tsdb";
+//		nscfgs.add(cfg);
+//		
+//		TSDBClient.config(nscfgs);
 	}
 	
 	public static void loadAllUId(){

@@ -5,6 +5,15 @@
 	<cache-root-dir>/var/dashboard/cache</cache-root-dir>
 	<cache-in-use>false</cache-in-use>
 	<mapreduce-in-use>false</mapreduce-in-use>
+	<!-- support one hbase, single uid and single meta table and multiple ts tables -->
+	<tsdb>
+		<zkQuorum>hadoop1</zkQuorum>
+		<zkBasepath>/hbase</zkBasepath>
+		<uidTable>demo.tsdb-uid</uidTable>
+		<metaTable>demo.metrictag</metaTable>
+		<!-- the format is <namespace>:<tablename> -->
+		<tsTables>:demo.tsdb</tsTables>
+	</tsdb>
 	<engine>
 		<server>
 			<port>8080</port>

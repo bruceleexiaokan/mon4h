@@ -11,7 +11,6 @@ import org.json.JSONTokener;
 
 import com.ctrip.freeway.metrics.IMetric;
 import com.ctrip.freeway.metrics.MetricManager;
-import com.mon4h.dashboard.engine.check.NamespaceCheck;
 import com.mon4h.dashboard.engine.command.PutDataPointsRequest;
 import com.mon4h.dashboard.engine.command.PutDataPointsResponse;
 import com.mon4h.dashboard.engine.command.PutDataPointsRequest.TimeSeriesData;

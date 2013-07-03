@@ -13,7 +13,6 @@ import org.apache.hadoop.hbase.client.Result;
 import org.apache.hadoop.hbase.client.ResultScanner;
 import org.apache.hadoop.hbase.client.Scan;
 import org.json.JSONTokener;
-import com.mon4h.dashboard.engine.check.NamespaceCheck;
 import com.mon4h.dashboard.engine.command.GetRawDataRequest;
 import com.mon4h.dashboard.engine.command.GetRawDataResponse;
 import com.mon4h.dashboard.engine.data.InterfaceConst;
@@ -88,11 +87,6 @@ public class GetRawDataHandler extends SimpleHttpRequestHandler<GetRawDataRespon
 		String remoteIp = CommonUtil.getRemoteIP(httpRequest);
 		if(remoteIp == null || remoteIp.isEmpty()){
 			remoteIp = CommonUtil.getRemoteIP(channel);
-		}
-		if( NamespaceCheck.checkIpRead(namespace, remoteIp) == false ) {
-			int resultCode = InterfaceConst.ResultCode.ACCESS_FORBIDDEN;
-			String resultInfo = "You don't have the right to visit it.";
-			return generateFailedResponse(resultCode,resultInfo);
 		}
 		baseTime = request.getStartTime();
 		if(baseTime<=0){

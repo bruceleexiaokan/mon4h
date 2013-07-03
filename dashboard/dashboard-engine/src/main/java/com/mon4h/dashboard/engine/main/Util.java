@@ -489,18 +489,10 @@ public class Util {
 	
 	public static void registerQueryMBean() throws MalformedObjectNameException, InstanceAlreadyExistsException, MBeanRegistrationException, NotCompliantMBeanException{
         MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();   
-        ObjectName name = new ObjectName("com.ctrip.dashboard.engine.jmx:type=QueryStats");   
+        ObjectName name = new ObjectName("com.mon4h.dashboard.engine.jmx:type=QueryStats");   
         QueryStatsInfoMBean mbean = new QueryStatsInfo();   
         mbs.registerMBean(mbean, name);
-	}
-	
-	public static void registerPushMBean() throws MalformedObjectNameException, InstanceAlreadyExistsException, MBeanRegistrationException, NotCompliantMBeanException{
-        MBeanServer mbs = ManagementFactory.getPlatformMBeanServer();   
-        ObjectName name = new ObjectName("com.ctrip.dashboard.engine.jmx:type=PushStats");   
-        PushStatsInfoMBean mbean = new PushStatsInfo();   
-        mbs.registerMBean(mbean, name);
-	}
-	
+	}	
 	
 	public static String generateExceptionStr(Throwable t){
 		if(t == null){

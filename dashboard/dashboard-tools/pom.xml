@@ -21,6 +21,11 @@
 		<artifactId>dashboard-tsdb</artifactId>
 		<version>1.0.0</version>
     </dependency>
+    <dependency>
+		<groupId>com.mon4h.dashboard</groupId>
+		<artifactId>dashboard-engine</artifactId>
+		<version>1.0.0</version>
+    </dependency>
 	<dependency>
 		<groupId>com.mon4h.dashboard</groupId>
 		<artifactId>dashboard-cache</artifactId>

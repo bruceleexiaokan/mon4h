@@ -1,6 +1,6 @@
 mon4h
 =====
-It's a project for hadoop/hbase maintenance
+It's a project for hadoop/hbase maintenance for study and research purpose only.
 
 How to build:
 =======

@@ -25,7 +25,7 @@ import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 
-import com.ctrip.framework.hbase.client.util.HBaseClientUtil;
+import com.mon4h.framework.hbase.client.util.HBaseClientUtil;
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.Get;
 import org.apache.hadoop.hbase.client.HTableInterface;

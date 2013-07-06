@@ -18,11 +18,11 @@ import com.mon4h.dashboard.engine.data.DataPoint;
 import com.mon4h.dashboard.engine.data.InterfaceConst;
 import com.mon4h.dashboard.engine.data.InterfaceException;
 import com.mon4h.dashboard.engine.data.TimeSeries;
-import com.mon4h.dashboard.engine.main.MetricTagWriter;
 import com.mon4h.dashboard.engine.rpc.CommonUtil;
 import com.mon4h.dashboard.engine.rpc.SimpleHttpRequestHandler;
 import com.mon4h.dashboard.tsdb.core.TSDB;
 import com.mon4h.dashboard.tsdb.core.TSDBClient;
+import com.mon4h.dashboard.tsdb.main.MetricTagWriter;
 import com.mon4h.dashboard.tsdb.uid.UniqueIds;
 
 public class PutDataPointsHandler extends SimpleHttpRequestHandler<PutDataPointsResponse>{

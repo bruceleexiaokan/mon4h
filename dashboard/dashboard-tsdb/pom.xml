@@ -18,7 +18,7 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.ctrip.framework</groupId>
+            <groupId>com.mon4h.hbaseclient</groupId>
             <artifactId>hbase-sync-client</artifactId>
             <version>1.0</version>
         </dependency>

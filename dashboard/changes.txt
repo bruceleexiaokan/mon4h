@@ -24,4 +24,11 @@
 		 -  [Todo] how to configure the force-create of metrics
 		           System.setProperty("tsd.core.auto_create_metrics", "true"); 
 		 -  [Todo] remove access control
+		 -  [Todo] tag value autocompletion
+		 -  [Todo] UID browse autocomplete, for example given a metrics name get its id, given an id, get its 
+		           metrics name， tag name, tag value.
+		 -  [Todo] dump of tsdb
+		 -  [Todo] dump of meta table, restful API
+		 -  [Todo] dump of uid table, restful API
+		 -  [Todo] maven package and deploy and release
 [Bugs]

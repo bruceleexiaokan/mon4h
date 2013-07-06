@@ -1,6 +1,6 @@
 package com.mon4h.dashboard.tsdb.uid;
 
-import com.ctrip.framework.hbase.client.util.HBaseClientUtil;
+import com.mon4h.framework.hbase.client.util.HBaseClientUtil;
 import org.apache.hadoop.hbase.client.*;
 
 import java.util.Arrays;

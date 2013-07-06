@@ -22,7 +22,7 @@ package com.mon4h.dashboard.engine.rpc;
 public interface Request{
 	
 	/***************************************************************
-	 * @methodï¼?setTimeStamp<br>
+	 * @method setTimeStamp<br>
 	 * <br>
 	 * @param timeStamp<br>
 	 * <br>
@@ -31,7 +31,7 @@ public interface Request{
 	
 	
 	/***************************************************************
-	 * @methodï¼?getTimeStamp<br>
+	 * @method getTimeStamp<br>
 	 * <br>
 	 * @return<br>
 	 * <br>

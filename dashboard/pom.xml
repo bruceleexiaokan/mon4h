@@ -155,6 +155,8 @@
     <module>dashboard-engine</module>
     <module>dashboard-tsdb</module>
     <module>dashboard-common</module>
+    <module>dashboard-cache</module>
+    <module>dashboard-tools</module>
   </modules>
   	<repositories>
 		<repository>

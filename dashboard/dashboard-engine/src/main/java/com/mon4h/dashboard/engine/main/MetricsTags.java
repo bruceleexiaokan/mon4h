@@ -22,7 +22,7 @@ import org.apache.hadoop.hbase.util.Bytes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ctrip.framework.hbase.client.util.HBaseClientUtil;
+import com.mon4h.framework.hbase.client.util.HBaseClientUtil;
 import com.mon4h.dashboard.engine.data.InterfaceConst;
 import com.mon4h.dashboard.engine.data.MetricsQuery;
 import com.mon4h.dashboard.engine.data.TagsQuery;

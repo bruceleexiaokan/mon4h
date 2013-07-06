@@ -19,8 +19,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import com.ctrip.framework.hbase.client.util.HBaseClientUtil;
-import com.ctrip.framework.hbase.client.util.HBasePutUtil;
+import com.mon4h.framework.hbase.client.util.HBaseClientUtil;
+import com.mon4h.framework.hbase.client.util.HBasePutUtil;
 import com.mon4h.dashboard.tsdb.stats.Histogram;
 import com.mon4h.dashboard.tsdb.uid.UniqueIds;
 

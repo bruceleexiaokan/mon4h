@@ -16,10 +16,10 @@ import org.apache.hadoop.hbase.util.PoolMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.ctrip.framework.hbase.client.HBaseClientManager;
-import com.ctrip.framework.hbase.client.HTableFactory;
-import com.ctrip.framework.hbase.client.constant.ConfConstant;
-import com.mon4h.dashboard.engine.main.MetricTagWriter;
+import com.mon4h.framework.hbase.client.HBaseClientManager;
+import com.mon4h.framework.hbase.client.HTableFactory;
+import com.mon4h.framework.hbase.client.constant.ConfConstant;
+import com.mon4h.dashboard.tsdb.main.MetricTagWriter;
 import com.mon4h.dashboard.tsdb.uid.UniqueIds;
 
 public class TSDBClient {

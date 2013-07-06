@@ -15,13 +15,13 @@ package com.mon4h.dashboard.tsdb.core;
 import java.io.IOException;
 import java.util.*;
 
-import com.ctrip.framework.hbase.client.util.HBaseClientUtil;
-import com.ctrip.framework.hbase.client.util.HBasePutUtil;
+import com.mon4h.framework.hbase.client.util.HBaseClientUtil;
+import com.mon4h.framework.hbase.client.util.HBasePutUtil;
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.*;
 import org.apache.hadoop.hbase.util.Bytes;
 
-import com.mon4h.dashboard.engine.main.MetricTagWriter;
+import com.mon4h.dashboard.tsdb.main.MetricTagWriter;
 import com.mon4h.dashboard.tsdb.stats.Histogram;
 import com.mon4h.dashboard.tsdb.stats.StatsCollector;
 import com.mon4h.dashboard.tsdb.uid.UniqueId;

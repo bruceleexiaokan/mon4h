@@ -1,0 +1,21 @@
+-- Analysis of hbase system
+ - hot region
+    - read/write ops num
+	- top 10 hot regions per day
+ - hot region servers
+    - read/write ops num
+	- top 10 hot region servers per day
+ - hot tables
+    - read/write ops num
+	- top 10 hot tables per day
+ - region split behaviors
+ - different views of hbase system
+   - jvm views
+     - 
+
+zooinspector
+
+- Query
+  -  A metrics tagged with table name, column family, column
+    for example tbl.demo.tsdb-uid.cf.name.staticIndexSizeKB,
+	

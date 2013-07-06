@@ -2,7 +2,6 @@
 
 #-------------------------------------------------------------------
 #    Dashboard Bootstrap Script 
-#	jiang_wei
 #-------------------------------------------------------------------
 if ! ./check-user.sh
 then
@@ -28,25 +27,18 @@ case $SERVER_KEY  in
 	"queryengine") 
 		SERVER_NO=1;
 		SERVER_PORT="8080";
-		MAIN_CLASS="com.ctrip.dashboard.engine.main.QueryEngine"; 
+		MAIN_CLASS="com.mon4h.dashboard.engine.main.QueryEngine"; 
 		MEM_INFO="-Xms3G -Xmx3G -Xmn900m -Xss512k";
-		CLASS_PATH="../lib/*";;
-		
-	"pushengine") 
-		SERVER_NO=2;
-		SERVER_PORT="8010";
-		MAIN_CLASS="com.ctrip.dashboard.engine.main.PushEngine"; 
-		MEM_INFO="-Xms1600m -Xmx1600m -Xmn600m -Xss512k";
 		CLASS_PATH="../lib/*";;
 		
 	"metascanner") 
 		SERVER_NO=3;
-		MAIN_CLASS="com.ctrip.dashboard.tools.metascanner.Main";
+		MAIN_CLASS="com.mon4h.dashboard.tools.metascanner.Main";
 		MEM_INFO="-Xms768m -Xmx768m -Xmn100m -Xss256k";
 		CLASS_PATH="../lib/*";;
  
 	*) 
-		echo "Useage:$0  cmd, cmd maybe: queryengine|pushengine|metascanner [debug]";
+		echo "Useage:$0  cmd, cmd maybe: queryengine|metascanner [debug]";
 		exit 1;;
 
 	 esac;	 
@@ -91,7 +83,7 @@ do
 		exit 1
 	fi
 
-	if [ $SERVER_KEY = "queryengine" -o $SERVER_KEY = "pushengine" ]
+	if [ $SERVER_KEY = "queryengine"]
 	then
 		#check more exactly
 		if ./status-check.sh $SERVER_PORT

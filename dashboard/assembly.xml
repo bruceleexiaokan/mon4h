@@ -1,0 +1,23 @@
+<assembly>
+    <id>prod</id>
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>/lib</outputDirectory>
+            <includes>
+            </includes>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+        <fileSet>
+            <directory>script</directory>
+            <outputDirectory>/bin</outputDirectory>
+            <includes>
+				<include>*</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+</assembly>

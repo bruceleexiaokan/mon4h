@@ -23,7 +23,7 @@ public abstract class AbstractResponse implements Response {
 	protected String msg;
 	
 	/***************************************************************
-	 * @Constructorï¼?AbstractResponse.java - AbstractResponse<br>
+	 * @Constructor AbstractResponse.java - AbstractResponse<br>
 	 * <br>
 	 * @param msg<br>
 	 * <br>
@@ -34,7 +34,7 @@ public abstract class AbstractResponse implements Response {
 	
 	
 	/***************************************************************
-	 * @methodï¼?toString<br>
+	 * @method toString<br>
 	 * (non-Javadoc)<br>
 	 * @see java.lang.Object#toString()<br>
 	 * toString - AbstractResponse<br>

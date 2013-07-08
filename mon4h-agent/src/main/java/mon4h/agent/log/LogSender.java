@@ -26,7 +26,8 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 
 public class LogSender implements ILogSender {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(LogSender.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(LoggerManager.class);
+//	private static final Log LOGGER = LogFactory.getLog(LogSender.class);
 
 	private static volatile LogSender instance = null;
 	private static int logsLowWatermark = AgentContants.DEFAULT_LOG_LOW_WATERMARK;
@@ -113,6 +114,13 @@ public class LogSender implements ILogSender {
 			synchronized (syncObj) {
 				syncObj.notify();
 			}
+		}
+	}
+
+	@Override
+	public void notifyFlush() {
+		synchronized (syncObj) {
+			syncObj.notify();
 		}
 	}
 	

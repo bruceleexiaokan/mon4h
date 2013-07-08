@@ -13,7 +13,9 @@ import org.slf4j.LoggerFactory;
 
 @Provider
 public class CollectorExceptionMapper implements ExceptionMapper<Exception>  {
-    private static final Logger LOGGER = LoggerFactory.getLogger(CollectorExceptionMapper.class);
+	
+	private static final Logger LOGGER = LoggerFactory.getLogger(CollectorExceptionMapper.class);
+//	private static final Log LOGGER = LogFactory.getLog(CollectorExceptionMapper.class);
 
     @Override
     public Response toResponse(Exception throwable) {

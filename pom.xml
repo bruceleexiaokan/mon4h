@@ -22,9 +22,12 @@
 		<hadoop-mapreduce.version>2.0.0-cdh4.2.1</hadoop-mapreduce.version>
 		<hbase.version>0.94.2-cdh4.2.1</hbase.version>
 		<hive.version>0.10.0-cdh4.2.1</hive.version>
-		<log4j.version>2.0-beta2</log4j.version>
-		<slf4j.version>1.7.2</slf4j.version>
-		<logback.version>1.0.9</logback.version>
+		<commons-logging.version>1.1.1</commons-logging.version>
+		<log4j.version>1.2.17</log4j.version>
+		<!-- log4j.version>2.0-beta2</log4j.version -->
+		<slf4j.version>1.4.3</slf4j.version>
+		<!-- slf4j.version>1.7.2</slf4j.version -->
+		<!-- logback.version>1.0.9</logback.version -->
 		<!-- jersey.version>1.17</jersey.version -->
 		<jersey.version>2.0</jersey.version>
 		<guava.version>14.0-rc1</guava.version>
@@ -92,7 +95,7 @@
 				<artifactId>slf4j-log4j12</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
-			<dependency>
+			<!-- dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-core</artifactId>
 				<version>${logback.version}</version>
@@ -121,7 +124,7 @@
 				<groupId>org.slf4j</groupId>
 				<artifactId>log4j-over-slf4j</artifactId>
 				<version>${slf4j.version}</version>
-			</dependency>
+			</dependency -->
 
 			<!-- About Jersey -->
 			<dependency>
@@ -253,10 +256,19 @@
 	<dependencies>
 		<!--logging -->
 		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
-		<dependency>
+		
+		<!-- dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
@@ -275,7 +287,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>log4j-over-slf4j</artifactId>
-		</dependency>
+		</dependency -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

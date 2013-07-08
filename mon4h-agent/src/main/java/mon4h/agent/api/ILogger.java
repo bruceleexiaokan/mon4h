@@ -13,6 +13,7 @@ public interface ILogger {
 	boolean isWarnEnabled();
 	boolean isErrorEnabled();
 	boolean isFatalEnabled();
+	boolean isLogLevelEnabled(LogLevel level);
 	
 	void log(LogLevel level, String message, Throwable throwable, Map<String, String> tags);
 	

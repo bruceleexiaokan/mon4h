@@ -10,9 +10,11 @@ import org.slf4j.LoggerFactory;
 
 public class CollectorConfiguration {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(CollectorConfiguration.class);
+//	private static final org.apache.commons.logging.Log LOGGER = LogFactory.getLog(CollectorConfiguration.class);
+
 	private static volatile boolean initialized = false;
 	private static final Properties prop = new Properties();
-	private static final Logger LOGGER = LoggerFactory.getLogger(CollectorConfiguration.class);
 
 	public final static Properties getProperties() {
 		if (!initialized) {

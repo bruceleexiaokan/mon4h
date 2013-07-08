@@ -37,6 +37,7 @@ public class Logger implements ILogger {
 		this.sender = sender;
 	}
 	
+	@Override
 	public boolean isDebugEnabled() {
 		return debugEnabled;
 	}
@@ -45,6 +46,7 @@ public class Logger implements ILogger {
 		this.debugEnabled = debugEnabled;
 	}
 
+	@Override
 	public boolean isInfoEnabled() {
 		return infoEnabled;
 	}
@@ -53,6 +55,7 @@ public class Logger implements ILogger {
 		this.infoEnabled = infoEnabled;
 	}
 
+	@Override
 	public boolean isWarnEnabled() {
 		return warnEnabled;
 	}
@@ -61,6 +64,7 @@ public class Logger implements ILogger {
 		this.warnEnabled = warnEnabled;
 	}
 
+	@Override
 	public boolean isErrorEnabled() {
 		return errorEnabled;
 	}
@@ -69,6 +73,7 @@ public class Logger implements ILogger {
 		this.errorEnabled = errorEnabled;
 	}
 
+	@Override
 	public boolean isFatalEnabled() {
 		return fatalEnabled;
 	}
@@ -76,7 +81,23 @@ public class Logger implements ILogger {
 	public void setFatalEnabled(boolean fatalEnabled) {
 		this.fatalEnabled = fatalEnabled;
 	}
-	
+
+	@Override
+	public boolean isLogLevelEnabled(LogLevel level) {
+		if (level.equals(LogLevel.DEBUG)) {
+			return debugEnabled;
+		} else if (level.equals(LogLevel.INFO)) {
+			return infoEnabled;
+		} else if (level.equals(LogLevel.WARN)) {
+			return warnEnabled;
+		} else if (level.equals(LogLevel.ERROR)) {
+			return errorEnabled;
+		} else if (level.equals(LogLevel.FATAL)) {
+			return fatalEnabled;
+		}
+		return false;
+	}
+
 	@Override
 	public void debug(String message) {
 		if (!isDebugEnabled())

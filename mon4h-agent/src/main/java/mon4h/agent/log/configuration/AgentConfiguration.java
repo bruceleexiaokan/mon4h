@@ -5,15 +5,16 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Properties;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class AgentConfiguration {
 
+	private static final Logger LOGGER = LoggerFactory.getLogger(AgentConfiguration.class);
+//	private static final Log LOGGER = LogFactory.getLog(AgentConfiguration.class);
+
 	private static volatile boolean initialized = false;
 	private static final Properties prop = new Properties();
-	private static final Logger LOGGER = LoggerFactory.getLogger(AgentConfiguration.class);
 
 	public final static Properties getProperties() {
 		if (!initialized) {

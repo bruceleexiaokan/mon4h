@@ -28,6 +28,8 @@ import org.slf4j.LoggerFactory;
 public class MessageResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(MessageResource.class);
+//	private static final Log LOGGER = LogFactory.getLog(MessageResource.class);
+
 	private static final byte[] dummyBytes = new byte[0];
 	
     @POST

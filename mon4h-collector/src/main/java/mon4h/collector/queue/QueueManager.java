@@ -25,6 +25,8 @@ import org.slf4j.LoggerFactory;
 public class QueueManager {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(QueueManager.class);
+//	private static final Log LOGGER = LogFactory.getLog(QueueManager.class);
+
 	private static volatile boolean initialized = false;
 	private static final HashMap<String, Queue<Message>> queueMap = new HashMap<String, Queue<Message>>();
 	private static final HashMap<String, List<Queue<Message>>> typeMap = new HashMap<String, List<Queue<Message>>>();

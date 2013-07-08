@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 public class ModelResource {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ModelResource.class);
+//	private static final org.apache.commons.logging.Log LOGGER = LogFactory.getLog(ModelResource.class);
 
 	@POST
     @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})

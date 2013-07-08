@@ -27,6 +27,7 @@ import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 public class LogSender implements ILogSender {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(LogSender.class);
+//	private static final Log LOGGER = LogFactory.getLog(LogSender.class);
 
 	private static volatile LogSender instance = null;
 	private static int logsLowWatermark = AgentContants.DEFAULT_LOG_LOW_WATERMARK;
@@ -115,6 +116,13 @@ public class LogSender implements ILogSender {
 			}
 		}
 	}
+
+	@Override
+	public void notifyFlush() {
+		synchronized (syncObj) {
+			syncObj.notify();
+		}
+	}
 	
 	private class SenderThread implements Runnable {
 
@@ -139,7 +147,9 @@ public class LogSender implements ILogSender {
 			if (msg != null) {
 				sendLogs(msg);
 			}
-			LOGGER.info("Going to stop sender thread, tid: " + Thread.currentThread().getId());
+			if (LOGGER != null) {
+				LOGGER.info("Going to stop sender thread, tid: " + Thread.currentThread().getId());
+			}
 		}
 
 		private byte[] buildMessage() {

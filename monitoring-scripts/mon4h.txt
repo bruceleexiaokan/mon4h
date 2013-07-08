@@ -12,7 +12,15 @@
  - different views of hbase system
    - jvm views
      - 
-
+ - how much memory/disk are processed during one scan
+ 
+ - AvgDataLocality - Region read efficiency
+ - Coprossessor to understand how many rows are involved in searching and how many rows are filtered based on the criteria
+ - which schema will reduce the # of disk scans
+ - Coprossessor 
+   - endpoint to compute the # of rows between a start row and end row   --> support fast aggregation over a large amount of data
+   - 
+ 
 zooinspector
 
 - Query

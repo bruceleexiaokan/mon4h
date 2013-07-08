@@ -11,7 +11,7 @@
 		<zkBasepath>/hbase</zkBasepath>
 		<uidTable>demo.tsdb-uid</uidTable>
 		<metaTable>demo.metrictag</metaTable>
-		<!-- the format is <namespace>:<tablename> -->
+		<!-- the format is <namespace>:<tablename>,<namespace>:<tablename> -->
 		<tsTables>:demo.tsdb</tsTables>
 	</tsdb>
 	<engine>

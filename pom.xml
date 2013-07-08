@@ -12,6 +12,7 @@
 		<module>mon4h-collector</module>
 		<module>mon4h-common</module>
 		<module>mon4h-agent</module>
+		<module>mon4h-plugins</module>
 	</modules>
 
 	<properties>
@@ -23,6 +24,7 @@
 		<hbase.version>0.94.2-cdh4.2.1</hbase.version>
 		<hive.version>0.10.0-cdh4.2.1</hive.version>
 		<commons-logging.version>1.1.1</commons-logging.version>
+		<commons-configuration.version>1.6</commons-configuration.version>
 		<log4j.version>1.2.17</log4j.version>
 		<!-- log4j.version>2.0-beta2</log4j.version -->
 		<slf4j.version>1.4.3</slf4j.version>
@@ -86,45 +88,30 @@
 				<version>${slf4j.version}</version>
 			</dependency>
 			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<dependency>
 				<groupId>commons-logging</groupId>
 				<artifactId>commons-logging</artifactId>
 				<version>${commons-logging.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>slf4j-log4j12</artifactId>
-				<version>${slf4j.version}</version>
+				<groupId>commons-configuration</groupId>
+				<artifactId>commons-configuration</artifactId>
+				<version>${commons-configuration.version}</version>
 			</dependency>
-			<!-- dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-core</artifactId>
-				<version>${logback.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-classic</artifactId>
-				<version>${logback.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>ch.qos.logback</groupId>
-				<artifactId>logback-access</artifactId>
-				<version>${logback.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>jul-to-slf4j</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>jcl-over-slf4j</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.slf4j</groupId>
-				<artifactId>log4j-over-slf4j</artifactId>
-				<version>${slf4j.version}</version>
-			</dependency -->
+			<!-- dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-core</artifactId> 
+				<version>${logback.version}</version> </dependency> <dependency> <groupId>ch.qos.logback</groupId> 
+				<artifactId>logback-classic</artifactId> <version>${logback.version}</version> 
+				</dependency> <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-access</artifactId> 
+				<version>${logback.version}</version> </dependency> <dependency> <groupId>org.slf4j</groupId> 
+				<artifactId>jul-to-slf4j</artifactId> <version>${slf4j.version}</version> 
+				</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>jcl-over-slf4j</artifactId> 
+				<version>${slf4j.version}</version> </dependency> <dependency> <groupId>org.slf4j</groupId> 
+				<artifactId>log4j-over-slf4j</artifactId> <version>${slf4j.version}</version> 
+				</dependency -->
 
 			<!-- About Jersey -->
 			<dependency>
@@ -267,27 +254,13 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 		</dependency>
-		
-		<!-- dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-access</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jul-to-slf4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>jcl-over-slf4j</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>log4j-over-slf4j</artifactId>
-		</dependency -->
+
+		<!-- dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
+			</dependency> <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-access</artifactId> 
+			</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>jul-to-slf4j</artifactId> 
+			</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>jcl-over-slf4j</artifactId> 
+			</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>log4j-over-slf4j</artifactId> 
+			</dependency -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

@@ -52,4 +52,8 @@ public class LoggerManager {
 		return logger;
 	}
 	
+	public MetricLogger getMetricLogger() {
+		return metricLogger;
+	}
+	
 }

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import mon4h.common.domain.models.sub.MetricType;
+import mon4h.common.domain.models.sub.MetricValueType;
 import mon4h.common.domain.models.sub.ModelType;
 import mon4h.common.domain.models.sub.Tag;
 
@@ -26,7 +26,7 @@ public class Metric implements ILogModel {
 	private String name;
     private double value;
     private long createdTime;
-    private MetricType metricType;
+    private MetricValueType metricType;
 
     @XmlElementWrapper(name = "tags")
     @XmlElement(name = "tag")
@@ -63,11 +63,11 @@ public class Metric implements ILogModel {
 		this.createdTime = createdTime;
 	}
 
-	public MetricType getMetricType() {
+	public MetricValueType getMetricType() {
 		return metricType;
 	}
 
-	public void setMetricType(MetricType metricType) {
+	public void setMetricType(MetricValueType metricType) {
 		this.metricType = metricType;
 	}
 
@@ -102,4 +102,23 @@ public class Metric implements ILogModel {
 		result = result && tags.equals(m.tags);
 		return result;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("MetricName=").append(name).append(",");
+		boolean first = true;
+		for (Tag tag : tags) {
+			if (first) {
+				first = false;
+			} else {
+				sb.append("|");
+			}
+			sb.append(tag.getKey()).append("=").append(tag.getValue());
+		}
+		sb.append(",MetricsType=").append(metricType.getValue() == 0 ? "double" : "long").append(",");
+		sb.append("value=").append(value);
+		return sb.toString();
+	}
+	
 }

@@ -10,7 +10,7 @@ import mon4h.common.domain.models.Log;
 import mon4h.common.domain.models.Message;
 import mon4h.common.domain.models.Metric;
 import mon4h.common.domain.models.sub.LogLevel;
-import mon4h.common.domain.models.sub.MetricType;
+import mon4h.common.domain.models.sub.MetricValueType;
 import mon4h.common.domain.models.sub.ModelType;
 import mon4h.common.domain.models.sub.Tag;
 import mon4h.common.queue.impl.QueueConstants;
@@ -58,7 +58,7 @@ public class ModelMessageHelperTest {
 		
 		Metric m1 = new Metric();
 		m1.setCreatedTime(1);
-		m1.setMetricType(MetricType.LONG_TYPE);
+		m1.setMetricType(MetricValueType.LONG_TYPE);
 		m1.setName("metric1");
 		m1.setValue(267);
 		models.clear();

@@ -18,6 +18,17 @@
 		<dependency>
 			<groupId>org.apache.hadoop</groupId>
 			<artifactId>hadoop-common</artifactId>
+			<version>${hadoop-common.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hbase</groupId>
+			<artifactId>hbase</artifactId>
+			<version>${hbase.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.hadoop</groupId>
+			<artifactId>hadoop-annotations</artifactId>
+			<version>${hadoop-common.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>mon4h</groupId>
@@ -29,12 +40,18 @@
 			<artifactId>mon4h-agent</artifactId>
 			<version>${mon4h.version}</version>
 		</dependency>
-			<dependency>
-				<groupId>commons-configuration</groupId>
-				<artifactId>commons-configuration</artifactId>
-				<version>${commons-configuration.version}</version>
-			</dependency>
-		
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>${commons-configuration.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-math</artifactId>
+			<version>${commons-math.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- dependency> <groupId>com.google.guava</groupId> <artifactId>guava</artifactId> 
 			</dependency -->
 	</dependencies>

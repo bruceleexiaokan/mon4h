@@ -1,4 +1,4 @@
-package org.apache.hadoop.hbase.master.ctripbalancer;
+package org.apache.hadoop.hbase.master.newbalancer;
 
 import java.util.*;
 

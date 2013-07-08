@@ -18,6 +18,7 @@
 	<properties>
 		<package.type>tar</package.type>
 		<mon4h.version>1.0.0</mon4h.version>
+		<hadoop.version>1.0.3</hadoop.version>
 		<hadoop-hdfs.version>2.0.0-cdh4.2.1</hadoop-hdfs.version>
 		<hadoop-common.version>2.0.0-cdh4.2.1</hadoop-common.version>
 		<hadoop-mapreduce.version>2.0.0-cdh4.2.1</hadoop-mapreduce.version>
@@ -25,6 +26,7 @@
 		<hive.version>0.10.0-cdh4.2.1</hive.version>
 		<commons-logging.version>1.1.1</commons-logging.version>
 		<commons-configuration.version>1.6</commons-configuration.version>
+		<commons-math.version>2.1</commons-math.version>
 		<log4j.version>1.2.17</log4j.version>
 		<!-- log4j.version>2.0-beta2</log4j.version -->
 		<slf4j.version>1.4.3</slf4j.version>
@@ -50,6 +52,11 @@
 			<!-- About hadoop -->
 			<dependency>
 				<groupId>org.apache.hadoop</groupId>
+				<artifactId>hadoop-hdfs</artifactId>
+				<version>${hadoop.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.hadoop</groupId>
 				<artifactId>hadoop-common</artifactId>
 				<version>${hadoop-common.version}</version>
 			</dependency>
@@ -57,6 +64,11 @@
 				<groupId>org.apache.hbase</groupId>
 				<artifactId>hbase</artifactId>
 				<version>${hbase.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.hadoop</groupId>
+				<artifactId>hadoop-annotations</artifactId>
+				<version>${hadoop-common.version}</version>
 			</dependency>
 			<dependency>
 				<groupId>org.apache.hive</groupId>
@@ -102,16 +114,12 @@
 				<artifactId>commons-configuration</artifactId>
 				<version>${commons-configuration.version}</version>
 			</dependency>
-			<!-- dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-core</artifactId> 
-				<version>${logback.version}</version> </dependency> <dependency> <groupId>ch.qos.logback</groupId> 
-				<artifactId>logback-classic</artifactId> <version>${logback.version}</version> 
-				</dependency> <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-access</artifactId> 
-				<version>${logback.version}</version> </dependency> <dependency> <groupId>org.slf4j</groupId> 
-				<artifactId>jul-to-slf4j</artifactId> <version>${slf4j.version}</version> 
-				</dependency> <dependency> <groupId>org.slf4j</groupId> <artifactId>jcl-over-slf4j</artifactId> 
-				<version>${slf4j.version}</version> </dependency> <dependency> <groupId>org.slf4j</groupId> 
-				<artifactId>log4j-over-slf4j</artifactId> <version>${slf4j.version}</version> 
-				</dependency -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-math</artifactId>
+				<version>${commons-math.version}</version>
+				<scope>test</scope>
+			</dependency>
 
 			<!-- About Jersey -->
 			<dependency>
@@ -427,6 +435,32 @@
 		<!-- repository> <id>releases</id> <url> http://xxx </url> </repository> 
 			<snapshotRepository> <id>snapshots</id> <url> http://xxx </url> </snapshotRepository -->
 	</distributionManagement>
+
+	<repositories>
+		<repository>
+			<id>apache release</id>
+			<url>https://repository.apache.org/content/repositories/releases/</url>
+		</repository>
+	</repositories>
+	<!-- repositories> <repository> <id>cdh.repo</id> <url>https://repository.cloudera.com/artifactory/cloudera-repos</url> 
+		<name>Cloudera Repositories</name> <snapshots> <enabled>false</enabled> </snapshots> 
+		</repository> <repository> <id>cdh.snapshots.repo</id> <url>https://repository.cloudera.com/artifactory/libs-snapshot-local</url> 
+		<name>Cloudera Snapshots Repository</name> <snapshots> <enabled>true</enabled> 
+		</snapshots> <releases> <enabled>false</enabled> </releases> </repository> 
+		<repository> <id>apache release</id> <url>https://repository.apache.org/content/repositories/releases/</url> 
+		</repository> <repository> <id>apache non-releases</id> <name>Apache non-releases</name> 
+		<url>http://people.apache.org/~stack/m2/repository</url> <snapshots> <enabled>false</enabled> 
+		</snapshots> <releases> <enabled>true</enabled> </releases> </repository> 
+		<repository> <id>java.net</id> <name>Java.Net</name> <url>http://download.java.net/maven/2/</url> 
+		<snapshots> <enabled>false</enabled> </snapshots> <releases> <enabled>true</enabled> 
+		</releases> </repository> <repository> <id>codehaus</id> <name>Codehaus Public</name> 
+		<url>http://repository.codehaus.org/</url> <snapshots> <enabled>false</enabled> 
+		</snapshots> <releases> <enabled>true</enabled> </releases> </repository> 
+		<repository> <id>repository.jboss.org</id> <url>http://repository.jboss.org/nexus/content/groups/public-jboss/</url> 
+		<snapshots> <enabled>false</enabled> </snapshots> </repository> <repository> 
+		<id>ghelmling.testing</id> <name>Gary Helmling test repo</name> <url>http://people.apache.org/~garyh/mvn/</url> 
+		<snapshots> <enabled>true</enabled> </snapshots> <releases> <enabled>true</enabled> 
+		</releases> </repository> </repositories -->
 
 	<!-- repositories> <repository> <id>releases-repository.java.net</id> <name>Java.net 
 		Snapshot Repository for Maven</name> <url>https://maven.java.net/content/repositories/releases/</url> 

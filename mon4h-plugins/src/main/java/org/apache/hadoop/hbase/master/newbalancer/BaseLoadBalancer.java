@@ -15,17 +15,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.hadoop.hbase.master.ctripbalancer;
+package org.apache.hadoop.hbase.master.newbalancer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.NavigableMap;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.NavigableMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -33,7 +33,6 @@ import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.ClusterStatus;
 import org.apache.hadoop.hbase.HRegionInfo;
 import org.apache.hadoop.hbase.HServerLoad.RegionLoad;
-//import org.apache.hadoop.hbase.RegionLoad;
 import org.apache.hadoop.hbase.ServerName;
 import org.apache.hadoop.hbase.master.AssignmentManager;
 import org.apache.hadoop.hbase.master.LoadBalancer;
@@ -43,6 +42,7 @@ import org.apache.hadoop.hbase.util.Bytes;
 import com.google.common.base.Joiner;
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.Sets;
+//import org.apache.hadoop.hbase.RegionLoad;
 
 /**
  * The base class for load balancers. It provides the the functions used to by
@@ -81,7 +81,8 @@ public abstract class BaseLoadBalancer implements LoadBalancer {
     int numMovedRegions = 0; //num moved regions from the initial configuration
     int numMovedMetaRegions = 0;       //num of moved regions that are META
 
-    protected Cluster(Map<ServerName, List<HRegionInfo>> clusterState,  Map<String, List<RegionLoad>> loads,
+    @SuppressWarnings("unchecked")
+	protected Cluster(Map<ServerName, List<HRegionInfo>> clusterState,  Map<String, List<RegionLoad>> loads,
         RegionLocationFinder regionFinder) {
       serversToIndex = new HashMap<ServerName, Integer>(clusterState.size());
       tablesToIndex = new HashMap<Integer, Integer>();

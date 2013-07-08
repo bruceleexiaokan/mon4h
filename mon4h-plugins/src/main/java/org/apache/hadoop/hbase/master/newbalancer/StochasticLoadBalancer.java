@@ -15,7 +15,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.apache.hadoop.hbase.master.ctripbalancer;
+package org.apache.hadoop.hbase.master.newbalancer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -619,6 +619,11 @@ public class StochasticLoadBalancer extends BaseLoadBalancer {
 			this.index = index;
 		}
 		final int index;
+		
+		@SuppressWarnings("unused")
+		public int getIndex() {
+			return index;
+		}
 	}
 
 	/**

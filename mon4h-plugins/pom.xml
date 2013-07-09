@@ -49,7 +49,6 @@
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-math</artifactId>
 			<version>${commons-math.version}</version>
-			<scope>test</scope>
 		</dependency>
 
 		<!-- dependency> <groupId>com.google.guava</groupId> <artifactId>guava</artifactId> 

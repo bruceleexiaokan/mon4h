@@ -118,7 +118,6 @@
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-math</artifactId>
 				<version>${commons-math.version}</version>
-				<scope>test</scope>
 			</dependency>
 
 			<!-- About Jersey -->

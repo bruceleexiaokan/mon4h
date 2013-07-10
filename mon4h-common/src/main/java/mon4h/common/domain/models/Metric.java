@@ -14,7 +14,6 @@ import mon4h.common.domain.models.sub.MetricValueType;
 import mon4h.common.domain.models.sub.ModelType;
 import mon4h.common.domain.models.sub.Tag;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 
 @XmlRootElement
@@ -38,7 +37,6 @@ public class Metric implements ILogModel {
 
 	@Override
 	@XmlTransient
-	@JsonIgnore
 	public ModelType getType() {
 		return ModelType.METRICS;
 	}

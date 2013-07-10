@@ -17,7 +17,6 @@ public class AgentAppender extends AppenderSkeleton {
 
 	private static final String hostIp = HostIpUtil.getHostIp();
 	private static final String hostName = HostIpUtil.getHostName();
-	private static final LoggerManager loggerManager = LoggerManager.getInstance();
 	
 	private static final String HOST_NAME = "HostName";
 	private static final String HOST_IP = "HostIp";
@@ -35,7 +34,7 @@ public class AgentAppender extends AppenderSkeleton {
 	@Override
 	protected void append(LoggingEvent event) {
 		String loggerName = event.getLoggerName();
-		ILogger logger = loggerManager.getLogger(loggerName);
+		ILogger logger = LoggerManager.getInstance().getLogger(loggerName);
 		Level l = event.getLevel();
 		LogLevel ll = null;
 		if (l.equals(Level.DEBUG)) {

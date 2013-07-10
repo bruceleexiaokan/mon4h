@@ -7,12 +7,9 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import junit.framework.Assert;
 import mon4h.collector.configuration.CollectorConstants;
@@ -24,7 +21,9 @@ import mon4h.common.domain.models.sub.ModelType;
 import mon4h.common.domain.models.sub.Tag;
 import mon4h.common.util.ModelMessageHelper;
 
-import org.glassfish.jersey.client.ClientConfig;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 public class ClientMessageTest {
 
@@ -35,15 +34,18 @@ public class ClientMessageTest {
 	 */
 	public static void main(String[] args) throws IOException,
 			ClassNotFoundException {
-		ClientConfig cc = new ClientConfig();
-		Client c = ClientBuilder.newClient(cc);
+
 		Log[] logs = createLogs();
 
 		// Response response = target("models/logs")
-		Response response = c
-				.target("http://127.0.0.1:8080/mon4h-collector/rest/models/logs")
-				.request()
-				.post(Entity.entity(logs, MediaType.APPLICATION_JSON));
+//		Response response = c
+//				.target("http://127.0.0.1:8080/mon4h-collector/rest/models/logs")
+//				.request()
+//				.post(Entity.entity(logs, MediaType.APPLICATION_JSON));
+		Client c = Client.create();
+		WebResource r = c.resource("http://127.0.0.1:8080/mon4h-collector/rest/models/logs");
+		ClientResponse response = r.type(MediaType.APPLICATION_JSON)
+			.post(ClientResponse.class, logs);
 		int status = response.getStatus();
 		System.out.println("status : " + status);
 
@@ -62,30 +64,43 @@ public class ClientMessageTest {
 //		ObjectInputStream ois = new ObjectInputStream(bais);
 //		ois.readObject();
 		
-
-		response = c
-				.target("http://127.0.0.1:8080/mon4h-collector/rest/messages")
-				.request(MediaType.APPLICATION_OCTET_STREAM)
-				.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, "1")
-				.post(Entity.entity(msgcontent, MediaType.APPLICATION_OCTET_STREAM));
+		r = c.resource("http://127.0.0.1:8080/mon4h-collector/rest/messages");
+		response = r.type(MediaType.APPLICATION_OCTET_STREAM)
+			.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, "1")
+			.post(ClientResponse.class, msgcontent);
+		status = response.getStatus();
+		
+		response = r.type(MediaType.APPLICATION_OCTET_STREAM)
+			.accept(MediaType.APPLICATION_OCTET_STREAM)
+			.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, "1")
+			.header(CollectorConstants.MESSAGE_NAME_HTTP_HEADER,
+					ModelType.LOGS.getType())
+			.get(ClientResponse.class);
 		status = response.getStatus();
 
-		response = c
-				.target("http://127.0.0.1:8080/mon4h-collector/rest/messages")
-				.request(MediaType.APPLICATION_OCTET_STREAM)
-				.accept(MediaType.APPLICATION_OCTET_STREAM)
-				.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, "1")
-				.header(CollectorConstants.MESSAGE_NAME_HTTP_HEADER,
-						ModelType.LOGS.getType()).get();
-
-		status = response.getStatus();
-		Assert.assertTrue(status >= 200 && status < 300);
-		String countStr = response
-				.getHeaderString(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER);
+//		response = c
+//				.target("http://127.0.0.1:8080/mon4h-collector/rest/messages")
+//				.request(MediaType.APPLICATION_OCTET_STREAM)
+//				.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, "1")
+//				.post(Entity.entity(msgcontent, MediaType.APPLICATION_OCTET_STREAM));
+//		status = response.getStatus();
+//
+//		response = c
+//				.target("http://127.0.0.1:8080/mon4h-collector/rest/messages")
+//				.request(MediaType.APPLICATION_OCTET_STREAM)
+//				.accept(MediaType.APPLICATION_OCTET_STREAM)
+//				.header(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER, "1")
+//				.header(CollectorConstants.MESSAGE_NAME_HTTP_HEADER,
+//						ModelType.LOGS.getType()).get();
+//
+//		status = response.getStatus();
+//		Assert.assertTrue(status >= 200 && status < 300);
+		List<String> headers = response.getHeaders().get(CollectorConstants.MESSAGE_NUMBER_HTTP_HEADER);
+		String countStr = headers.size() == 1 ? headers.get(0) : "";
 		Assert.assertTrue(Integer.valueOf(countStr) == 1);
 
 		Assert.assertTrue(response.hasEntity());
-		byte[] msgContent = response.readEntity(byte[].class);
+		byte[] msgContent = response.getEntity(byte[].class);
 		ByteArrayInputStream bais1 = new ByteArrayInputStream(msgContent);
 		ObjectInputStream ois1 = new ObjectInputStream(bais1);
 		Message newMsg = (Message) ois1.readObject();

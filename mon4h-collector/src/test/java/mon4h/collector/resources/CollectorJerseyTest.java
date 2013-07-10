@@ -11,10 +11,8 @@ import mon4h.common.queue.impl.CompositeMemoryQueue;
 import mon4h.common.queue.impl.MMapQueue;
 import mon4h.common.queue.impl.QueueConstants;
 
-import org.glassfish.jersey.test.JerseyTest;
 
-
-public abstract class CollectorJerseyTest extends JerseyTest {
+public abstract class CollectorJerseyTest {
 
 	protected void cleanupQueue() throws Exception {
 		QueueManager manager = QueueManager.getInstance();

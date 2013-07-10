@@ -5,12 +5,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import mon4h.agent.api.ILogger;
 
-import org.slf4j.LoggerFactory;
-import org.slf4j.Logger;
-
 public class LoggerManager {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(LoggerManager.class);
+//	private static final Logger LOGGER = LoggerFactory.getLogger(LoggerManager.class);
 //	private static final Log LOGGER = LogFactory.getLog(LoggerManager.class);
 
 	private final Map<String, ILogger> loggerMap = new ConcurrentHashMap<String, ILogger>();
@@ -24,7 +21,7 @@ public class LoggerManager {
 		LogSender logSender = LogSender.getInstance();
 		metricLogger = new MetricLogger();
 		metricLogger.setSender(logSender);
-		LOGGER.info("LoggerManager started");
+//		LOGGER.info("LoggerManager started");
 	}
 	
 	public static LoggerManager getInstance() {
@@ -37,9 +34,9 @@ public class LoggerManager {
 	}
 	
 	public static void shutdown() {
-		LOGGER.info("LoggerManager shutting down");
+//		LOGGER.info("LoggerManager shutting down");
 		LogSender.getInstance().shutdown();
-		LOGGER.info("LoggerManager shut down");
+//		LOGGER.info("LoggerManager shut down");
 	}
 	
 	public ILogger getLogger(String name) {

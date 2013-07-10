@@ -11,7 +11,7 @@ public class AgentAppenderTest {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AgentAppenderTest.class);
 
 	@Test
-	public void testLoggerAppender() {
+	public void testLoggerAppender() throws InterruptedException {
 		LOGGER.debug("Test");
 		LOGGER.error("Test1", new IOException("just test"));
 		LOGGER.info("Test is over");

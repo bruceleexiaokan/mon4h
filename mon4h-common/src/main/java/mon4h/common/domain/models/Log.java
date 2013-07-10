@@ -14,7 +14,6 @@ import mon4h.common.domain.models.sub.LogLevel;
 import mon4h.common.domain.models.sub.ModelType;
 import mon4h.common.domain.models.sub.Tag;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.common.collect.Lists;
 
 
@@ -35,13 +34,15 @@ public class Log implements ILogModel {
 	private String message;
 	private Throwable throwable;
 	
+	public Log() {
+	}
+	
 	@XmlElementWrapper(name = "tags")
     @XmlElement(name = "tag")
     private List<Tag> tags = Lists.newArrayList();
 	
 	@Override
 	@XmlTransient
-	@JsonIgnore
 	public ModelType getType() {
 		return ModelType.LOGS;
 	}

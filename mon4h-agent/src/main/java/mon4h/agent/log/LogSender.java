@@ -5,10 +5,7 @@ import java.util.Properties;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.ws.rs.client.Client;
-import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 import mon4h.agent.api.ILogSender;
 import mon4h.agent.log.configuration.AgentConfiguration;
@@ -17,16 +14,16 @@ import mon4h.common.domain.models.ILogModel;
 import mon4h.common.domain.models.Message;
 import mon4h.common.util.ModelMessageHelper;
 
-import org.glassfish.jersey.client.ClientConfig;
-import org.glassfish.jersey.client.JerseyClientBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
 public class LogSender implements ILogSender {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(LogSender.class);
+	private static Logger LOGGER = LoggerFactory.getLogger(LogSender.class);
 //	private static final Log LOGGER = LogFactory.getLog(LogSender.class);
 
 	private static volatile LogSender instance = null;
@@ -42,15 +39,10 @@ public class LogSender implements ILogSender {
 	private ArrayBlockingQueue<ILogModel> queue = new ArrayBlockingQueue<ILogModel>(logsHighWatermark);
 	private AtomicInteger discardedNumber = new AtomicInteger(0);
 	private Object syncObj = new Object();
-	private ClientConfig config;
 	private SenderThread[] senders = new SenderThread[senderThreadNumber];
 	private Thread[] threads = new Thread[senderThreadNumber];
 	
 	private LogSender() {
-		// Configuration for the Client
-		config = new ClientConfig();
-		// Add Providers
-		config.register(new JacksonJaxbJsonProvider());
 		running = true;
 		for (int i = 0; i < threads.length; ++i) {
 			senders[i] = new SenderThread();
@@ -127,14 +119,21 @@ public class LogSender implements ILogSender {
 	private class SenderThread implements Runnable {
 
 		private final ArrayList<ILogModel> list = new ArrayList<ILogModel>();
-		private Client client;
+		private WebResource resource;
 		
 		private SenderThread() {
-			client = JerseyClientBuilder.newClient(config);
+			Client c = Client.create();
+			resource = c.resource(serverAddress);
 		}
 		
 		@Override
 		public void run() {
+			if (LOGGER == null) {
+				LOGGER = LoggerFactory.getLogger(LogSender.class);
+				if (LOGGER == null) {
+					throw new RuntimeException("Why LOGGER still null?");
+				}
+			}
 			LOGGER.info("Going to start sender thread, tid: " + Thread.currentThread().getId());
 			while (running) {
 				checkAndWait();
@@ -147,9 +146,7 @@ public class LogSender implements ILogSender {
 			if (msg != null) {
 				sendLogs(msg);
 			}
-			if (LOGGER != null) {
-				LOGGER.info("Going to stop sender thread, tid: " + Thread.currentThread().getId());
-			}
+			LOGGER.info("Going to stop sender thread, tid: " + Thread.currentThread().getId());
 		}
 
 		private byte[] buildMessage() {
@@ -173,10 +170,14 @@ public class LogSender implements ILogSender {
 		private boolean sendLogs(byte[] msg) {
 			boolean result = false;
 			try {
-				Response response = client.target(serverAddress)
-		        	.request(MediaType.APPLICATION_OCTET_STREAM)
-		        	.header(AgentContants.MESSAGE_NUMBER_HTTP_HEADER, "1")
-		        	.post(Entity.entity(msg, MediaType.APPLICATION_OCTET_STREAM));
+				ClientResponse response = resource.type(MediaType.APPLICATION_OCTET_STREAM)
+						.accept(MediaType.APPLICATION_OCTET_STREAM)
+						.header(AgentContants.MESSAGE_NUMBER_HTTP_HEADER, "1")
+						.post(ClientResponse.class, msg);
+//				Response response = client.target(serverAddress)
+//		        	.request(MediaType.APPLICATION_OCTET_STREAM)
+//		        	.header(AgentContants.MESSAGE_NUMBER_HTTP_HEADER, "1")
+//		        	.post(Entity.entity(msg, MediaType.APPLICATION_OCTET_STREAM));
 				int status = response.getStatus();
 				if (status >= 300) {
 					LOGGER.error("Got an error while sending log. status code: " + status);

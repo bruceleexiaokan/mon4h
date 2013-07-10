@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory;
 
 public class AgentConfiguration {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(AgentConfiguration.class);
+//	private static final Logger LOGGER = LoggerFactory.getLogger(AgentConfiguration.class);
 //	private static final Log LOGGER = LogFactory.getLog(AgentConfiguration.class);
 
 	private static volatile boolean initialized = false;
@@ -38,10 +38,10 @@ public class AgentConfiguration {
 
             in = url.openStream();
             prop.load(in);
-            LOGGER.info("Successfully loaded collector configuration!");
+//            LOGGER.info("Successfully loaded collector configuration!");
             
         } catch (Exception e) {
-            LOGGER.warn("Cannot load configuration from file <" + AgentContants.CONFIG_FILE + ">", e);
+//            LOGGER.warn("Cannot load configuration from file <" + AgentContants.CONFIG_FILE + ">", e);
         } finally {
             if (in != null) {
                 try {

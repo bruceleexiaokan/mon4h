@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard Common UI</title>
+    <link rel="stylesheet" href="resource/istyle/istyle.30626.css">
+    <link rel="stylesheet" href="resource/css/layout.css">
+    <link rel="stylesheet" href="resource/css/main.css">
+</head>
+<body>
+<div class="navbar" style="margin-bottom: 5px">
+    <div class="navbar-inner">
+        <a class="logo" href="#">Dashboard Common UI 2.0</a>
+    </div>
+</div>
+<div id="middle" class="container" style="width: 100%">
+    <div class="input-prepend input-append"  style="margin-bottom: 5px">
+        <div class="btn-group text-left" data-key="env" id="env">
+            <button class="btn"><i class="icon-list-alt"></i>&nbsp;Environment&nbsp;<span
+                    class="label label-info" style="width: 40px;">TEST</span></button>
+            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="javascript:void(0);" data-val="DEV">DEV</a></li>
+                <li><a href="javascript:void(0);" data-val="TEST">TEST</a></li>
+                <li><a href="javascript:void(0);" data-val="UAT">UAT</a></li>
+                <li><a href="javascript:void(0);" data-val="PROD">PROD</a></li>
+            </ul>
+        </div>
+        <input type="text" id="namespace" placeholder="Input NameSpace" style="width: 233px;"/>
+        <button class="btn filterinput-line" tabindex="-1">-</button>
+        <input style="width:750px" type="text" id="metric-name" placeholder="Input Metric Name"/>
+
+    </div>
+    <div  class="input-prepend input-append"style="margin-bottom: 5px">
+        <div class="bs-tags-filter">
+            <div class="input-prepend input-append" id="tag-filter">
+            </div>
+        </div>
+    </div>
+    <div class="input-prepend input-append"style="margin-bottom: 5px">
+        <div class="btn-group text-left">
+            <button class="btn">
+                <i class="icon-calendar"></i> StartTime
+            </button>
+            <input id="start-time" type="text" style="width: 145px">
+            <button class="btn">
+                <i class="icon-calendar"></i> EndTime
+            </button>
+            <input id="end-time" type="text" style="width: 145px">
+        </div>
+        <div class="btn-group text-left">
+            <button class="btn"><i class="icon-time"></i>&nbsp;Interval&nbsp;
+            </button>
+            <input style="width:75px" type="text" id="interval">
+        </div>
+        <div class="btn-group text-left" data-key="chart" id="chart">
+            <button class="btn"><i class="icon-signal"></i>&nbsp;Chart Type&nbsp;<span
+                    class="label label-info" style="width: 50px;">Static</span>
+            </button>
+            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="javascript:void(0);" data-val="line">Static</a></li>
+                <li><a href="javascript:void(0);" data-val="realtime">Realtime</a></li>
+                <li><a href="javascript:void(0);" data-val="pie">Pie</a></li>
+                <li><a href="javascript:void(0);" data-val="bar">Histogram</a></li>
+            </ul>
+        </div>
+        <div class="btn-group text-left" data-key="aggregator" id="aggregator">
+            <button class="btn"><i class="icon-indent-left"></i>&nbsp;Aggregation Function&nbsp;<span
+                    class="label label-info" style="width: 30px;">SUM</span></button>
+            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="javascript:void(0);" data-val="sum">SUM</a></li>
+                <li><a href="javascript:void(0);" data-val="min">MIN</a></li>
+                <li><a href="javascript:void(0);" data-val="max">MAX</a></li>
+                <li><a href="javascript:void(0);" data-val="avg">AVG</a></li>
+                <li><a href="javascript:void(0);" data-val="dev">DEV</a></li>
+            </ul>
+        </div>
+        <div class="btn-group text-left" data-key="downsampler" id="downsampler">
+            <button class="btn"><i class="icon-indent-right"></i>&nbsp;Downsampling Function&nbsp;<span
+                    class="label label-info" style="width: 30px;">SUM</span></button>
+            <button class="btn dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+                <li><a href="javascript:void(0);" data-val="sum">SUM</a></li>
+                <li><a href="javascript:void(0);" data-val="min">MIN</a></li>
+                <li><a href="javascript:void(0);" data-val="max">MAX</a></li>
+                <li><a href="javascript:void(0);" data-val="avg">AVG</a></li>
+                <li><a href="javascript:void(0);" data-val="dev">DEV</a></li>
+                <li><a href="javascript:void(0);" data-val="rat">RATE</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="input-prepend input-append" style="margin-bottom: 5px">
+        <div class="btn-group text-left">
+            <button class="btn">Group By
+            </button>
+            <input style="width:640px" type="text" id="tag-group" placeholder="请输入进行Group By的Tag Name"/>
+        </div>
+        <div class="btn-group text-left">
+            <button class="btn">Max Count
+            </button>
+            <input style="width:50px" type="text" id="max-datapoint-count" value="100"/>
+        </div>
+        <button type="button" class="btn btn-primary" id="searchBtn">
+            <i class="icon-search icon-white"></i> query
+        </button>
+        <button type="button" class="btn" id="resetBtn" style="margin-left:10px;">
+            <i class="icon-refresh"></i> Reset Filter Condition
+        </button>
+        <button type="button" class="btn" id="resetAllBtn" style="margin-left:10px;">
+            <i class="icon-refresh"></i> Reset All
+        </button>
+    </div>
+    <div id="content" >
+        <div id="dashboard-data">
+
+        </div>
+    </div>
+</div>
+<div id="bottom">
+    <div>@Copyright 2013 by [ Dashboard Team ]</div>
+</div>
+<script src="resource/istyle/jquery-1.9.1.min.js" charset="utf-8"></script>
+<script src="resource/istyle/istyle.30626.js" charset="utf-8"></script>
+<script src="resource/istyle/CData-1.0.js" charset="utf-8"></script>
+<script src="resource/js/component/json2.js" charset="utf-8"></script>
+<script src="resource/js/component/jquery.hash.js" charset="utf-8"></script>
+<script src="resource/js/component/jquery.timer.js" charset="utf-8"></script>
+<script src="resource/js/component/moment.js" charset="utf-8"></script>
+<script src="resource/js/component/autocomplete.js" charset="utf-8"></script>
+<script src="resource/js/component/utils.js" charset="utf-8"></script>
+<script src="resource/js/component/datetime.js" charset="utf-8"></script>
+<script src="resource/js/component/dropdown.js" charset="utf-8"></script>
+<script src="resource/js/dashboard-util.js" charset="utf-8"></script>
+<script src="resource/js/dashboard-chart-line.js" charset="utf-8"></script>
+<script src="resource/js/dashboard-chart-pie.js" charset="utf-8"></script>
+<script src="resource/js/dashboard-chart-bar.js" charset="utf-8"></script>
+<script src="resource/js/dashboard-chart-realtime.js" charset="utf-8"></script>
+<script src="resource/js/dashboard-config.js" charset="utf-8"></script>
+<script src="resource/js/dashboard-tag.js" charset="utf-8"></script>
+<script src="resource/js/dashboard-request.js" charset="utf-8"></script>
+<script src="resource/js/dashboard-data.js" charset="utf-8"></script>
+<script src="resource/js/dashboard-ui.js" charset="utf-8"></script>
+<script>
+    $(function () {
+        var dashbardUI = new DashboardUI();
+        dashbardUI.init();
+    });
+</script>
+</body>
+</html>

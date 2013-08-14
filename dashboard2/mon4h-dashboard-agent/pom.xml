@@ -1,0 +1,32 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>mon4h.framework.dashboard</groupId>
+        <artifactId>mon4h-dashboard-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <groupId>mon4h.framework.dashboard</groupId>
+    <artifactId>mon4h-dashboard-agent</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+    <name>mon4h-dashboard-agent</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+		<dependency>
+			<groupId>mon4h.framework.dashboard</groupId>
+			<artifactId>mon4h-dashboard-common</artifactId>
+			<version>${mon4h-dashboard.version}</version>
+		</dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>6.3.1</version>
+        </dependency>
+    </dependencies>
+</project>

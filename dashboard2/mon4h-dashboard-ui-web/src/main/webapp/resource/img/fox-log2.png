@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>
+Framework / central-logging | 
+GitLab
+</title>
+<link href="/assets/favicon-4b751da746de7855d7eb8123072388ed.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+<link href="/assets/application-6769374da7426d0fc48c721a8557ccf4.css" media="screen" rel="stylesheet" type="text/css" />
+<script src="/assets/application-ca4ee38cc34055fdfe383c6af4c13bb6.js" type="text/javascript"></script>
+<meta content="authenticity_token" name="csrf-param" />
+<meta content="wqyaPnEVW49makMDQFXlBhzQDkAXJFEFAZ/ETzUVyeI=" name="csrf-token" />
+<link href="http://git.dev.sh.ctripcorp.com/framework/central-logging/commits/master.atom?private_token=YoPyhQ2ifBmTriLaqPpM" rel="alternate" title="Recent commits to central-logging:master" type="application/atom+xml" />
+</head>
+
+<body class='ui_basic project'>
+
+<header class='navbar navbar-static-top navbar-gitlab'>
+<div class='navbar-inner'>
+<div class='container'>
+<div class='app_logo'>
+<span class='separator'></span>
+<a href="/" class="home has_bottom_tooltip" title="Dashboard"><h1>GITLAB</h1>
+</a><span class='separator'></span>
+</div>
+<h1 class='project_name'>Framework / central-logging</h1>
+<ul class='nav'>
+<li>
+<a href="/projects/new" class="has_bottom_tooltip" data-original-title="New project" title="Create New Project"><i class='icon-plus'></i>
+</a></li>
+<li>
+<a href="/profile" class="has_bottom_tooltip" data-original-title="Your profile" title="Your Profile"><i class='icon-user'></i>
+</a></li>
+<li class='separator'></li>
+<li>
+<div class='search'>
+<form accept-charset="UTF-8" action="/search" class="navbar-form pull-left" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+<input class="search-input" id="search" name="search" placeholder="Search" type="text" />
+</form>
+
+</div>
+<script>
+  //<![CDATA[
+    $(function(){
+      $("#search").autocomplete({
+        source: [{"label":"<group> Framework","url":"/groups/framework"},{"label":"Framework / central-logging","url":"/framework/central-logging"},{"label":"Framework / ab-testing","url":"/framework/ab-testing"},{"label":"Framework / central-logging-tfs","url":"/framework/central-logging-tfs"},{"label":"Framework / ctrip-dashboard","url":"/framework/ctrip-dashboard"},{"label":"Framework / Hadoop-HBase-Tools","url":"/framework/hadoop-hbase-tools"},{"label":"weiw / csm-clogwriter","url":"/weiw/csm-clogwriter"},{"label":"xingchaowang / central-logging-monitor","url":"/xingchaowang/central-logging-monitor"},{"label":"Framework / hbase-async-client","url":"/framework/hbase-async-client"},{"label":"Framework / hbase-sync-client","url":"/framework/hbase-sync-client"},{"label":"yongz / HBaseMonitor","url":"/yongz/hbasemonitor"},{"label":"Framework / Dashboard 2.0","url":"/framework/dashboard-2-0"},{"label":"My Profile","url":"/profile"},{"label":"My SSH Keys","url":"/keys"},{"label":"My Dashboard","url":"/"},{"label":"Admin Section","url":"/admin"},{"label":"central-logging Issues","url":"/framework/central-logging/issues"},{"label":"central-logging Commits","url":"/framework/central-logging/commits/master"},{"label":"central-logging Merge Requests","url":"/framework/central-logging/merge_requests"},{"label":"central-logging Milestones","url":"/framework/central-logging/milestones"},{"label":"central-logging Snippets","url":"/framework/central-logging/snippets"},{"label":"central-logging Team","url":"/framework/central-logging/team"},{"label":"central-logging Tree","url":"/framework/central-logging/tree/master"},{"label":"central-logging Wall","url":"/framework/central-logging/wall"},{"label":"central-logging Wiki","url":"/framework/central-logging/wikis"},{"label":"API Help","url":"/help/api"},{"label":"Markdown Help","url":"/help/markdown"},{"label":"Permissions Help","url":"/help/permissions"},{"label":"Public Access Help","url":"/help/public_access"},{"label":"Rake Tasks Help","url":"/help/raketasks"},{"label":"SSH Keys Help","url":"/help/ssh"},{"label":"System Hooks Help","url":"/help/system_hooks"},{"label":"Web Hooks Help","url":"/help/web_hooks"},{"label":"Workflow Help","url":"/help/workflow"}],
+        select: function(event, ui) { location.href = ui.item.url }
+      });
+    });
+  //]]>
+</script>
+
+
+</li>
+<li>
+<div class='account-box'>
+<a href="/profile" class="pic"><img alt="No_avatar" src="/assets/no_avatar-989a56e2040bd76fbe20e523670133b2.png" />
+</a><div class='account-links'>
+<a href="/profile" class="username"><i class='icon-user icon-white'></i>
+My profile
+</a><a href="/users/sign_out" class="logout" data-method="delete" rel="nofollow"><i class='icon-signout icon-white'></i>
+Logout
+</a></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</header>
+<script>
+  //<![CDATA[
+    $(function() {
+      GitLab.GfmAutoComplete.Members.url = "/api/v3/projects/30/members";
+      GitLab.GfmAutoComplete.Members.params.private_token = "YoPyhQ2ifBmTriLaqPpM";
+    
+      GitLab.GfmAutoComplete.Emoji.data = ["+1", "-1", "100", "1234", "8ball", "a", "ab", "abc", "abcd", "accept", "aerial_tramway", "airplane", "alarm_clock", "alien", "ambulance", "anchor", "angel", "anger", "angry", "anguished", "ant", "apple", "aquarius", "aries", "arrow_backward", "arrow_double_down", "arrow_double_up", "arrow_down", "arrow_down_small", "arrow_forward", "arrow_heading_down", "arrow_heading_up", "arrow_left", "arrow_lower_left", "arrow_lower_right", "arrow_right", "arrow_right_hook", "arrow_up", "arrow_up_down", "arrow_up_small", "arrow_upper_left", "arrow_upper_right", "arrows_clockwise", "arrows_counterclockwise", "art", "articulated_lorry", "astonished", "athletic_shoe", "atm", "b", "baby", "baby_bottle", "baby_chick", "baby_symbol", "back", "baggage_claim", "balloon", "ballot_box_with_check", "bamboo", "banana", "bangbang", "bank", "bar_chart", "barber", "baseball", "basketball", "bath", "bathtub", "battery", "bear", "bee", "beer", "beers", "beetle", "beginner", "bell", "bento", "bicyclist", "bike", "bikini", "bird", "birthday", "black_circle", "black_joker", "black_large_square", "black_medium_small_square", "black_medium_square", "black_nib", "black_small_square", "black_square_button", "blossom", "blowfish", "blue_book", "blue_car", "blue_heart", "blush", "boar", "boat", "bomb", "book", "bookmark", "bookmark_tabs", "books", "boom", "boot", "bouquet", "bow", "bowling", "bowtie", "boy", "bread", "bride_with_veil", "bridge_at_night", "briefcase", "broken_heart", "bug", "bulb", "bullettrain_front", "bullettrain_side", "bus", "busstop", "bust_in_silhouette", "busts_in_silhouette", "cactus", "cake", "calendar", "calling", "camel", "camera", "cancer", "candy", "capital_abcd", "capricorn", "car", "card_index", "carousel_horse", "cat", "cat2", "cd", "chart", "chart_with_downwards_trend", "chart_with_upwards_trend", "checkered_flag", "cherries", "cherry_blossom", "chestnut", "chicken", "children_crossing", "chocolate_bar", "christmas_tree", "church", "cinema", "circus_tent", "city_sunrise", "city_sunset", "cl", "clap", "clapper", "clipboard", "clock1", "clock10", "clock1030", "clock11", "clock1130", "clock12", "clock1230", "clock130", "clock2", "clock230", "clock3", "clock330", "clock4", "clock430", "clock5", "clock530", "clock6", "clock630", "clock7", "clock730", "clock8", "clock830", "clock9", "clock930", "closed_book", "closed_lock_with_key", "closed_umbrella", "cloud", "clubs", "cn", "cocktail", "coffee", "cold_sweat", "collision", "computer", "confetti_ball", "confounded", "confused", "congratulations", "construction", "construction_worker", "convenience_store", "cookie", "cool", "cop", "copyright", "corn", "couple", "couple_with_heart", "couplekiss", "cow", "cow2", "credit_card", "crescent_moon", "crocodile", "crossed_flags", "crown", "cry", "crying_cat_face", "crystal_ball", "cupid", "curly_loop", "currency_exchange", "curry", "custard", "customs", "cyclone", "dancer", "dancers", "dango", "dart", "dash", "date", "de", "deciduous_tree", "department_store", "diamond_shape_with_a_dot_inside", "diamonds", "disappointed", "disappointed_relieved", "dizzy", "dizzy_face", "do_not_litter", "dog", "dog2", "dollar", "dolls", "dolphin", "door", "doughnut", "dragon", "dragon_face", "dress", "dromedary_camel", "droplet", "dvd", "e-mail", "ear", "ear_of_rice", "earth_africa", "earth_americas", "earth_asia", "egg", "eggplant", "eight", "eight_pointed_black_star", "eight_spoked_asterisk", "electric_plug", "elephant", "email", "end", "envelope", "envelope_with_arrow", "es", "euro", "european_castle", "european_post_office", "evergreen_tree", "exclamation", "expressionless", "eyeglasses", "eyes", "facepunch", "factory", "fallen_leaf", "family", "fast_forward", "fax", "fearful", "feelsgood", "feet", "ferris_wheel", "file_folder", "finnadie", "fire", "fire_engine", "fireworks", "first_quarter_moon", "first_quarter_moon_with_face", "fish", "fish_cake", "fishing_pole_and_fish", "fist", "five", "flags", "flashlight", "floppy_disk", "flower_playing_cards", "flushed", "foggy", "football", "footprints", "fork_and_knife", "fountain", "four", "four_leaf_clover", "fr", "free", "fried_shrimp", "fries", "frog", "frowning", "fuelpump", "full_moon", "full_moon_with_face", "game_die", "gb", "gem", "gemini", "ghost", "gift", "gift_heart", "girl", "globe_with_meridians", "goat", "goberserk", "godmode", "golf", "grapes", "green_apple", "green_book", "green_heart", "grey_exclamation", "grey_question", "grimacing", "grin", "grinning", "guardsman", "guitar", "gun", "haircut", "hamburger", "hammer", "hamster", "hand", "handbag", "hankey", "hash", "hatched_chick", "hatching_chick", "headphones", "hear_no_evil", "heart", "heart_decoration", "heart_eyes", "heart_eyes_cat", "heartbeat", "heartpulse", "hearts", "heavy_check_mark", "heavy_division_sign", "heavy_dollar_sign", "heavy_exclamation_mark", "heavy_minus_sign", "heavy_multiplication_x", "heavy_plus_sign", "helicopter", "herb", "hibiscus", "high_brightness", "high_heel", "hocho", "honey_pot", "honeybee", "horse", "horse_racing", "hospital", "hotel", "hotsprings", "hourglass", "hourglass_flowing_sand", "house", "house_with_garden", "hurtrealbad", "hushed", "ice_cream", "icecream", "id", "ideograph_advantage", "imp", "inbox_tray", "incoming_envelope", "information_desk_person", "information_source", "innocent", "interrobang", "iphone", "it", "izakaya_lantern", "jack_o_lantern", "japan", "japanese_castle", "japanese_goblin", "japanese_ogre", "jeans", "joy", "joy_cat", "jp", "key", "keycap_ten", "kimono", "kiss", "kissing", "kissing_cat", "kissing_closed_eyes", "kissing_heart", "kissing_smiling_eyes", "koala", "koko", "kr", "lantern", "large_blue_circle", "large_blue_diamond", "large_orange_diamond", "last_quarter_moon", "last_quarter_moon_with_face", "laughing", "leaves", "ledger", "left_luggage", "left_right_arrow", "leftwards_arrow_with_hook", "lemon", "leo", "leopard", "libra", "light_rail", "link", "lips", "lipstick", "lock", "lock_with_ink_pen", "lollipop", "loop", "loudspeaker", "love_hotel", "love_letter", "low_brightness", "m", "mag", "mag_right", "mahjong", "mailbox", "mailbox_closed", "mailbox_with_mail", "mailbox_with_no_mail", "man", "man_with_gua_pi_mao", "man_with_turban", "mans_shoe", "maple_leaf", "mask", "massage", "meat_on_bone", "mega", "melon", "memo", "mens", "metal", "metro", "microphone", "microscope", "milky_way", "minibus", "minidisc", "mobile_phone_off", "money_with_wings", "moneybag", "monkey", "monkey_face", "monorail", "moon", "mortar_board", "mount_fuji", "mountain_bicyclist", "mountain_cableway", "mountain_railway", "mouse", "mouse2", "movie_camera", "moyai", "muscle", "mushroom", "musical_keyboard", "musical_note", "musical_score", "mute", "nail_care", "name_badge", "neckbeard", "necktie", "negative_squared_cross_mark", "neutral_face", "new", "new_moon", "new_moon_with_face", "newspaper", "ng", "nine", "no_bell", "no_bicycles", "no_entry", "no_entry_sign", "no_good", "no_mobile_phones", "no_mouth", "no_pedestrians", "no_smoking", "non-potable_water", "nose", "notebook", "notebook_with_decorative_cover", "notes", "nut_and_bolt", "o", "o2", "ocean", "octocat", "octopus", "oden", "office", "ok", "ok_hand", "ok_woman", "older_man", "older_woman", "on", "oncoming_automobile", "oncoming_bus", "oncoming_police_car", "oncoming_taxi", "one", "open_book", "open_file_folder", "open_hands", "open_mouth", "ophiuchus", "orange_book", "outbox_tray", "ox", "package", "page_facing_up", "page_with_curl", "pager", "palm_tree", "panda_face", "paperclip", "parking", "part_alternation_mark", "partly_sunny", "passport_control", "paw_prints", "peach", "pear", "pencil", "pencil2", "penguin", "pensive", "performing_arts", "persevere", "person_frowning", "person_with_blond_hair", "person_with_pouting_face", "phone", "pig", "pig2", "pig_nose", "pill", "pineapple", "pisces", "pizza", "point_down", "point_left", "point_right", "point_up", "point_up_2", "police_car", "poodle", "poop", "post_office", "postal_horn", "postbox", "potable_water", "pouch", "poultry_leg", "pound", "pouting_cat", "pray", "princess", "punch", "purple_heart", "purse", "pushpin", "put_litter_in_its_place", "question", "rabbit", "rabbit2", "racehorse", "radio", "radio_button", "rage", "rage1", "rage2", "rage3", "rage4", "railway_car", "rainbow", "raised_hand", "raised_hands", "raising_hand", "ram", "ramen", "rat", "recycle", "red_car", "red_circle", "registered", "relaxed", "relieved", "repeat", "repeat_one", "restroom", "revolving_hearts", "rewind", "ribbon", "rice", "rice_ball", "rice_cracker", "rice_scene", "ring", "rocket", "roller_coaster", "rooster", "rose", "rotating_light", "round_pushpin", "rowboat", "ru", "rugby_football", "runner", "running", "running_shirt_with_sash", "sa", "sagittarius", "sailboat", "sake", "sandal", "santa", "satellite", "satisfied", "saxophone", "school", "school_satchel", "scissors", "scorpius", "scream", "scream_cat", "scroll", "seat", "secret", "see_no_evil", "seedling", "seven", "shaved_ice", "sheep", "shell", "ship", "shipit", "shirt", "shit", "shoe", "shower", "signal_strength", "six", "six_pointed_star", "ski", "skull", "sleeping", "sleepy", "slot_machine", "small_blue_diamond", "small_orange_diamond", "small_red_triangle", "small_red_triangle_down", "smile", "smile_cat", "smiley", "smiley_cat", "smiling_imp", "smirk", "smirk_cat", "smoking", "snail", "snake", "snowboarder", "snowflake", "snowman", "sob", "soccer", "soon", "sos", "sound", "space_invader", "spades", "spaghetti", "sparkle", "sparkler", "sparkles", "sparkling_heart", "speak_no_evil", "speaker", "speech_balloon", "speedboat", "squirrel", "star", "star2", "stars", "station", "statue_of_liberty", "steam_locomotive", "stew", "straight_ruler", "strawberry", "stuck_out_tongue", "stuck_out_tongue_closed_eyes", "stuck_out_tongue_winking_eye", "sun_with_face", "sunflower", "sunglasses", "sunny", "sunrise", "sunrise_over_mountains", "surfer", "sushi", "suspect", "suspension_railway", "sweat", "sweat_drops", "sweat_smile", "sweet_potato", "swimmer", "symbols", "syringe", "tada", "tanabata_tree", "tangerine", "taurus", "taxi", "tea", "telephone", "telephone_receiver", "telescope", "tennis", "tent", "thought_balloon", "three", "thumbsdown", "thumbsup", "ticket", "tiger", "tiger2", "tired_face", "tm", "toilet", "tokyo_tower", "tomato", "tongue", "top", "tophat", "tractor", "traffic_light", "train", "train2", "tram", "triangular_flag_on_post", "triangular_ruler", "trident", "triumph", "trolleybus", "trollface", "trophy", "tropical_drink", "tropical_fish", "truck", "trumpet", "tshirt", "tulip", "turtle", "tv", "twisted_rightwards_arrows", "two", "two_hearts", "two_men_holding_hands", "two_women_holding_hands", "u5272", "u5408", "u55b6", "u6307", "u6708", "u6709", "u6e80", "u7121", "u7533", "u7981", "u7a7a", "uk", "umbrella", "unamused", "underage", "unlock", "up", "us", "v", "vertical_traffic_light", "vhs", "vibration_mode", "video_camera", "video_game", "violin", "virgo", "volcano", "vs", "walking", "waning_crescent_moon", "waning_gibbous_moon", "warning", "watch", "water_buffalo", "watermelon", "wave", "wavy_dash", "waxing_crescent_moon", "waxing_gibbous_moon", "wc", "weary", "wedding", "whale", "whale2", "wheelchair", "white_check_mark", "white_circle", "white_flower", "white_large_square", "white_medium_small_square", "white_medium_square", "white_small_square", "white_square_button", "wind_chime", "wine_glass", "wink", "wolf", "woman", "womans_clothes", "womans_hat", "womens", "worried", "wrench", "x", "yellow_heart", "yen", "yum", "zap", "zero", "zzz"];
+      // convert the list so that the items have the right format for completion
+      GitLab.GfmAutoComplete.Emoji.data = $.map(GitLab.GfmAutoComplete.Emoji.data, function(value) {
+        return {
+          name: value,
+          insert: value+':',
+          image: '/assets/emoji/'+value+'.png'
+        }
+      });
+    
+      GitLab.GfmAutoComplete.setup();
+    });
+  //]]>
+</script>
+
+
+
+
+<div class='container'>
+<ul class='main_menu'>
+<li class="home"><a href="/framework/central-logging" title="Project">central-logging</a>
+</li><li class="active"><a href="/framework/central-logging/tree/master">Files</a>
+</li><li class=""><a href="/framework/central-logging/commits/master">Commits</a>
+</li><li class=""><a href="/framework/central-logging/graph">Network</a>
+</li><li class=""><a href="/framework/central-logging/issues">Issues
+<span class='count issue_counter'>0</span>
+</a></li><li class=""><a href="/framework/central-logging/merge_requests">Merge Requests
+<span class='count merge_counter'>0</span>
+</a></li><li class=""><a href="/framework/central-logging/wall">Wall</a>
+</li><li class=""><a href="/framework/central-logging/wikis/index">Wiki</a>
+</li></ul>
+<div class='content'><ul class='nav nav-tabs'>
+<li>
+<form accept-charset="UTF-8" action="/framework/central-logging/refs/switch" class="project-refs-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+<select class="project-refs-select chosen" id="ref" name="ref"><optgroup label="Branch"><option value="dashboard-tsdb">dashboard-tsdb</option>
+<option value="event_collector">event_collector</option>
+<option value="hdfswriter">hdfswriter</option>
+<option value="hdfswriter-master">hdfswriter-master</option>
+<option value="master" selected="selected">master</option>
+<option value="newevent">newevent</option>
+<option value="rc2hbase">rc2hbase</option>
+<option value="release_demo">release_demo</option>
+<option value="report">report</option>
+<option value="report-2">report-2</option>
+<option value="rest-app">rest-app</option>
+<option value="todo-writer-common">todo-writer-common</option></optgroup><optgroup label="Tag"><option value="v2.1.4.01-20130704">v2.1.4.01-20130704</option>
+<option value="v2.1.3.01-20130621">v2.1.3.01-20130621</option>
+<option value="v2.1.2.09-20130621">v2.1.2.09-20130621</option>
+<option value="v2.1.2.08-20130614">v2.1.2.08-20130614</option>
+<option value="v2.1.2.07-20130613">v2.1.2.07-20130613</option>
+<option value="v2.1.2.06-20130613">v2.1.2.06-20130613</option>
+<option value="v2.1.2.05-20130613_bugs">v2.1.2.05-20130613_bugs</option>
+<option value="v2.1.2.04-20130610">v2.1.2.04-20130610</option>
+<option value="v2.1.2.03-20130606">v2.1.2.03-20130606</option>
+<option value="v2.1.2.02-20130606">v2.1.2.02-20130606</option>
+<option value="v2.1.2.01-20130603">v2.1.2.01-20130603</option>
+<option value="v2.1.1.07-20130603">v2.1.1.07-20130603</option>
+<option value="v2.1.1.06-20130603">v2.1.1.06-20130603</option>
+<option value="v2.1.1.05-20130531">v2.1.1.05-20130531</option>
+<option value="v2.1.1.04-20130531">v2.1.1.04-20130531</option>
+<option value="v2.1.1.04-20130530">v2.1.1.04-20130530</option>
+<option value="v2.1.1.03">v2.1.1.03</option>
+<option value="v2.1.1.02">v2.1.1.02</option>
+<option value="v2.1.1.01">v2.1.1.01</option>
+<option value="v2.1.0.03-20130523">v2.1.0.03-20130523</option>
+<option value="v2.1.0.02-20130514">v2.1.0.02-20130514</option>
+<option value="v2.1.0.01">v2.1.0.01</option>
+<option value="v2.1.0">v2.1.0</option>
+<option value="v2.05">v2.05</option>
+<option value="v2.0.9">v2.0.9</option>
+<option value="v2.0.8">v2.0.8</option>
+<option value="v2.0.7.13">v2.0.7.13</option>
+<option value="v2.0.7.12">v2.0.7.12</option>
+<option value="v2.0.7.11">v2.0.7.11</option>
+<option value="v2.0.7.10">v2.0.7.10</option>
+<option value="v2.0.7.09">v2.0.7.09</option>
+<option value="v2.0.7.08">v2.0.7.08</option>
+<option value="v2.0.7.07">v2.0.7.07</option>
+<option value="v2.0.7.06">v2.0.7.06</option>
+<option value="v2.0.7.05">v2.0.7.05</option>
+<option value="v2.0.7.04">v2.0.7.04</option>
+<option value="v2.0.7.03">v2.0.7.03</option>
+<option value="v2.0.7.02">v2.0.7.02</option>
+<option value="v2.0.7-hotfix">v2.0.7-hotfix</option>
+<option value="v2.0.7-01">v2.0.7-01</option>
+<option value="v2.0.7">v2.0.7</option>
+<option value="v2.0.11.3">v2.0.11.3</option>
+<option value="v2.0.11.2">v2.0.11.2</option>
+<option value="v2.0.11.08">v2.0.11.08</option>
+<option value="v2.0.11.07">v2.0.11.07</option>
+<option value="v2.0.11.06">v2.0.11.06</option>
+<option value="v2.0.11.05">v2.0.11.05</option>
+<option value="v2.0.11.04">v2.0.11.04</option>
+<option value="v2.0.11.01">v2.0.11.01</option>
+<option value="v2.0.11">v2.0.11</option>
+<option value="v2.0.10">v2.0.10</option>
+<option value="remote">remote</option></optgroup></select>
+<input id="destination" name="destination" type="hidden" value="tree" />
+<input id="path" name="path" type="hidden" value="central-logging-browser/src/main/webapp/resource/img/fox-log2.png" />
+</form>
+
+
+</li>
+<li class="active"><a href="/framework/central-logging/tree/master">Source</a>
+</li><li class='right'>
+<div class='input-prepend project_clone_holder'>
+<button class='btn active' data-clone='git@git.dev.sh.ctripcorp.com:framework/central-logging.git'>SSH</button>
+<button class='btn' data-clone='http://git.dev.sh.ctripcorp.com/framework/central-logging.git'>HTTP</button>
+<input class="one_click_select input-xxlarge" id="project_clone" name="project_clone" type="text" value="git@git.dev.sh.ctripcorp.com:framework/central-logging.git" />
+</div>
+
+</li>
+</ul>
+
+<div class='tree-holder' id='tree-holder'>
+<ul class='breadcrumb'>
+<li>
+<span class='arrow'></span>
+<a href="/framework/central-logging/tree/master">central-logging
+</a></li>
+/
+<li>
+<a href="#">..</a>
+</li>
+/
+<li>
+<a href="/framework/central-logging/tree/master/central-logging-browser/src/main/webapp/resource/img">img</a>
+</li>
+/
+<li>
+<a href="/framework/central-logging/tree/master/central-logging-browser/src/main/webapp/resource/img/fox-log2.png">fox-log2.png</a>
+</li>
+</ul>
+<div class='clear'></div>
+<div class='tree_progress'></div>
+<div class='tree-content-holder' id='tree-content-holder'>
+<div class='file_holder'>
+<div class='file_title'>
+<i class='icon-file'></i>
+<span class='file_name'>
+fox-log2.png
+<small>1.51 KB</small>
+</span>
+<span class='options'><div class='btn-group tree-btn-group'>
+<a href="/framework/central-logging/blob/master/central-logging-browser/src/main/webapp/resource/img/fox-log2.png" class="btn very_small" target="_blank">raw</a>
+<a href="/framework/central-logging/commits/master/central-logging-browser/src/main/webapp/resource/img/fox-log2.png" class="btn very_small">history</a>
+</div>
+</span>
+</div>
+<div class='file_content image_file'>
+<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAkCAYAAADo6zjiAAAABmJLR0QA/wD/&#x000A;AP+gvaeTAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH3QMVBjY7fol8&#x000A;zwAABZxJREFUWMPtl21IG2ccwP/xpfENtb6VoGM2vlBHm9Q2H0ZLW2iHDLoP&#x000A;0+KYdtBS1hU6KCsbhY6CnzpY2ehgY+DszGxXtWAKfRGROiWaiNKoST0bLjHm&#x000A;op7JxVwuueQul5e7Z5+E1KaFavOp/X/8v/6ee+7/PM8f4L286yIDADCZTNly&#x000A;ufwHt9stlpSU/KHRaPh0FTSZTEWxWOzCzp07Iw0NDb8DAMDU1JSW53kUCoWQ&#x000A;3++PzczMzL/twlqtVo3jOEbTdCIUCqFgMCgNDAxcAwAAp9PZjxBCFEXxFEWJ&#x000A;DMOg1dVVvqen5+LbKD4+Pn6VJMk4y7LI7/fHSJKM8TyP7HZ7f8aGE0IIWJb9&#x000A;y2AwVBEE0RePx7NUKtXNnp6ea9sp/vTp0+tKpfJHURQTFovl75KSkh08z/8p&#x000A;l8sBACADAEAQBIjH4wAAcOrUKXdjY2P7yMhITSQScSgUii9NJlPeqwp0dHTk&#x000A;mUym7FS2e/fuNQWDwXav1zvr9XoLjxw58jUAgM/n+5hlWXj+/LlDBgAwNjZ2&#x000A;cv/+/Y+WlpYWDh48uC85yYMHD65yHNeFEPpQrVbvW19fP7Rr165DpaWlmSzL&#x000A;FnMcl5ebmxstLCxk3G63IIriHYIgrK2trYMdHR15SqXyizNnzvyTnNNms7HF&#x000A;xcUFa2trNTIAAJ1Opzh69OhyLBaLV1ZWvrTaGzduNCkUip/q6upqc3JysgsK&#x000A;CnbI5XKQyWQgSZIMISTLzMyURaNRWSKRkNbX16MkST4SRfHb9vZ2X3Kuzs7O&#x000A;opaWFprjuJjP5yvL2vjsGIZh5eXlqrt37544ffr0f8lBRUVF0x6Pp3VxcTGR&#x000A;pEsAAIiimBMOhxN79+5VZWVlZW7YOY6jz50759u8mMbGxhMIoYxYLPbvC+3+&#x000A;5MmTY06nM67X63vSefBMTU2ZcRxPaLVa9UtGDMPw2dnZtXQV7+zsLMIwjNbr&#x000A;9TMbuoxkB7vd/g3DMPzw8PDudABUVFQ0h8PhsM1m+zwlQHNzs55hGAdBEBfS&#x000A;AUDTdB1BENrz58+vpAS4ffv27oqKin35+fmKdABUVVXVNjQ0NCfrXgCora39&#x000A;pbS0VL5nz55L6QAoKyv7TiaT7Z6cnLySEqC8vPxwJBLxaTSa4Obgx48ft83M&#x000A;zJx91am32XdhYeGrzXqNRuMGgEB+fn57ykCfzyfQNC3iOO6yWCwnNvQ6nU5h&#x000A;NpvnSJKUHA6HoNVqL7/iqs3GcXzN7XZLdrvdp9Vqm5KgrhAEQbIsKy0vL3Mp&#x000A;ATAMu2W1WgNLS0uS3+9PGI3GF1YxOzurpyhKdDgcQm9vb9nmeIvF4lxZWZEc&#x000A;DgfZ19dXl9T7w16vV1pdXY27XK5Fm832a8otEAThEo7jeDweR7m5uZkqlerW&#x000A;2NjYbxvJDhw4cMxsNrd6PB4rRVGfJsfqdDqF3+93EgTRXVNTU9nW1ma/f/++&#x000A;enx8fKi+vv6TgoICGcMwMD09ba6vr//+tXs4NDR0FsdxVyAQEBmGQTRNi/Pz&#x000A;85hOp3ttd3R1dX0AADA6Oqp2uVwYz/MiwzDI5/Ml5ufnscHBwZNv9Nd2d3cf&#x000A;xnHcxXGcxLIs8nq9UaPRePZ1MSMjI9pgMJjgOA6xLCvhOD5lMpnKttU+ExMT&#x000A;l71erxCJRFA0Gk1gGJYS4uHDhxMejweFw2FEkmRweHi45a32MY7jXoZhUCgU&#x000A;SoyOjjYl26anpy8GAgFJFEUJwzBL2m4zg8GwRlEUWl5eDiTr/X6/IAiCZLPZ&#x000A;7qT9LW+1WtcoipKMRuN1AIC5ublej8cjPXv2bHJLc8FWZGVlhWVZNm4wGJRN&#x000A;TU2rCKGIUqmseNM8GdsYMLoEQZBXV1e30jQtWa3Wz7Y8GW0RIJumaZskSUG5&#x000A;XC47fvy4+t0bLAcGBq5NTEyw/f39V7aaI2s7ANXV1T8jhD6qra29+X7O36r8&#x000A;D/4iPJjR52aSAAAAAElFTkSuQmCC'>
+</div>
+
+</div>
+
+</div>
+
+</div>
+</div>
+</div>
+</body>
+</html>

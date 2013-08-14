@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <task-config>
+        <executor-pool>
+            <core-pool-size>2</core-pool-size>
+        </executor-pool>
+        <tasks>
+            <DBConfig>2</DBConfig>
+        </tasks>
+    </task-config>
+</configuration>

@@ -1,0 +1,74 @@
+.input-append button {
+    height: 30px;
+}
+
+#tags .btn-group {
+    padding-left: 10px;
+    margin-left: 0px;
+}
+
+#loading {
+    padding-top: 300px;
+}
+#rending {
+    padding-top: 300px;
+}
+
+.bs-tags-filter {
+    text-align: left;
+    width: 1132px;
+    position: relative;
+    padding-left: 55px;
+    /*margin: 0px 5px 10px 5px;*/
+    *padding-top: 19px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.bs-tags-filter:after {
+    content: "Filter";
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    padding: 3px 7px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    color: #9da0a4;
+    -webkit-border-radius: 4px 0 4px 0;
+    -moz-border-radius: 4px 0 4px 0;
+    border-radius: 4px 0 4px 0;
+}
+
+.tag-row button {
+    width: 80px;
+}
+
+.tag-row {
+    padding-top: 5px;
+}
+
+.tag-row button {
+    width: 80px;
+}
+.tag-row input{
+    width: 188px;
+}
+#tag-filter {
+    white-space: normal;
+}
+
+#content {
+    text-align: center;
+    margin: 10px 38px 10px 38px;
+}
+
+#dashboard-data {
+    min-height: 500px;
+}
+
+

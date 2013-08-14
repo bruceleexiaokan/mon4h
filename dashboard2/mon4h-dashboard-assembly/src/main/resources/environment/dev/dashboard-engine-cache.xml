@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <leveldb-path>
+        <tsdata-path>C:/dashboard/cache/tsdata/</tsdata-path>
+        <cacheinfo-path>C:/dashboard/cache/cacheinfo/</cacheinfo-path>
+        <metrics-path>C:/dashboard/cache/metrics/</metrics-path>
+        <timeseries-path>C:/dashboard/cache/timeseries/</timeseries-path>
+        <predownsample-timerange-path>C:/dashboard/cache/predownsampletimerange/</predownsample-timerange-path>
+    </leveldb-path>
+</configuration>

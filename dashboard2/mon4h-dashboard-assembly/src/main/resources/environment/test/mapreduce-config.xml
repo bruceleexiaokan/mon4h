@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <mapreduce-config>
+		<hbase.zookeeper.quorum>192.168.81.176,192.168.81.177,192.168.81.178,192.168.81.179</hbase.zookeeper.quorum>
+		<zookeeper.znode.parent>/hbase</zookeeper.znode.parent>
+		<work_table>DASHBOARD_TS_DATA,__ns-null__show.count</work_table>
+		<starttime></starttime>
+		<endtime></endtime>
+		<AppID>920701</AppID>
+		<LoggingServerIP>192.168.83.166</LoggingServerIP>
+		<LoggingServerPort>63100</LoggingServerPort>
+    </mapreduce-config>
+</configuration>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+<configuration>
+    <property>
+        <name>hbase.cluster.distributed</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>hbase.rootdir</name>
+        <value>hdfs://ns/hbase</value>
+    </property>
+    <property>
+        <name>hbase.zookeeper.quorum</name>
+        <value>192.168.82.55,192.168.82.56,192.168.82.57</value>
+    </property>
+    <property>
+        <name>fs.defaultFS</name>
+        <value>hdfs://ns</value>
+    </property>
+    <property>
+        <name>dfs.nameservices</name>
+        <value>ns</value>
+    </property>
+    <property>
+        <name>dfs.replication</name>
+        <value>2</value>
+    </property>
+    <property>
+        <name>dfs.ha.namenodes.ns</name>
+        <value>SVR2083HP360,VMS00896</value>
+    </property>
+    <!--dfs.namenode.rpc-address.[nameservice ID].-->
+    <property>
+        <name>dfs.namenode.rpc-address.ns.SVR2083HP360</name>
+        <value>SVR2083HP360:54310</value>
+    </property>
+    <property>
+        <name>dfs.namenode.rpc-address.ns.VMS00896</name>
+        <value>VMS00896:54310</value>
+    </property>
+    <!--failover-->
+    <property>
+        <name>dfs.client.failover.proxy.provider.ns</name>
+        <value>org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider</value>
+    </property>
+</configuration>

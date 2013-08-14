@@ -1,0 +1,56 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: "Yanone";
+    src: url("../font/YanoneKaffeesatz-Light-5dbeb581887fdef6774ea1cd004caa67.ttf");
+}
+
+@font-face {
+    font-family: "digit";
+    src: url("../font/digital-7_mono.ttf") format("truetype");
+}
+
+body {
+    /*background: url("../img/bg.png") scroll repeat;*/
+    overflow-y: scroll;
+}
+
+#container {
+    min-width: 1024px;
+}
+
+#top {
+    height: 56px;
+    overflow: visible;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(37, 36, 37, 0.85);
+    border-bottom: 1px solid rgba(37, 36, 37, 0.85);
+    -moz-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 1px 10px rgba(0, 0, 0, 0.3);
+    z-index: 10000;
+}
+
+#middle {
+    /*margin: 10px 10px 0 10px;*/
+    /*padding-top: 5px;*/
+    overflow: visible;
+    text-align: center;
+    min-height: 680px;
+}
+
+#bottom {
+    /*margin: 20px 0 0 0;*/
+    margin-bottom: 5px;
+    padding: 10px 0 20px 0;
+
+    background: rgba(0, 0, 0, 0.65);
+}
+
+#bottom div {
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 0 2px #000;
+}

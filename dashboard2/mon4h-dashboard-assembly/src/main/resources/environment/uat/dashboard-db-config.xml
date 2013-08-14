@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <db-config>
+        <jdbc-connection-pool>
+            <url>jdbc:mysql://pub.mysql.db.uat.sh.ctripcorp.com:55666/dashboarddb?useUnicode=true</url>
+            <driverClassName>com.mysql.jdbc.Driver</driverClassName>
+            <username>uapp_dashboard_3</username>
+            <password>0A2OnFnJ7lVqX3gdyHH4</password>
+            <initialSize>3</initialSize>
+            <maxActive>12</maxActive>
+            <maxIdle>3</maxIdle>
+            <minIdle>3</minIdle>
+            <maxWait>10000</maxWait>
+        </jdbc-connection-pool>
+    </db-config>
+</configuration>

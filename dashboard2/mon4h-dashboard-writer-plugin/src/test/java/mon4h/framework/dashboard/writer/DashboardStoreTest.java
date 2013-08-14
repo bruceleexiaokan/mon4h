@@ -1,5 +1,6 @@
 package mon4h.framework.dashboard.writer;
 
+import com.ctrip.framework.hbase.client.HBaseClientManager;
 import com.ctrip.framework.hbase.client.util.HBaseClientUtil;
 
 import mon4h.framework.dashboard.common.util.Bytes;
@@ -15,11 +16,15 @@ import mon4h.framework.dashboard.writer.DashboardStore;
 import mon4h.framework.dashboard.writer.EnvType;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.HColumnDescriptor;
+import org.apache.hadoop.hbase.HConstants;
 import org.apache.hadoop.hbase.HTableDescriptor;
 import org.apache.hadoop.hbase.KeyValue;
 import org.apache.hadoop.hbase.client.Get;
+import org.apache.hadoop.hbase.client.HBaseAdmin;
 import org.apache.hadoop.hbase.client.HTableInterface;
+import org.apache.hadoop.hbase.client.HTablePool;
 import org.apache.hadoop.hbase.client.Result;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,14 +40,25 @@ import java.util.Map;
  * Date: 7/8/13
  * Time: 2:59 PM
  */
-public class DashboardStoreTest extends AbstractHBaseTest {
+public class DashboardStoreTest {
     private static final String NAMESPACE_METRIC_UID = "__test__metric.uid";
     private static final String NAMESPACE_TS_UID = "__test__ts.uid";
     private DashboardStore dashboardStore;
+    protected HTablePool tablePool;
+    protected HBaseAdmin admin;
 
     @Before
     public void setUp() throws Exception {
-        super.setUp();
+        Configuration conf = new Configuration();
+        conf.set("hbase.zookeeper.quorum", "192.168.81.176,192.168.81.177,192.168.81.178");
+        conf.set(HConstants.ZOOKEEPER_ZNODE_PARENT, "/hbase");
+        admin = new HBaseAdmin(conf);
+
+        HBaseClientManager clientManager = HBaseClientManager.getClientManager();
+        tablePool = clientManager.getHTablePool("192.168.81.176,192.168.81.177,192.168.81.178", "/hbase");
+        if (tablePool == null) {
+            tablePool = clientManager.addHTablePool("192.168.81.176,192.168.81.177,192.168.81.178", "/hbase");
+        }
         if (admin.tableExists("unit_test_metric")) {
             if (admin.isTableEnabled("unit_test_metric")) {
                 admin.disableTable("unit_test_metric");

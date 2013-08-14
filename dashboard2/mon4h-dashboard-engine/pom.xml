@@ -9,7 +9,7 @@
 	
     <groupId>mon4h.framework.dashboard</groupId>
     <artifactId>mon4h-dashboard-engine</artifactId>
-    <version>1.0.0</version>
+    <version>${mon4h-dashboard.version}</version>
     <packaging>jar</packaging>
     <name>mon4h-dashboard-engine</name>
 

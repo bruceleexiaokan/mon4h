@@ -1,6 +1,10 @@
 package mon4h.framework.dashboard.writer;
 
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import mon4h.framework.dashboard.common.config.ConfigConstant;
 import mon4h.framework.dashboard.common.util.Bytes;
 import mon4h.framework.dashboard.common.util.ConfigUtil;
@@ -8,16 +12,17 @@ import mon4h.framework.dashboard.common.util.IPUtil;
 import mon4h.framework.dashboard.persist.config.DBConfig;
 import mon4h.framework.dashboard.persist.config.Namespace;
 import mon4h.framework.dashboard.persist.constant.NamespaceConstant;
-import mon4h.framework.dashboard.persist.data.*;
+import mon4h.framework.dashboard.persist.data.DataPoint;
+import mon4h.framework.dashboard.persist.data.FeatureDataType;
+import mon4h.framework.dashboard.persist.data.SetFeatureData;
+import mon4h.framework.dashboard.persist.data.TimeSeriesKey;
+import mon4h.framework.dashboard.persist.data.ValueType;
 import mon4h.framework.dashboard.persist.store.Store;
 import mon4h.framework.dashboard.persist.store.hbase.HBaseStore;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Map;
-import java.util.Set;
 
 /**
  * User: huang_jie
@@ -38,7 +43,7 @@ public class DashboardStore {
         if (!isInit) {
             synchronized (this) {
                 if (!isInit) {
-                    ConfigUtil.addResource(ConfigConstant.CONFIG_KEY_DB, env.env.toLowerCase() + "/dashboard-db-config.xml");
+//                    ConfigUtil.addResource(ConfigConstant.CONFIG_KEY_DB, env.env.toLowerCase() + "/dashboard-db-config.xml");
                     ConfigUtil.addResource(ConfigConstant.CONFIG_KEY_TASK, env.env.toLowerCase() + "/dashboard-write-task.xml");
                     this.store = new HBaseStore();
                 }
@@ -168,18 +173,6 @@ public class DashboardStore {
         return namespace;
     }
 
-    public static void main(String[] args) {
-        DashboardStore store = DashboardStore.getInstance(EnvType.DEV);
-        System.out.println(store.getMetricName("__hotel__fsfds.__twr__"));
-        System.out.println(store.getNamespace("__hotel__fsfds.__twr__"));
-
-        System.out.println(store.getMetricName("test.test1"));
-        System.out.println(store.getNamespace("test.test1"));
-        EnvType envType = EnvType.valueOf("DEV");
-        System.out.println(envType);
-
-    }
-
     @Deprecated
     private void addPointInternal(String namespace, String metric, long timestamp, double value, Map<String, String> tags) {
         TimeSeriesKey tsKey = new TimeSeriesKey();
@@ -254,4 +247,25 @@ public class DashboardStore {
         }
         return true;
     }
+
+    public static void main(String[] args) {
+        DashboardStore store = DashboardStore.getInstance(EnvType.DEV);
+        System.out.println(store.getMetricName("__hotel__fsfds.__twr__"));
+        System.out.println(store.getNamespace("__hotel__fsfds.__twr__"));
+
+        System.out.println(store.getMetricName("test.test1"));
+        System.out.println(store.getNamespace("test.test1"));
+        EnvType envType = EnvType.valueOf("DEV");
+        System.out.println(envType);
+        store.init(envType);
+        
+        Map<String, String> tags = new HashMap<String, String>();
+        tags.put("hostname", "mytesthost");
+        tags.put("tagname1", "tagvalue1");
+        tags.put("tagname2", "tagvalue2");
+        
+        store.addPoint(null, "brucetest", System.currentTimeMillis(), 100, tags);
+        LOGGER.info("successfully sent metrics");
+    }
+
 }

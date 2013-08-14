@@ -10,7 +10,7 @@
     <groupId>mon4h.framework.dashboard</groupId>
     <artifactId>mon4h-dashboard-ui-web</artifactId>
     <packaging>war</packaging>
-    <version>1.0.0</version>
+    <version>${mon4h-dashboard.version}</version>
     <name>mon4h-dashboard-ui-web</name>
 
     <properties>

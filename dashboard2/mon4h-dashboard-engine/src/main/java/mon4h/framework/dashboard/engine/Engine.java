@@ -21,14 +21,18 @@ public class Engine {
 		public static Engine instance = new Engine();
 	}
 	
-	private Engine(){
+	private Engine() {
 	}
 	
-	private void init(){
+	private void init() {
 		CommandProcessorProvider.getInstance().setCommandProcessor(new DefaultCommandProcessor());
-		fastThreadPool = new ThreadPoolExecutor(16,32,15,TimeUnit.MINUTES,new ArrayBlockingQueue<Runnable>(1024));
-		slowThreadPool = new ThreadPoolExecutor(16,32,15,TimeUnit.MINUTES,new ArrayBlockingQueue<Runnable>(1024));
-        thriftThreadPool = new ThreadPoolExecutor(16,32,15,TimeUnit.MINUTES,new ArrayBlockingQueue<Runnable>(1024));
+        Configure config = ConfigUtil.getConfigure(ConfigConstant.CONFIG_KEY_THREAD);
+        fastThreadPool = new ThreadPoolExecutor(config.getInt("fast-thread-pool/corePoolSize",16),
+                config.getInt("fast-thread-pool/maximumPoolSize",32), config.getInt("fast-thread-pool/keepAliveTime",15), TimeUnit.MINUTES, new ArrayBlockingQueue<Runnable>(1024));
+        slowThreadPool = new ThreadPoolExecutor(config.getInt("slow-thread-pool/corePoolSize",16),
+                config.getInt("slow-thread-pool/maximumPoolSize",32), config.getInt("slow-thread-pool/keepAliveTime",15), TimeUnit.MINUTES, new ArrayBlockingQueue<Runnable>(1024));
+        thriftThreadPool = new ThreadPoolExecutor(config.getInt("thrift-thread-pool/corePoolSize",16),
+                config.getInt("thrift-thread-pool/maximumPoolSize",32), config.getInt("thrift-thread-pool/keepAliveTime",15), TimeUnit.MINUTES, new ArrayBlockingQueue<Runnable>(1024));
 	}
 	
 	public static Engine getInstance(){

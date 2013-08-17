@@ -259,7 +259,7 @@ public class GetGroupedDataPointsCommand implements Command<CommandResponse> {
             stream.close();
 
         } catch (IOException e) {
-            e.printStackTrace();//TODO ?
+            LOGGER.warn("Load data point from HBase error:", e);
         }
 
         aggGroups(groupInfos, aggFunc, downsampleFunc);
@@ -358,8 +358,15 @@ public class GetGroupedDataPointsCommand implements Command<CommandResponse> {
         if (request == null) {
             parseRequest();
         }
-        if (request != null) {
+        if (request != null && isLongTimeRequest()) {
+            return true;
+        }
+        return false;
+    }
 
+    private boolean isLongTimeRequest() {
+        if (endTime > 0 && baseTime > 0 && (endTime - baseTime > 3600000 * 17)) {
+            return true;
         }
         return false;
     }

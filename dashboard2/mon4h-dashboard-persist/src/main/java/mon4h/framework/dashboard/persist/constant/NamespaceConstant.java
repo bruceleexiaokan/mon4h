@@ -24,7 +24,7 @@ public interface NamespaceConstant {
 	public static final String SPERATE_ONE = "_";
 	
 	public static final int SCAN_CACHE_NUM = 4096;
-	public static final int TSID_FILTER_NUM = 10000;
+	public static final int TSID_FILTER_NUM = 2048;
 	public static final int MINS_PER_COL = 4;
 	public static final int MAX_COL_PER_ROW = 256;
 	public static final int MINS_PER_ROW = MINS_PER_COL*MAX_COL_PER_ROW;

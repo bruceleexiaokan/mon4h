@@ -17,6 +17,7 @@ public class EngineInit implements InitListener{
             ConfigUtil.addResource(ConfigConstant.CONFIG_KEY_DB,"dashboard-db-config.xml");
             ConfigUtil.addResource(ConfigConstant.CONFIG_KEY_TASK,"dashboard-engine-task.xml");
             ConfigUtil.addResource(ConfigConstant.CONFIG_KEY_CACHE,"dashboard-engine-cache.xml");
+            ConfigUtil.addResource(ConfigConstant.CONFIG_KEY_THREAD,"dashboard-engine-thread.xml");
 
             LocalCacheIDS.getInstance().scheduleCacheTask();
 

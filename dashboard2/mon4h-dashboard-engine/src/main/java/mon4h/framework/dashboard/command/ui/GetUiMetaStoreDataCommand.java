@@ -73,19 +73,16 @@ public class GetUiMetaStoreDataCommand implements Command<CommandResponse> {
 	
 	@Override
 	public boolean isHighCost() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public boolean isThrift() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public CommandResponse execute() {
-		// TODO Auto-generated method stub
 		if( failedResp != null ) {
 			return failedResp;
 		}

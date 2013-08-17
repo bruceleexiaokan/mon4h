@@ -595,14 +595,38 @@ public class LocalCache implements TimeSeriesCacheDAO {
             queryTags.put(tagNameId, tagValueIds);
         }
 
-        Map<String, Set<Long>> results = new TreeMap<String, Set<Long>>();
-
-        String pattern = createRegexFilter(mid, queryTags).toString();
-        Map<byte[], byte[]> map = seekTimeSeries(Bytes.add(NamespaceConstant.START_KEY_B, Bytes.toBytes(mid)),
-                pattern, filter);
-        if (map == null) {
-            return null;
+        Map<byte[], byte[]> map;
+        if (CollectionUtils.isEmpty(filter)) {
+            String pattern = createRegexFilter(mid, queryTags, true).toString();
+            map = seekTimeSeries(Bytes.add(NamespaceConstant.START_KEY_B, Bytes.toBytes(mid)),
+                    pattern, filter);
+            if (map == null) {
+                return null;
+            }
+        } else {
+            String patternStr = createRegexFilter(mid, queryTags, false).toString();
+            Pattern pattern;
+            try {
+                pattern = Pattern.compile(patternStr);
+            } catch (Exception e) {
+                return null;
+            }
+            map = new TreeMap<byte[], byte[]>(LevelDB.MEMCMP);
+            for (Long tsId : filter) {
+                byte[] tsIdBytes = Bytes.toBytes(tsId, 8);
+                byte[] key = Bytes.from(NamespaceConstant.START_KEY_A).add(tsIdBytes).add(LocalCacheIDS.SPERATE_M_N).value();
+                byte[] value = leveldb_timeseries.get(key);
+                if (value == null) {
+                    continue;
+                }
+                Matcher matcher = pattern.matcher(Bytes.toISO8859String(value));
+                if (matcher.matches()) {
+                    map.put(Bytes.from("B".getBytes()).add(value).add(LocalCacheIDS.SPERATE_M_I).value(), tsIdBytes);
+                }
+            }
         }
+
+        Map<String, Set<Long>> results = new TreeMap<String, Set<Long>>();
 
         Set<Entry<byte[], byte[]>> timeSeriesSet = map.entrySet();
         Iterator<Entry<byte[], byte[]>> timeSeriesIt = timeSeriesSet.iterator();
@@ -655,10 +679,14 @@ public class LocalCache implements TimeSeriesCacheDAO {
         return groups;
     }
 
-    public StringBuilder createRegexFilter(int mid, Map<Short, Set<Integer>> queryTags) {
+    public StringBuilder createRegexFilter(int mid, Map<Short, Set<Integer>> queryTags, boolean hasPrefix) {
         final StringBuilder buf = new StringBuilder();
         buf.append("(?s)");
-        buf.append("^B");
+        if (hasPrefix) {
+            buf.append("^B");
+        } else {
+            buf.append("^");
+        }
         buf.append("\\Q");
         buf.append(Bytes.toISO8859String(Bytes.toBytes(mid)));
         buf.append("\\E");
@@ -692,7 +720,11 @@ public class LocalCache implements TimeSeriesCacheDAO {
                 }
             }
         }
-        buf.append("(.{6})*" + LocalCacheIDS.SPERATE_M_I + "$");
+        buf.append("(.{6})*");
+        if (hasPrefix) {
+            buf.append(LocalCacheIDS.SPERATE_M_I);
+        }
+        buf.append("$");
 
         return buf;
     }
@@ -711,12 +743,12 @@ public class LocalCache implements TimeSeriesCacheDAO {
         int startTime = timeRangeCache.start;
         int endTime = timeRangeCache.end;
 
-        if( startTime >= endTime ) {
-        	return list;
+        if (startTime >= endTime) {
+            return list;
         }
-        
-        int scopeTimeStart = (int) (scope.startTime/240000);
-        int scopeTimeEnd = (int) (scope.endTime/240000);
+
+        int scopeTimeStart = (int) (scope.startTime / 240000);
+        int scopeTimeEnd = (int) (scope.endTime / 240000);
         if (scopeTimeStart < startTime && scopeTimeEnd < startTime) {
             return null;
         } else if (scopeTimeStart < startTime && scopeTimeEnd > startTime && scopeTimeEnd <= endTime) {
@@ -726,14 +758,14 @@ public class LocalCache implements TimeSeriesCacheDAO {
             for (int i = hourStart; i <= hourEnd; i++) {
                 TimeRange timeRange = new TimeRange();
                 if (hourStart == i) {
-                    timeRange.startTime = (long)startTime * 240000;
+                    timeRange.startTime = (long) startTime * 240000;
                 } else {
-                    timeRange.startTime = (long)i * 3600000;
+                    timeRange.startTime = (long) i * 3600000;
                 }
                 if (hourEnd == i) {
-                    timeRange.endTime = (long)scopeTimeEnd * 240000;
+                    timeRange.endTime = (long) scopeTimeEnd * 240000;
                 } else {
-                    timeRange.endTime = (long)(i+1) * 3600000;
+                    timeRange.endTime = (long) (i + 1) * 3600000;
                 }
                 list.add(timeRange);
             }
@@ -743,14 +775,14 @@ public class LocalCache implements TimeSeriesCacheDAO {
             for (int i = hourStart; i <= hourEnd; i++) {
                 TimeRange timeRange = new TimeRange();
                 if (hourStart == i) {
-                    timeRange.startTime = (long)startTime * 240000;
+                    timeRange.startTime = (long) startTime * 240000;
                 } else {
-                    timeRange.startTime = (long)i * 3600000;
+                    timeRange.startTime = (long) i * 3600000;
                 }
                 if (hourEnd == i) {
-                    timeRange.endTime = (long)endTime * 240000;
+                    timeRange.endTime = (long) endTime * 240000;
                 } else {
-                    timeRange.endTime = (long)(i+1) * 3600000;
+                    timeRange.endTime = (long) (i + 1) * 3600000;
                 }
                 list.add(timeRange);
             }
@@ -760,14 +792,14 @@ public class LocalCache implements TimeSeriesCacheDAO {
             for (int i = hourStart; i <= hourEnd; i++) {
                 TimeRange timeRange = new TimeRange();
                 if (hourStart == i) {
-                    timeRange.startTime = (long)scopeTimeStart * 240000;
+                    timeRange.startTime = (long) scopeTimeStart * 240000;
                 } else {
-                    timeRange.startTime = (long)i * 3600000;
+                    timeRange.startTime = (long) i * 3600000;
                 }
                 if (hourEnd == i) {
-                    timeRange.endTime = (long)scopeTimeEnd * 240000;
+                    timeRange.endTime = (long) scopeTimeEnd * 240000;
                 } else {
-                    timeRange.endTime = (long)(i+1) * 3600000;
+                    timeRange.endTime = (long) (i + 1) * 3600000;
                 }
                 list.add(timeRange);
             }
@@ -778,14 +810,14 @@ public class LocalCache implements TimeSeriesCacheDAO {
             for (int i = hourStart; i <= hourEnd; i++) {
                 TimeRange timeRange = new TimeRange();
                 if (hourStart == i) {
-                    timeRange.startTime = (long)startTime * 240000;
+                    timeRange.startTime = (long) startTime * 240000;
                 } else {
-                    timeRange.startTime = (long)i * 3600000;
+                    timeRange.startTime = (long) i * 3600000;
                 }
                 if (hourEnd == i) {
-                    timeRange.endTime = (long)scopeTimeEnd * 240000;
+                    timeRange.endTime = (long) scopeTimeEnd * 240000;
                 } else {
-                    timeRange.endTime = (long)(i+1) * 3600000;
+                    timeRange.endTime = (long) (i + 1) * 3600000;
                 }
                 list.add(timeRange);
             }

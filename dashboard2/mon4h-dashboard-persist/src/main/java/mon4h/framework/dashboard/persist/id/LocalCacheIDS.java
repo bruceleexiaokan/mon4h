@@ -60,10 +60,10 @@ public class LocalCacheIDS implements Runnable {
             NamespaceConstant.SPERATE_ONE + NamespaceConstant.COLUMN_FAMILY_M +
                     NamespaceConstant.SPERATE_ONE + NamespaceConstant.COLUMN_I;
 
-    private static long now_timeseries_id = 0;
-    private static long max_timeseries_id = 0;
-    private static long cur_timeseries_id = 0;
-    private static long cur_end_timeseries_id = 0;
+    private static long levelDBMaxTSId = 0;
+    private static long hbaseMaxTSId = 0;
+    private static long curScanStartTSId = 0;
+    private static long curScanEndTSId = 0;
 
     private static class LocalCacheIDSHolder {
         public static LocalCacheIDS instance = new LocalCacheIDS();
@@ -84,7 +84,7 @@ public class LocalCacheIDS implements Runnable {
 
     private void firstRun() {
         if (isFirstLoad == true) {
-            now_timeseries_id = getNowTimeSeriesID();
+            levelDBMaxTSId = getNowTimeSeriesID();
             isFirstLoad = false;
         }
     }
@@ -105,8 +105,8 @@ public class LocalCacheIDS implements Runnable {
         if (table == null) {
             return null;
         }
-        max_timeseries_id = getMaxTimeSeriesID(table);
-        if (now_timeseries_id >= max_timeseries_id) {
+        hbaseMaxTSId = getMaxTimeSeriesID(table);
+        if (levelDBMaxTSId >= hbaseMaxTSId) {
             HBaseClientUtil.closeHTable(table);
             return null;
         }
@@ -120,21 +120,21 @@ public class LocalCacheIDS implements Runnable {
             return;
         }
         try {
-            cur_timeseries_id = max_timeseries_id;
-            cur_end_timeseries_id = now_timeseries_id;
+            curScanStartTSId = hbaseMaxTSId;
+            curScanEndTSId = levelDBMaxTSId;
             while (true) {
-                List<TimeSeriesID> timeseries = getTimeSeries(table);
-                if (timeseries != null && timeseries.size() != 0) {
-                    List<KeyValue> list = scanMetrics(timeseries);
+                List<TimeSeriesID> timeSeries = getTimeSeries(table);
+                if (timeSeries != null && timeSeries.size() != 0) {
+                    List<KeyValue> list = scanMetrics(timeSeries);
                     writeMetrics(list);
-                    writeTimeSerires(timeseries);
-                    now_timeseries_id += timeseries.size();
-                    putNowTimeSeriesID(now_timeseries_id);
+                    writeTimeSerires(timeSeries);
+                    levelDBMaxTSId += timeSeries.size();
+                    putNowTimeSeriesID(levelDBMaxTSId);
                 } else {
                     break;
                 }
-                cur_timeseries_id -= 4096;
-                if (timeseries.size() < 4096 || cur_timeseries_id <= 0) {
+                curScanStartTSId -= 4096;
+                if (timeSeries.size() < 4096 || curScanStartTSId <= 0) {
                     break;
                 }
             }
@@ -224,8 +224,8 @@ public class LocalCacheIDS implements Runnable {
         List<TimeSeriesID> timeserires = new ArrayList<TimeSeriesID>();
 
         Scan scan = new Scan();
-        byte[] startKey = Bytes.add(NamespaceConstant.START_KEY_A, Bytes.toBytes(Long.MAX_VALUE - cur_timeseries_id, 8));
-        byte[] endKey = Bytes.add(NamespaceConstant.START_KEY_A, Bytes.toBytes(Long.MAX_VALUE - cur_end_timeseries_id, 8));
+        byte[] startKey = Bytes.add(NamespaceConstant.START_KEY_A, Bytes.toBytes(Long.MAX_VALUE - curScanStartTSId, 8));
+        byte[] endKey = Bytes.add(NamespaceConstant.START_KEY_A, Bytes.toBytes(Long.MAX_VALUE - curScanEndTSId, 8));
         scan.setStartRow(startKey);
         scan.setStopRow(endKey);
         scan.addColumn(Bytes.toBytes(NamespaceConstant.COLUMN_FAMILY_M), Bytes.toBytes(NamespaceConstant.COLUMN_N));

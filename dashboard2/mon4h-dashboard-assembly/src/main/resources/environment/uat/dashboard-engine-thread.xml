@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <fast-thread-pool>
+        <corePoolSize>16</corePoolSize>
+        <maximumPoolSize>64</maximumPoolSize>
+        <keepAliveTime>15</keepAliveTime>
+    </fast-thread-pool>
+    <slow-thread-pool>
+        <corePoolSize>16</corePoolSize>
+        <maximumPoolSize>32</maximumPoolSize>
+        <keepAliveTime>15</keepAliveTime>
+    </slow-thread-pool>
+    <thrift-thread-pool>
+        <corePoolSize>8</corePoolSize>
+        <maximumPoolSize>16</maximumPoolSize>
+        <keepAliveTime>15</keepAliveTime>
+    </thrift-thread-pool>
+</configuration>

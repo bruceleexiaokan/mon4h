@@ -291,9 +291,13 @@ public class HBaseDataFragment implements DataFragment {
     @Override
     public Set<Long> getContainsTimeSeriesIDs(int mid, TimeRange scope) {
         Set<Long> rt = new HashSet<Long>();
-        buildScans(new FirstKeyOnlyFilter(), scope);
+        FilterList filterList = new FilterList();
+        filterList.addFilter(new KeyOnlyFilter());
+        filterList.addFilter(new FirstKeyOnlyFilter());
+        buildScans(filterList, scope);
         for (Scan scan : scans) {
             try {
+                scan.setCaching(8192);
                 ResultScanner results = table.getScanner(scan);
                 Result result = results.next();
                 while (result != null) {
@@ -303,7 +307,7 @@ public class HBaseDataFragment implements DataFragment {
                     result = results.next();
                 }
             } catch (IOException e) {
-                return null;
+                LOGGER.warn("Get time series id from HBase error:", e);
             }
         }
         return rt;

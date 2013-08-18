@@ -375,7 +375,8 @@ public class TsdbQuery implements Query {
      *         stored in the map has its timestamp zero'ed out.
      * @throws IllegalArgumentException if bad data was retreived from HBase.
      */
-    public TreeMap<byte[], StreamSpan> findStreamSpans() {
+    @SuppressWarnings("resource")
+	public TreeMap<byte[], StreamSpan> findStreamSpans() {
         final short metric_width = UniqueIds.metrics().width();
         if (TSDBQueryInterface.tsdbquerytest == true) {
             if (TSDBQueryInterface.getRows() != null) {
@@ -459,7 +460,8 @@ public class TsdbQuery implements Query {
      *         stored in the map has its timestamp zero'ed out.
      * @throws IllegalArgumentException if bad data was retreived from HBase.
      */
-    public TreeMap<byte[], Span> findSpans() {
+    @SuppressWarnings("resource")
+	public TreeMap<byte[], Span> findSpans() {
         final short metric_width = UniqueIds.metrics().width();
         final TreeMap<byte[], Span> spans =  // The key is a row key from HBase.
                 new TreeMap<byte[], Span>(new SpanCmp(metric_width));

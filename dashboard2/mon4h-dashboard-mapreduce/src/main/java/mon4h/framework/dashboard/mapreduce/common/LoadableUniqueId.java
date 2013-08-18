@@ -25,6 +25,7 @@ public class LoadableUniqueId extends UniqueId {
         return scan;
     }
 
+	@SuppressWarnings("resource")
 	public void loadAll() {
         final Scan scan = getAllScanner();
         HTableInterface table = tablePool.getTable(super.table);

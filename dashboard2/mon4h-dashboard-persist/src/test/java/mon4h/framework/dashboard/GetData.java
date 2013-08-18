@@ -27,7 +27,7 @@ import org.apache.hadoop.hbase.filter.KeyOnlyFilter;
  * Time: 9:11 PM
  */
 public class GetData {
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "resource"})
 	public static void main(String[] args) throws IOException, ParseException {
 test1();
 
@@ -85,12 +85,12 @@ test1();
         System.exit(0);
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "resource"})
 	public static void test1() throws IOException, ParseException {
         Configuration conf = HBaseConfiguration.create();
         conf.set(HConstants.ZOOKEEPER_QUORUM, "192.168.82.55,192.168.82.56,192.168.82.57");
         conf.set(HConstants.ZOOKEEPER_ZNODE_PARENT, "/hbase");
-        HTableInterface table = new HTable(conf, "DASHBOARD_TS_DATA");
+		HTableInterface table = new HTable(conf, "DASHBOARD_TS_DATA");
         Get get = new Get(new byte[]{127,-1,-5,50,1,-1,-88,127,127,-1,-1,-1,-1,-1,-97,57});
         get.addColumn("m".getBytes(), new byte[]{0,7});
         System.out.println(Bytes.toStringBinary(new byte[]{127, -1, -5, 50, 1, -1, -88, 127, 127, -1, -1, -1, -1, -1, -73, -97}));

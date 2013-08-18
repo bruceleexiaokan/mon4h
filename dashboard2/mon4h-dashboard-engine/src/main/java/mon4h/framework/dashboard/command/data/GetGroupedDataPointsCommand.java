@@ -39,6 +39,8 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.json.JSONTokener;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class GetGroupedDataPointsCommand implements Command<CommandResponse> {
@@ -54,6 +56,8 @@ public class GetGroupedDataPointsCommand implements Command<CommandResponse> {
     private String intervalStr;
     private Integer mid;
     private GetGroupedDataPointsResponse failedResp;
+    
+	private static final Logger log = LoggerFactory.getLogger(GetGroupedDataPointsCommand.class);
 
     public GetGroupedDataPointsCommand(InputAdapter inputAdapter, OutputAdapter outputAdapter) {
         this.inputAdapter = inputAdapter;
@@ -259,7 +263,7 @@ public class GetGroupedDataPointsCommand implements Command<CommandResponse> {
             stream.close();
 
         } catch (IOException e) {
-            LOGGER.warn("Load data point from HBase error:", e);
+        	log.warn("Load data point from HBase error:", e);
         }
 
         aggGroups(groupInfos, aggFunc, downsampleFunc);

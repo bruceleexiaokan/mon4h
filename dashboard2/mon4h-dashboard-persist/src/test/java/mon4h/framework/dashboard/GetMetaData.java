@@ -17,7 +17,8 @@ import java.io.IOException;
  */
 public class GetMetaData {
 
-    public static void main(String[] args) throws IOException {
+    @SuppressWarnings("resource")
+	public static void main(String[] args) throws IOException {
         Configuration conf = HBaseConfiguration.create();
         conf.set(HConstants.ZOOKEEPER_QUORUM, "192.168.82.55,192.168.82.56,192.168.82.57");
         conf.set(HConstants.ZOOKEEPER_ZNODE_PARENT, "/hbase");

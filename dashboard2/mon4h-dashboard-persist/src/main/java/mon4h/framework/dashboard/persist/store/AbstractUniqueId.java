@@ -4,9 +4,6 @@ package mon4h.framework.dashboard.persist.store;
 import mon4h.framework.dashboard.common.plugin.PluginLoader;
 import mon4h.framework.dashboard.common.util.Bytes;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Abstract unique id generator, implement unique id cache
  * User: huang_jie
@@ -14,7 +11,7 @@ import org.slf4j.LoggerFactory;
  * Time: 10:28 AM
  */
 public abstract class AbstractUniqueId implements UniqueId {
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractUniqueId.class);
+//    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractUniqueId.class);
     private Cache reverseCache;
     protected IDType idType;
 

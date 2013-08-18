@@ -69,22 +69,31 @@ public class PreDownsampleUtil {
         try {
             file = new FileInputStream(path);
         } catch (FileNotFoundException e) {
-            log.error("Read file " + path + " error, error is " + e.getMessage());
+            log.error("Read file " + path + " error, error is " + e.getMessage(), e);
             return null;
         }
 
-        StringBuilder sb = new StringBuilder();
-        byte[] br = new byte[1024];
-        int length = -1;
         try {
-            while ((length = file.read(br)) != -1) {
-                sb.append(new String(br, 0, length));
-            }
-        } catch (IOException e) {
-            log.error("Read file " + path + " error, error is " + e.getMessage());
+	        StringBuilder sb = new StringBuilder();
+	        byte[] br = new byte[1024];
+	        int length = -1;
+	        try {
+	            while ((length = file.read(br)) != -1) {
+	                sb.append(new String(br, 0, length));
+	            }
+	        } catch (IOException e) {
+	            log.error("Read file " + path + " error, error is " + e.getMessage(), e);
+	        }
+	        return sb.toString();
+        } finally {
+        	if (file != null) {
+        		try {
+					file.close();
+				} catch (IOException e) {
+		            log.warn("Get IOException while closing file " + path + ", error is " + e.getMessage(), e);
+				}
+        	}
         }
-
-        return sb.toString();
     }
 
     public static HTablePool initTablePool(String zkquorum, String basePath) {

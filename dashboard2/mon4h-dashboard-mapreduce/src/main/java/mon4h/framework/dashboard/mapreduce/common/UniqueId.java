@@ -448,6 +448,7 @@ public class UniqueId implements UniqueIdInterface {
      *         the search term.  If the search term is empty, returns the first few
      *         terms.
      */
+	@SuppressWarnings("resource")
 	public List<String> suggest(final String search) {
         // TODO(tsuna): Add caching to try to avoid re-scanning the same thing.
         final Scan scan = getSuggestScanner(search);

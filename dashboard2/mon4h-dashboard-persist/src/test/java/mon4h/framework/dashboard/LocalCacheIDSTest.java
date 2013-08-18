@@ -12,7 +12,7 @@ import java.util.Iterator;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class LocalCacheIDSTest  extends AbstractTest {
+public class LocalCacheIDSTest  extends DashboardAbstractTest {
 
     @Override
     @Before

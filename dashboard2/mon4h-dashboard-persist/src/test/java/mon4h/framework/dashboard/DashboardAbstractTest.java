@@ -11,7 +11,7 @@ import org.junit.Before;
  * Date: 7/29/13
  * Time: 3:18 PM
  */
-public abstract class AbstractTest {
+public abstract class DashboardAbstractTest {
     @Before
     public void setUp() throws Exception {
         ConfigUtil.addResource(ConfigConstant.CONFIG_KEY_DB,"dashboard-db-config.xml");

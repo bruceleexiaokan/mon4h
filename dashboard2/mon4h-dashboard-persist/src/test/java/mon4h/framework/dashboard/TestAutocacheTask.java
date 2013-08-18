@@ -18,7 +18,7 @@ import java.io.IOException;
 import java.util.*;
 import java.util.Map.Entry;
 
-public class TestAutocacheTask extends AbstractTest {
+public class TestAutocacheTask extends DashboardAbstractTest {
 	
     @Override
     @Before

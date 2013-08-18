@@ -2,7 +2,7 @@ package mon4h.framework.dashboard.persist;
 
 import com.ctrip.framework.hbase.client.HBaseClientManager;
 
-import mon4h.framework.dashboard.AbstractTest;
+import mon4h.framework.dashboard.DashboardAbstractTest;
 
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.hbase.client.HBaseAdmin;
@@ -14,7 +14,7 @@ import org.junit.Before;
  * Date: 7/2/13
  * Time: 4:03 PM
  */
-public abstract class AbstractHBaseTest extends AbstractTest{
+public abstract class AbstractHBaseTest extends DashboardAbstractTest{
     protected HTablePool tablePool;
     protected HBaseAdmin admin;
 

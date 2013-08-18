@@ -9,7 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 
-public class HBasePreDownsampledFragmentTest extends AbstractTest {
+public class HBasePreDownsampledFragmentTest extends DashboardAbstractTest {
 
     @Override
     @Before

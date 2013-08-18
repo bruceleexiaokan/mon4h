@@ -1,7 +1,7 @@
 package mon4h.framework.dashboard.persist.config;
 
 
-import mon4h.framework.dashboard.AbstractTest;
+import mon4h.framework.dashboard.DashboardAbstractTest;
 import mon4h.framework.dashboard.persist.config.DBConfig;
 import mon4h.framework.dashboard.persist.config.Namespace;
 
@@ -13,7 +13,7 @@ import org.junit.Test;
  * Date: 7/5/13
  * Time: 5:12 PM
  */
-public class DBConfigTest extends AbstractTest {
+public class DBConfigTest extends DashboardAbstractTest {
     @Override
     @Before
     public void setUp() throws Exception {

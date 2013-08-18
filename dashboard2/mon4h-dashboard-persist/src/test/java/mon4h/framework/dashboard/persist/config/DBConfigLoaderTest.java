@@ -1,7 +1,7 @@
 package mon4h.framework.dashboard.persist.config;
 
 
-import mon4h.framework.dashboard.AbstractTest;
+import mon4h.framework.dashboard.DashboardAbstractTest;
 import mon4h.framework.dashboard.persist.config.DBConfigLoader;
 import mon4h.framework.dashboard.persist.config.Namespace;
 
@@ -15,7 +15,7 @@ import java.util.Map;
  * Date: 7/5/13
  * Time: 4:47 PM
  */
-public class DBConfigLoaderTest extends AbstractTest {
+public class DBConfigLoaderTest extends DashboardAbstractTest {
     @Override
     @Before
     public void setUp() throws Exception {

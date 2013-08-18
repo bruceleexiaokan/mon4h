@@ -1,7 +1,7 @@
 package mon4h.framework.dashboard.persist.util;
 
 
-import mon4h.framework.dashboard.AbstractTest;
+import mon4h.framework.dashboard.DashboardAbstractTest;
 import mon4h.framework.dashboard.persist.util.DBUtil;
 
 import org.junit.Before;
@@ -16,7 +16,7 @@ import java.sql.Statement;
  * Date: 7/5/13
  * Time: 2:38 PM
  */
-public class DBUtilTest extends AbstractTest{
+public class DBUtilTest extends DashboardAbstractTest{
     @Override
     @Before
     public void setUp() throws Exception {
